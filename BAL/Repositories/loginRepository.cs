@@ -105,7 +105,7 @@ namespace BAL.Repositories
                         Name = i.Title,
                         UserID = UserID,
                         LocationID = i.LocationID,
-                        Image = i.Image == null ? "https://upmaa-pennmuseum.netdna-ssl.com/collections/images/image_not_available_300.jpg" : ConfigurationManager.AppSettings["AdminURL"].ToString() + i.Image,
+                       Image = i.Image == null ? "" : ConfigurationManager.AppSettings["AdminURL"].ToString() + i.Image,
                         StatusID = i.StatusID
                     });
                 }

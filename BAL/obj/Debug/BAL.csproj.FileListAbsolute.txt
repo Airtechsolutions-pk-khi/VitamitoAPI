@@ -240,3 +240,14 @@ D:\Project\Vitamito_API\BAL\obj\Debug\BAL.csproj.CoreCompileInputs.cache
 D:\Project\Vitamito_API\BAL\obj\Debug\BAL.csproj.CopyComplete
 D:\Project\Vitamito_API\BAL\obj\Debug\BAL.dll
 D:\Project\Vitamito_API\BAL\obj\Debug\BAL.pdb
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\bin\Debug\BAL.dll.config
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\bin\Debug\BAL.dll
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\bin\Debug\BAL.pdb
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\bin\Debug\DAL.dll
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\bin\Debug\DAL.pdb
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\bin\Debug\DAL.dll.config
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\obj\Debug\BAL.csproj.AssemblyReference.cache
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\obj\Debug\BAL.csproj.CoreCompileInputs.cache
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\obj\Debug\BAL.csproj.CopyComplete
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\obj\Debug\BAL.dll
+C:\Office\Airtech\Vitamato\VitamitoAPI\BAL\obj\Debug\BAL.pdb
