@@ -46,7 +46,7 @@ namespace VitamitoAPI.Controllers
         [Route("banners/all/{UserID}")]
         public Rsp GetBanners(int UserID)
         {
-            return loginRepo.GetBanners(UserID,0);
+            return loginRepo.GetBanners(UserID, 0);
         }
 
         [HttpGet]
@@ -65,13 +65,14 @@ namespace VitamitoAPI.Controllers
         [Route("settings/user/{UserID}")]
         public AppSettings GetSettings(int UserID)
         {
-            return new AppSettings{
-            Currency="Rs",
-            DeliveryCharges="0",
-            LocationID= 2182,
-            Status="1",
-            TaxPercent="0",
-            UserID= 2313
+            return new AppSettings
+            {
+                Currency = "Rs",
+                DeliveryCharges = "0",
+                LocationID = 2182,
+                Status = "1",
+                TaxPercent = "0",
+                UserID = 2313
             };
         }
     }
