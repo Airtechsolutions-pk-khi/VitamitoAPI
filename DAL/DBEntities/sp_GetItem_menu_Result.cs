@@ -33,5 +33,7 @@ namespace DAL.DBEntities
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<bool> HasVariant { get; set; }
+        public Nullable<bool> IsVATApplied { get; set; }
+        public double CurrentStock { get; set; }
     }
 }

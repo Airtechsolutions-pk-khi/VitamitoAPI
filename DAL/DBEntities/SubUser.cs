@@ -42,6 +42,10 @@ namespace DAL.DBEntities
         public string Zipcode { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string CreatedBy { get; set; }
+        public Nullable<bool> IsFBR { get; set; }
+        public string FbrPOSID { get; set; }
+        public string FbrUserCode { get; set; }
+        public string Token { get; set; }
     
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }

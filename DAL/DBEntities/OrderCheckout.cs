@@ -48,6 +48,9 @@ namespace DAL.DBEntities
         public Nullable<bool> IsPartial { get; set; }
         public Nullable<double> PartialAmount { get; set; }
         public string DiscountReason { get; set; }
+        public Nullable<double> FbrAmount { get; set; }
+        public string FbrInvoiceNumber { get; set; }
+        public string FbrInvoiceResponse { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Location Location { get; set; }

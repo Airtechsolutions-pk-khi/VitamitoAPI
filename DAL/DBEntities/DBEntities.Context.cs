@@ -443,9 +443,13 @@ namespace DAL.DBEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_FinishItemsList_Result>("sp_FinishItemsList", locationIDParameter);
         }
     
-        public virtual ObjectResult<sp_GetAllBanners_Result> sp_GetAllBanners()
+        public virtual ObjectResult<sp_GetAllBanners_Result> sp_GetAllBanners(Nullable<int> locationID)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAllBanners_Result>("sp_GetAllBanners");
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAllBanners_Result>("sp_GetAllBanners", locationIDParameter);
         }
     
         public virtual ObjectResult<sp_getallusers_Result> sp_getallusers()
@@ -573,15 +577,6 @@ namespace DAL.DBEntities
                 new ObjectParameter("LocationID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetInventoryItems_Result>("sp_GetInventoryItems", itemIDParameter, locationIDParameter);
-        }
-    
-        public virtual ObjectResult<sp_GetItem_menu_Result> sp_GetItem_menu(Nullable<int> locationID)
-        {
-            var locationIDParameter = locationID.HasValue ?
-                new ObjectParameter("LocationID", locationID) :
-                new ObjectParameter("LocationID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetItem_menu_Result>("sp_GetItem_menu", locationIDParameter);
         }
     
         public virtual ObjectResult<sp_GetItemModifierMapping_menu_Result> sp_GetItemModifierMapping_menu()
@@ -1986,6 +1981,15 @@ namespace DAL.DBEntities
                 new ObjectParameter("Contact", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ValidateUser", emailParameter, contactParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetItem_menu_Result> sp_GetItem_menu(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetItem_menu_Result>("sp_GetItem_menu", locationIDParameter);
         }
     }
 }

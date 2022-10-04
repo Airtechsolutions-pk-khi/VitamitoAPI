@@ -34,6 +34,10 @@ namespace DAL.DBEntities
         public string Snapchat { get; set; }
         public string Twitter { get; set; }
         public string OrderNoPrefix { get; set; }
+        public string HeaderText { get; set; }
+        public Nullable<bool> IsA4Print { get; set; }
+        public Nullable<bool> AllowNegativeInventroy { get; set; }
+        public string TaxName { get; set; }
     
         public virtual User User { get; set; }
     }

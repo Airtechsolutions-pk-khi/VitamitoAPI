@@ -46,6 +46,8 @@ namespace DAL.DBEntities
         public string ItemType { get; set; }
         public Nullable<int> DealID { get; set; }
         public Nullable<bool> IsVATApplied { get; set; }
+        public string ItemCode { get; set; }
+        public string Description { get; set; }
     
         public virtual Item Item { get; set; }
         public virtual Order Order { get; set; }

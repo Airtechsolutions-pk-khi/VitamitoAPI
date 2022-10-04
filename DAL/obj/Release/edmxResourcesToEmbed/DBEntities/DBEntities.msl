@@ -356,32 +356,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_GetItem_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetItem_menu">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetItem_menu_Result">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
-          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="NameOnReceipt" ColumnName="NameOnReceipt" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-          <ScalarProperty Name="SKU" ColumnName="SKU" />
-          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-          <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Cost" ColumnName="Cost" />
-          <ScalarProperty Name="ItemType" ColumnName="ItemType" />
-          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_GetItemModifierMapping_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetItemModifierMapping_menu">
       <ResultMapping>
         <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetItemModifierMapping_menu_Result">
@@ -1884,6 +1858,9 @@
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.Order">
         <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="FbrStatus" ColumnName="FbrStatus" />
+          <ScalarProperty Name="IsOrderFbr" ColumnName="IsOrderFbr" />
+          <ScalarProperty Name="FbrInvoiceNumber" ColumnName="FbrInvoiceNumber" />
           <ScalarProperty Name="DeliveryStatus" ColumnName="DeliveryStatus" />
           <ScalarProperty Name="CounterType" ColumnName="CounterType" />
           <ScalarProperty Name="IsAvailiable" ColumnName="IsAvailiable" />
@@ -1916,6 +1893,9 @@
     <EntitySetMapping Name="OrderCheckouts">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.OrderCheckout">
         <MappingFragment StoreEntitySet="OrderCheckout">
+          <ScalarProperty Name="FbrInvoiceResponse" ColumnName="FbrInvoiceResponse" />
+          <ScalarProperty Name="FbrInvoiceNumber" ColumnName="FbrInvoiceNumber" />
+          <ScalarProperty Name="FbrAmount" ColumnName="FbrAmount" />
           <ScalarProperty Name="DiscountReason" ColumnName="DiscountReason" />
           <ScalarProperty Name="PartialAmount" ColumnName="PartialAmount" />
           <ScalarProperty Name="IsPartial" ColumnName="IsPartial" />
@@ -1962,6 +1942,8 @@
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
           <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
           <ScalarProperty Name="DealID" ColumnName="DealID" />
           <ScalarProperty Name="ItemType" ColumnName="ItemType" />
@@ -2117,6 +2099,10 @@
     <EntitySetMapping Name="ReceiptPermissions">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.ReceiptPermission">
         <MappingFragment StoreEntitySet="ReceiptPermissions">
+          <ScalarProperty Name="TaxName" ColumnName="TaxName" />
+          <ScalarProperty Name="AllowNegativeInventroy" ColumnName="AllowNegativeInventroy" />
+          <ScalarProperty Name="IsA4Print" ColumnName="IsA4Print" />
+          <ScalarProperty Name="HeaderText" ColumnName="HeaderText" />
           <ScalarProperty Name="OrderNoPrefix" ColumnName="OrderNoPrefix" />
           <ScalarProperty Name="Twitter" ColumnName="Twitter" />
           <ScalarProperty Name="Snapchat" ColumnName="Snapchat" />
@@ -2248,6 +2234,10 @@
     <EntitySetMapping Name="SubUsers">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.SubUser">
         <MappingFragment StoreEntitySet="SubUser">
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="FbrUserCode" ColumnName="FbrUserCode" />
+          <ScalarProperty Name="FbrPOSID" ColumnName="FbrPOSID" />
+          <ScalarProperty Name="IsFBR" ColumnName="IsFBR" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
@@ -2470,5 +2460,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetItem_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetItem_menu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetItem_menu_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameOnReceipt" ColumnName="NameOnReceipt" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="SKU" ColumnName="SKU" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
+          <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
+          <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

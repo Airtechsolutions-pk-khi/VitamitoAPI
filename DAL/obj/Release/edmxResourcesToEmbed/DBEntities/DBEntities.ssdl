@@ -371,7 +371,7 @@
     <Property Name="NameOnReceipt" Type="nvarchar(max)" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Image" Type="nvarchar(max)" />
-    <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="100" />
     <Property Name="SKU" Type="nvarchar" MaxLength="50" />
     <Property Name="DisplayOrder" Type="int" />
     <Property Name="SortByAlpha" Type="bit" />
@@ -520,6 +520,9 @@
     <Property Name="IsAvailiable" Type="bit" />
     <Property Name="CounterType" Type="nvarchar" MaxLength="150" />
     <Property Name="DeliveryStatus" Type="int" />
+    <Property Name="FbrInvoiceNumber" Type="nvarchar" MaxLength="200" />
+    <Property Name="IsOrderFbr" Type="bit" />
+    <Property Name="FbrStatus" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="OrderCheckout">
     <Key>
@@ -553,6 +556,9 @@
     <Property Name="IsPartial" Type="bit" />
     <Property Name="PartialAmount" Type="float" />
     <Property Name="DiscountReason" Type="nvarchar" MaxLength="250" />
+    <Property Name="FbrAmount" Type="float" />
+    <Property Name="FbrInvoiceNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="FbrInvoiceResponse" Type="nvarchar" MaxLength="300" />
   </EntityType>
   <EntityType Name="OrderDealDetail">
     <Key>
@@ -594,6 +600,8 @@
     <Property Name="ItemType" Type="varchar" MaxLength="50" />
     <Property Name="DealID" Type="int" />
     <Property Name="IsVATApplied" Type="bit" />
+    <Property Name="ItemCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="OrderModifierDetail">
     <Key>
@@ -736,6 +744,10 @@
     <Property Name="Snapchat" Type="nvarchar" MaxLength="50" />
     <Property Name="Twitter" Type="nvarchar" MaxLength="50" />
     <Property Name="OrderNoPrefix" Type="nvarchar" MaxLength="50" />
+    <Property Name="HeaderText" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsA4Print" Type="bit" />
+    <Property Name="AllowNegativeInventroy" Type="bit" />
+    <Property Name="TaxName" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Reveiws">
     <Key>
@@ -779,7 +791,7 @@
     <Property Name="ReceivedStockLevel" Type="float" />
     <Property Name="ReturnStock" Type="float" />
     <Property Name="Date" Type="datetime" />
-    <Property Name="Description" Type="nchar" MaxLength="10" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
     <Property Name="StatusId" Type="int" />
     <Property Name="PurshaseOrderID" Type="int" />
     <Property Name="PONum" Type="varchar" MaxLength="50" />
@@ -868,6 +880,10 @@
     <Property Name="Zipcode" Type="nvarchar" MaxLength="10" />
     <Property Name="CreatedOn" Type="datetime" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsFBR" Type="bit" />
+    <Property Name="FbrPOSID" Type="nvarchar" MaxLength="50" />
+    <Property Name="FbrUserCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Token" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -2131,7 +2147,9 @@
   <Function Name="sp_FinishItemsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
-  <Function Name="sp_GetAllBanners" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetAllBanners" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_getallusers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_GetBanners" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_GetCategory_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

@@ -51,6 +51,9 @@ namespace DAL.DBEntities
         public Nullable<bool> IsAvailiable { get; set; }
         public string CounterType { get; set; }
         public Nullable<int> DeliveryStatus { get; set; }
+        public string FbrInvoiceNumber { get; set; }
+        public Nullable<bool> IsOrderFbr { get; set; }
+        public string FbrStatus { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -201,3 +201,11 @@ D:\Project\Vitamito_API\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\Project\Vitamito_API\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\Project\Vitamito_API\DAL\obj\Debug\DAL.dll
 D:\Project\Vitamito_API\DAL\obj\Debug\DAL.pdb
+D:\Project\VitamitoAPI\DAL\bin\Debug\DAL.dll.config
+D:\Project\VitamitoAPI\DAL\bin\Debug\DAL.dll
+D:\Project\VitamitoAPI\DAL\bin\Debug\DAL.pdb
+D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.dll
+D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.pdb

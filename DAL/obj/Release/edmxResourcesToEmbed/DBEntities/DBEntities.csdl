@@ -111,7 +111,9 @@
     <FunctionImport Name="sp_FinishItemsList" ReturnType="Collection(db_a74425_premiumposModel.sp_FinishItemsList_Result)">
       <Parameter Name="LocationID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_GetAllBanners" ReturnType="Collection(db_a74425_premiumposModel.sp_GetAllBanners_Result)" />
+    <FunctionImport Name="sp_GetAllBanners" ReturnType="Collection(db_a74425_premiumposModel.sp_GetAllBanners_Result)">
+      <Parameter Name="LocationID" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="sp_getallusers" ReturnType="Collection(db_a74425_premiumposModel.sp_getallusers_Result)" />
     <FunctionImport Name="sp_GetBanners" ReturnType="Collection(db_a74425_premiumposModel.sp_GetBanners_Result)" />
     <FunctionImport Name="sp_GetCategory_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetCategory_menu_Result)">
@@ -148,9 +150,6 @@
     </FunctionImport>
     <FunctionImport Name="sp_GetInventoryItems" ReturnType="Collection(db_a74425_premiumposModel.sp_GetInventoryItems_Result)">
       <Parameter Name="ItemID" Mode="In" Type="Int32" />
-      <Parameter Name="LocationID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_GetItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetItem_menu_Result)">
       <Parameter Name="LocationID" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="sp_GetItemModifierMapping_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetItemModifierMapping_menu_Result)" />
@@ -934,6 +933,9 @@
       <End Role="User" EntitySet="Users" />
       <End Role="Variant" EntitySet="Variants" />
     </AssociationSet>
+    <FunctionImport Name="sp_GetItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetItem_menu_Result)">
+      <Parameter Name="LocationID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ABC_Result">
     <Property Type="DateTime" Name="Date" Nullable="true" />
@@ -1233,28 +1235,6 @@
     <Property Type="String" Name="PurchasingUnit" Nullable="true" MaxLength="50" />
     <Property Type="Double" Name="CostPerUnit" Nullable="true" />
     <Property Type="Double" Name="CurrentStockLevel" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_GetItem_menu_Result">
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="Int32" Name="SubCategoryID" Nullable="true" />
-    <Property Type="Int32" Name="UnitID" Nullable="true" />
-    <Property Type="String" Name="Name" Nullable="true" />
-    <Property Type="String" Name="NameOnReceipt" Nullable="true" />
-    <Property Type="String" Name="Description" Nullable="true" />
-    <Property Type="String" Name="Image" Nullable="true" />
-    <Property Type="String" Name="Barcode" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="SKU" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
-    <Property Type="Boolean" Name="SortByAlpha" Nullable="true" />
-    <Property Type="Double" Name="Price" Nullable="true" />
-    <Property Type="Double" Name="Cost" Nullable="true" />
-    <Property Type="String" Name="ItemType" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="50" />
-    <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="StatusID" Nullable="true" />
-    <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
-    <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
-    <Property Type="Boolean" Name="HasVariant" Nullable="true" />
   </ComplexType>
   <ComplexType Name="sp_GetItemModifierMapping_menu_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -2472,7 +2452,7 @@
     <Property Name="NameOnReceipt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DisplayOrder" Type="Int32" />
     <Property Name="SortByAlpha" Type="Boolean" />
@@ -2667,6 +2647,9 @@
     <NavigationProperty Name="OrderCheckouts" Relationship="db_a74425_premiumposModel.FK_OrderCheckout_Order" FromRole="Order" ToRole="OrderCheckout" />
     <NavigationProperty Name="OrderDetails" Relationship="db_a74425_premiumposModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
     <NavigationProperty Name="Payments" Relationship="db_a74425_premiumposModel.FK_Payment_Order" FromRole="Order" ToRole="Payment" />
+    <Property Name="FbrInvoiceNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IsOrderFbr" Type="Boolean" />
+    <Property Name="FbrStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="OrderCheckout">
     <Key>
@@ -2704,6 +2687,9 @@
     <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_OrderCheckout_Location" FromRole="OrderCheckout" ToRole="Location" />
     <NavigationProperty Name="Order" Relationship="db_a74425_premiumposModel.FK_OrderCheckout_Order" FromRole="OrderCheckout" ToRole="Order" />
     <NavigationProperty Name="Table_orderCheckoutDetail" Relationship="db_a74425_premiumposModel.FK_Table_orderCheckoutDetail1_OrderCheckout" FromRole="OrderCheckout" ToRole="Table_orderCheckoutDetail" />
+    <Property Name="FbrAmount" Type="Double" />
+    <Property Name="FbrInvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FbrInvoiceResponse" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="OrderDealDetail">
     <Key>
@@ -2751,6 +2737,8 @@
     <NavigationProperty Name="Order" Relationship="db_a74425_premiumposModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
     <NavigationProperty Name="OrderDealDetails" Relationship="db_a74425_premiumposModel.FK_OrderDealDetail_OrderDetail" FromRole="OrderDetail" ToRole="OrderDealDetail" />
     <NavigationProperty Name="OrderModifierDetails" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_OrderDetail" FromRole="OrderDetail" ToRole="OrderModifierDetail" />
+    <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="OrderModifierDetail">
     <Key>
@@ -2909,6 +2897,10 @@
     <Property Name="Twitter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="OrderNoPrefix" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="User" Relationship="db_a74425_premiumposModel.FK_ReceiptPermissions_User" FromRole="ReceiptPermission" ToRole="User" />
+    <Property Name="HeaderText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsA4Print" Type="Boolean" />
+    <Property Name="AllowNegativeInventroy" Type="Boolean" />
+    <Property Name="TaxName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Reveiw">
     <Key>
@@ -2953,7 +2945,7 @@
     <Property Name="ReceivedStockLevel" Type="Double" />
     <Property Name="ReturnStock" Type="Double" />
     <Property Name="Date" Type="DateTime" Precision="3" />
-    <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <Property Name="StatusId" Type="Int32" />
     <Property Name="PurshaseOrderID" Type="Int32" />
     <Property Name="PONum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -3062,6 +3054,10 @@
     <NavigationProperty Name="Country" Relationship="db_a74425_premiumposModel.FK_SubUser_Country" FromRole="SubUser" ToRole="Country" />
     <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_SubUser_Location" FromRole="SubUser" ToRole="Location" />
     <NavigationProperty Name="User" Relationship="db_a74425_premiumposModel.FK_SubUser_USer" FromRole="SubUser" ToRole="User" />
+    <Property Name="IsFBR" Type="Boolean" />
+    <Property Name="FbrPOSID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FbrUserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Token" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -4261,4 +4257,28 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="sp_GetItem_menu_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="SubCategoryID" Nullable="true" />
+    <Property Type="Int32" Name="UnitID" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="true" />
+    <Property Type="String" Name="NameOnReceipt" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="String" Name="Image" Nullable="true" />
+    <Property Type="String" Name="Barcode" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="SKU" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+    <Property Type="Boolean" Name="SortByAlpha" Nullable="true" />
+    <Property Type="Double" Name="Price" Nullable="true" />
+    <Property Type="Double" Name="Cost" Nullable="true" />
+    <Property Type="String" Name="ItemType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="HasVariant" Nullable="true" />
+    <Property Type="Boolean" Name="IsVATApplied" Nullable="true" />
+    <Property Type="Double" Name="CurrentStock" Nullable="false" />
+  </ComplexType>
 </Schema>
