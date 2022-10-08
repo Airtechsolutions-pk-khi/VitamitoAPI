@@ -120,7 +120,8 @@ namespace BAL.Repositories
                                     ItemImages=lstIM.ToArray(),
                                     DisplayOrder=item.DisplayOrder,
                                     IsFeatured= false,
-                                    CurrentStock = item.CurrentStock
+                                    CurrentStock = item.CurrentStock,
+                                    IsInventoryItem=item.IsInventoryItem>0?true:false
                                 });
                             }
                             SubCategoryLst.Add(new SubCategoryBLL

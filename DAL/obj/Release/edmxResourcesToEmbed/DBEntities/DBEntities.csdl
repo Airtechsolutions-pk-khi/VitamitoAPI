@@ -4280,5 +4280,6 @@
     <Property Type="Boolean" Name="HasVariant" Nullable="true" />
     <Property Type="Boolean" Name="IsVATApplied" Nullable="true" />
     <Property Type="Double" Name="CurrentStock" Nullable="false" />
+    <Property Type="Int32" Name="IsInventoryItem" Nullable="false" />
   </ComplexType>
 </Schema>

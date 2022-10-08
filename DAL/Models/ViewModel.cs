@@ -195,6 +195,7 @@ namespace DAL.Models
         public string[] ItemImages { get; set; }
         public int? DisplayOrder { get; set; }
         public double? CurrentStock { get; set; }
+        public bool? IsInventoryItem { get; set; }
         public bool? IsFeatured { get; set; }
         public List<ModifierBLL> Modifiers { get; set; }
         public List<VariantsBLL> Variants { get; set; }

@@ -2485,6 +2485,7 @@
           <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
           <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
           <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+          <ScalarProperty Name="IsInventoryItem" ColumnName="IsInventoryItem" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

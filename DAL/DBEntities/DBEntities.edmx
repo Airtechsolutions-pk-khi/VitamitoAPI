@@ -3123,7 +3123,7 @@
           <Parameter Name="LocationID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetAllBanners" ReturnType="Collection(db_a74425_premiumposModel.sp_GetAllBanners_Result)" >
-            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_getallusers" ReturnType="Collection(db_a74425_premiumposModel.sp_getallusers_Result)" />
           <FunctionImport Name="sp_GetBanners" ReturnType="Collection(db_a74425_premiumposModel.sp_GetBanners_Result)" />
@@ -7291,6 +7291,7 @@
           <Property Type="Boolean" Name="HasVariant" Nullable="true" />
           <Property Type="Boolean" Name="IsVATApplied" Nullable="true" />
           <Property Type="Double" Name="CurrentStock" Nullable="false" />
+          <Property Type="Int32" Name="IsInventoryItem" Nullable="false" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -9782,6 +9783,7 @@
                 <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
                 <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
                 <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+                <ScalarProperty Name="IsInventoryItem" ColumnName="IsInventoryItem" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
