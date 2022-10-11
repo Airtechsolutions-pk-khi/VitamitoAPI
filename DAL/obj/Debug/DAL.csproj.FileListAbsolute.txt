@@ -201,14 +201,6 @@ D:\Project\Vitamito_API\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\Project\Vitamito_API\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\Project\Vitamito_API\DAL\obj\Debug\DAL.dll
 D:\Project\Vitamito_API\DAL\obj\Debug\DAL.pdb
-D:\Project\VitamitoAPI\DAL\bin\Debug\DAL.dll.config
-D:\Project\VitamitoAPI\DAL\bin\Debug\DAL.dll
-D:\Project\VitamitoAPI\DAL\bin\Debug\DAL.pdb
-D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
-D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
-D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.csproj.CopyComplete
-D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.dll
-D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.pdb
 C:\Office\Airtech\Vitamato\VitamitoAPI\DAL\bin\Debug\DAL.dll.config
 C:\Office\Airtech\Vitamato\VitamitoAPI\DAL\bin\Debug\DAL.dll
 C:\Office\Airtech\Vitamato\VitamitoAPI\DAL\bin\Debug\DAL.pdb
@@ -217,3 +209,11 @@ C:\Office\Airtech\Vitamato\VitamitoAPI\DAL\obj\Debug\DAL.csproj.CoreCompileInput
 C:\Office\Airtech\Vitamato\VitamitoAPI\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Office\Airtech\Vitamato\VitamitoAPI\DAL\obj\Debug\DAL.dll
 C:\Office\Airtech\Vitamato\VitamitoAPI\DAL\obj\Debug\DAL.pdb
+D:\Project\VitamitoAPI\DAL\bin\Debug\DAL.dll.config
+D:\Project\VitamitoAPI\DAL\bin\Debug\DAL.dll
+D:\Project\VitamitoAPI\DAL\bin\Debug\DAL.pdb
+D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.dll
+D:\Project\VitamitoAPI\DAL\obj\Debug\DAL.pdb

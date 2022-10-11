@@ -67,7 +67,7 @@ namespace VitamitoAPI.Controllers
         {
             return new AppSettings
             {
-                Currency = "Rs",
+                Currency = "BHD",
                 DeliveryCharges = "0",
                 LocationID = 2182,
                 Status = "1",
