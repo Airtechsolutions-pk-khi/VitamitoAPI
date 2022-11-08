@@ -69,7 +69,7 @@ namespace VitamitoAPI.Controllers
             {
                 Currency = "BHD",
                 DeliveryCharges = "0",
-                LocationID = 2182,
+                LocationID = 2195,
                 Status = "1",
                 TaxPercent = "0",
                 UserID = 2313
