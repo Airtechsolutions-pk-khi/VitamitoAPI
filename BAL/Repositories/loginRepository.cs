@@ -5,7 +5,10 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using WebAPICode.Helpers;
 
 namespace BAL.Repositories
 {
@@ -87,14 +90,40 @@ namespace BAL.Repositories
         //        return rsp;
         //    }
         //}
+        public static DataTable _dt;
+        public List<AppSettings> GetSetting(int UserID)
+        {           
+            try
+            {
+                var lst = new List<AppSettings>();
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@UserID", UserID);
+                _dt = (new DBHelper().GetTableFromSP)("sp_GetSettingsVitamito", p);
+                 
+                if (_dt != null)
+                {
+                    if (_dt.Rows.Count > 0)
+                    {
+                        lst = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_dt)).ToObject<List<AppSettings>>();
+                         
+                        //lst = _dt.DataTableToList<AppSettings>();
+                    }
+                }
+                return lst;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+ 
+        }
         public RspBanner GetBanners(int UserID,int LocationID)
         {
             var banners = new List<BannerBLL>();
             var rsp = new RspBanner();
             try
             {
-                var list = DBContext.Banners.Where(x => x.StatusID == 1  && x.LocationID== LocationID).ToList();
-
+                var list = DBContext.Banners.Where(x => x.StatusID == 1  && x.LocationID== LocationID && x.Type == "Header").ToList();
                
                 foreach (var i in list)
                 {
@@ -105,6 +134,7 @@ namespace BAL.Repositories
                         Name = i.Title,
                         UserID = UserID,
                         LocationID = i.LocationID,
+                         Type = i.Type,
                        Image = i.Image == null ? "" : ConfigurationManager.AppSettings["AdminURL"].ToString() + i.Image,
                         StatusID = i.StatusID
                     });

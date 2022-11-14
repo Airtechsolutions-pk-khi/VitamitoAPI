@@ -1337,25 +1337,6 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="ValidateLogin" FunctionName="db_a74425_premiumposModel.Store.ValidateLogin" />
     <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="db_a74425_premiumposModel.Store.ValidateUser" />
-    <EntitySetMapping Name="Banners">
-      <EntityTypeMapping TypeName="db_a74425_premiumposModel.Banner">
-        <MappingFragment StoreEntitySet="Banner">
-          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-          <ScalarProperty Name="ButtonURL" ColumnName="ButtonURL" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
-          <ScalarProperty Name="IsSilder" ColumnName="IsSilder" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="BannerID" ColumnName="BannerID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CardTypes">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.CardType">
         <MappingFragment StoreEntitySet="CardTypes">
@@ -1454,6 +1435,8 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CurrentPoint" ColumnName="CurrentPoint" />
+          <ScalarProperty Name="RedeemPoints" ColumnName="RedeemPoints" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
@@ -1722,6 +1705,7 @@
     <EntitySetMapping Name="Items">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.Item">
         <MappingFragment StoreEntitySet="Item">
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
           <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
           <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -2129,6 +2113,7 @@
     <EntitySetMapping Name="Reveiws">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.Reveiw">
         <MappingFragment StoreEntitySet="Reveiws">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
           <ScalarProperty Name="ItemID" ColumnName="ItemID" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
           <ScalarProperty Name="Contact" ColumnName="Contact" />
@@ -2489,5 +2474,25 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="Banners">
+      <EntityTypeMapping TypeName="db_a74425_premiumposModel.Banner">
+        <MappingFragment StoreEntitySet="Banner">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="ButtonURL" ColumnName="ButtonURL" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+          <ScalarProperty Name="IsSilder" ColumnName="IsSilder" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="BannerID" ColumnName="BannerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

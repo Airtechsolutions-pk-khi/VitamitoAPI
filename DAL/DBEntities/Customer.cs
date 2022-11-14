@@ -45,6 +45,8 @@ namespace DAL.DBEntities
         public Nullable<int> StatusID { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string CreatedBy { get; set; }
+        public Nullable<double> RedeemPoints { get; set; }
+        public Nullable<double> CurrentPoint { get; set; }
     
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }

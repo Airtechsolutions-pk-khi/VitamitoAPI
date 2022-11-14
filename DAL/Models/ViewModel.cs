@@ -39,6 +39,7 @@ namespace DAL.Models
     {
         public int BannerID { get; set; }
         public string Name { get; set; }
+        public string Type { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
         public Nullable<int> StatusID { get; set; }
@@ -49,11 +50,14 @@ namespace DAL.Models
     public class AppSettings
     {
         public int UserID { get; set; }
-        public int LocationID{ get; set; }
-        public string TaxPercent { get; set; }
+        public int LocationID { get; set; }
+        public int TaxPercent { get; set; }
+        public string Currency { get; set; }
+        public double? Discount { get; set; }
+        public double? MinOrderAmount { get; set; }
         public string DeliveryCharges { get; set; }
-        public string Currency{ get; set; }
-        public string Status { get; set; }
+        
+        public string StatusID { get; set; }
 
     }
     public class RspOffers

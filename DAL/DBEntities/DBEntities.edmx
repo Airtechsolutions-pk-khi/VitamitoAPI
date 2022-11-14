@@ -12,6 +12,7 @@
           <Property Name="BannerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar(max)" />
           <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="IsSilder" Type="int" />
           <Property Name="IsFeatured" Type="int" />
           <Property Name="LastUpdatedDate" Type="datetime" />
@@ -136,6 +137,8 @@
           <Property Name="StatusID" Type="int" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="RedeemPoints" Type="float" />
+          <Property Name="CurrentPoint" Type="float" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
@@ -390,6 +393,7 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="HasVariant" Type="bit" />
           <Property Name="IsVATApplied" Type="bit" />
+          <Property Name="IsFeatured" Type="bit" />
         </EntityType>
         <EntityType Name="ItemImages">
           <Key>
@@ -766,6 +770,7 @@
           <Property Name="Contact" Type="nvarchar" MaxLength="50" />
           <Property Name="StatusID" Type="int" />
           <Property Name="ItemID" Type="int" />
+          <Property Name="LocationID" Type="int" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -3555,7 +3560,6 @@
             <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Contact" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Banners" EntityType="db_a74425_premiumposModel.Banner" />
           <EntitySet Name="CardTypes" EntityType="db_a74425_premiumposModel.CardType" />
           <EntitySet Name="Categories" EntityType="db_a74425_premiumposModel.Category" />
           <EntitySet Name="Cities" EntityType="db_a74425_premiumposModel.City" />
@@ -3612,10 +3616,6 @@
           <EntitySet Name="Users" EntityType="db_a74425_premiumposModel.User" />
           <EntitySet Name="UserPaymentInfoes" EntityType="db_a74425_premiumposModel.UserPaymentInfo" />
           <EntitySet Name="Variants" EntityType="db_a74425_premiumposModel.Variant" />
-          <AssociationSet Name="FK__Banner__Location__44952D46" Association="db_a74425_premiumposModel.FK__Banner__Location__44952D46">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="Banner" EntitySet="Banners" />
-          </AssociationSet>
           <AssociationSet Name="FK_Category_Location" Association="db_a74425_premiumposModel.FK_Category_Location">
             <End Role="Location" EntitySet="Locations" />
             <End Role="Category" EntitySet="Categories" />
@@ -3945,8 +3945,13 @@
             <End Role="Variant" EntitySet="Variants" />
           </AssociationSet>
           <FunctionImport Name="sp_GetItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetItem_menu_Result)">
-            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Banners" EntityType="db_a74425_premiumposModel.Banner" />
+          <AssociationSet Name="FK__Banner__Location__44952D46" Association="db_a74425_premiumposModel.FK__Banner__Location__44952D46">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Banner" EntitySet="Banners" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="ABC_Result">
           <Property Type="DateTime" Name="Date" Nullable="true" />
@@ -5040,25 +5045,6 @@
           <Property Type="Double" Name="Delivery" Nullable="true" />
           <Property Type="Int32" Name="DeliveryOrders" Nullable="true" />
         </ComplexType>
-        <EntityType Name="Banner">
-          <Key>
-            <PropertyRef Name="BannerID" />
-          </Key>
-          <Property Name="BannerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IsSilder" Type="Int32" />
-          <Property Name="IsFeatured" Type="Int32" />
-          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StatusID" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="ButtonURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LocationID" Type="Int32" />
-          <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK__Banner__Location__44952D46" FromRole="Banner" ToRole="Location" />
-        </EntityType>
         <EntityType Name="CardType">
           <Key>
             <PropertyRef Name="CardTypeID" />
@@ -5194,6 +5180,8 @@
           <NavigationProperty Name="CustomerWishLists" Relationship="db_a74425_premiumposModel.FK_CustomerWishList_Customer" FromRole="Customer" ToRole="CustomerWishList" />
           <NavigationProperty Name="Orders" Relationship="db_a74425_premiumposModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
           <NavigationProperty Name="OrderCheckouts" Relationship="db_a74425_premiumposModel.FK_OrderCheckout_Customer" FromRole="Customer" ToRole="OrderCheckout" />
+          <Property Name="RedeemPoints" Type="Double" />
+          <Property Name="CurrentPoint" Type="Double" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
@@ -5490,6 +5478,7 @@
           <NavigationProperty Name="PurchaseOrderDetails" Relationship="db_a74425_premiumposModel.FK_PurchaseOrderDetail_Item" FromRole="Item" ToRole="PurchaseOrderDetail" />
           <NavigationProperty Name="Reveiws" Relationship="db_a74425_premiumposModel.FK_Reveiws_Item" FromRole="Item" ToRole="Reveiw" />
           <NavigationProperty Name="Stocks" Relationship="db_a74425_premiumposModel.FK_Stock_Item" FromRole="Item" ToRole="Stock" />
+          <Property Name="IsFeatured" Type="Boolean" />
         </EntityType>
         <EntityType Name="ItemImage">
           <Key>
@@ -5578,7 +5567,6 @@
           <Property Name="CRN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FooterNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Passcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Banners" Relationship="db_a74425_premiumposModel.FK__Banner__Location__44952D46" FromRole="Location" ToRole="Banner" />
           <NavigationProperty Name="Categories" Relationship="db_a74425_premiumposModel.FK_Category_Location" FromRole="Location" ToRole="Category" />
           <NavigationProperty Name="City" Relationship="db_a74425_premiumposModel.FK_Location_City" FromRole="Location" ToRole="City" />
           <NavigationProperty Name="Companies" Relationship="db_a74425_premiumposModel.FK_Company_Location" FromRole="Location" ToRole="Company" />
@@ -5595,6 +5583,7 @@
           <NavigationProperty Name="Stores" Relationship="db_a74425_premiumposModel.FK_Store_Location" FromRole="Location" ToRole="Store" />
           <NavigationProperty Name="SubUsers" Relationship="db_a74425_premiumposModel.FK_SubUser_Location" FromRole="Location" ToRole="SubUser" />
           <NavigationProperty Name="Suppliers" Relationship="db_a74425_premiumposModel.FK_Supplier_Location" FromRole="Location" ToRole="Supplier" />
+          <NavigationProperty Name="Banners" Relationship="db_a74425_premiumposModel.FK__Banner__Location__44952D46" FromRole="Location" ToRole="Banner" />
         </EntityType>
         <EntityType Name="Modifier">
           <Key>
@@ -5926,6 +5915,7 @@
           <Property Name="StatusID" Type="Int32" />
           <Property Name="ItemID" Type="Int32" />
           <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_Reveiws_Item" FromRole="Reveiw" ToRole="Item" />
+          <Property Name="LocationID" Type="Int32" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -6272,18 +6262,6 @@
           <NavigationProperty Name="OrderModifierDetails" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_Variant" FromRole="Variant" ToRole="OrderModifierDetail" />
           <NavigationProperty Name="User" Relationship="db_a74425_premiumposModel.FK_Variant_User" FromRole="Variant" ToRole="User" />
         </EntityType>
-        <Association Name="FK__Banner__Location__44952D46">
-          <End Type="db_a74425_premiumposModel.Location" Role="Location" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.Banner" Role="Banner" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Banner">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Category_Location">
           <End Type="db_a74425_premiumposModel.Location" Role="Location" Multiplicity="0..1" />
           <End Type="db_a74425_premiumposModel.Category" Role="Category" Multiplicity="*" />
@@ -7293,6 +7271,38 @@
           <Property Type="Double" Name="CurrentStock" Nullable="false" />
           <Property Type="Int32" Name="IsInventoryItem" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="BannerID" />
+          </Key>
+          <Property Name="BannerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsSilder" Type="Int32" />
+          <Property Name="IsFeatured" Type="Int32" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ButtonURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LocationID" Type="Int32" />
+          <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK__Banner__Location__44952D46" FromRole="Banner" ToRole="Location" />
+        </EntityType>
+        <Association Name="FK__Banner__Location__44952D46">
+          <End Type="db_a74425_premiumposModel.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.Banner" Role="Banner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Banner">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8635,25 +8645,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ValidateLogin" FunctionName="db_a74425_premiumposModel.Store.ValidateLogin" />
           <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="db_a74425_premiumposModel.Store.ValidateUser" />
-          <EntitySetMapping Name="Banners">
-            <EntityTypeMapping TypeName="db_a74425_premiumposModel.Banner">
-              <MappingFragment StoreEntitySet="Banner">
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="ButtonURL" ColumnName="ButtonURL" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
-                <ScalarProperty Name="IsSilder" ColumnName="IsSilder" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="BannerID" ColumnName="BannerID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CardTypes">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.CardType">
               <MappingFragment StoreEntitySet="CardTypes">
@@ -8752,6 +8743,8 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CurrentPoint" ColumnName="CurrentPoint" />
+                <ScalarProperty Name="RedeemPoints" ColumnName="RedeemPoints" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
@@ -9020,6 +9013,7 @@
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.Item">
               <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
                 <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
                 <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -9427,6 +9421,7 @@
           <EntitySetMapping Name="Reveiws">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.Reveiw">
               <MappingFragment StoreEntitySet="Reveiws">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="Contact" ColumnName="Contact" />
@@ -9787,6 +9782,26 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Banners">
+            <EntityTypeMapping TypeName="db_a74425_premiumposModel.Banner">
+              <MappingFragment StoreEntitySet="Banner">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ButtonURL" ColumnName="ButtonURL" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="IsSilder" ColumnName="IsSilder" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BannerID" ColumnName="BannerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
