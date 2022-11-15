@@ -51,14 +51,32 @@ namespace DAL.Models
     {
         public int UserID { get; set; }
         public int LocationID { get; set; }
-        public int TaxPercent { get; set; }
+        public int? TaxPercent { get; set; }
+        public string TopHeadDescription { get; set; }
         public string Currency { get; set; }
         public double? Discount { get; set; }
         public double? MinOrderAmount { get; set; }
         public string DeliveryCharges { get; set; }
         
-        public string StatusID { get; set; }
+         
 
+        public List<CouponVM> Coupons = new List<CouponVM>();
+
+    }
+    public class CouponVM
+    {
+        public int ID { get; set; }
+        public string Title { get; set; }
+        public string Type { get; set; }
+        public string Description { get; set; }
+        public Nullable<decimal> Amount { get; set; }
+        public string CouponCode { get; set; }
+        public Nullable<System.DateTime> LastUpdatedDate { get; set; }
+        public Nullable<int> LastUpdatedBy { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public Nullable<System.DateTime> FromDate { get; set; }
+        public Nullable<System.DateTime> ToDate { get; set; }
+        public Nullable<int> UserID { get; set; }
     }
     public class RspOffers
     {

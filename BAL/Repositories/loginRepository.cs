@@ -91,23 +91,32 @@ namespace BAL.Repositories
         //    }
         //}
         public static DataTable _dt;
-        public List<AppSettings> GetSetting(int UserID)
+        public static DataSet _ds;
+        public AppSettings GetSetting(int UserID)
         {           
             try
             {
-                var lst = new List<AppSettings>();
+                
+                var lst = new AppSettings();
+                var coupon = new List<CouponVM>();
                 SqlParameter[] p = new SqlParameter[1];
                 p[0] = new SqlParameter("@UserID", UserID);
-                _dt = (new DBHelper().GetTableFromSP)("sp_GetSettingsVitamito", p);
+                _ds = (new DBHelper().GetDatasetFromSP)("sp_GetSettings_Vitamito", p);
                  
-                if (_dt != null)
+                if (_ds != null)
                 {
-                    if (_dt.Rows.Count > 0)
+                    if (_ds.Tables[0] != null)
                     {
-                        lst = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_dt)).ToObject<List<AppSettings>>();
-                         
+                        lst = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[0])).ToObject<List<AppSettings>>().FirstOrDefault();
+                        //lst = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[0])).ToObject<AppSettings>().FirstOrDefault();                        
                         //lst = _dt.DataTableToList<AppSettings>();
                     }
+                    if (_ds.Tables[1] != null)
+                    {
+                        coupon = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[1])).ToObject<List<CouponVM>>();
+                        //lst = _dt.DataTableToList<AppSettings>();
+                    }
+                    lst.Coupons = coupon;
                 }
                 return lst;
             }

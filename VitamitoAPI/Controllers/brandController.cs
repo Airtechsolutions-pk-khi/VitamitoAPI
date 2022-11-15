@@ -63,7 +63,7 @@ namespace VitamitoAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("settings/user/{UserID}")]
-        public List<AppSettings> GetSettings(int UserID)
+        public AppSettings GetSettings(int UserID)
         
         {
             return loginRepo.GetSetting(UserID);
