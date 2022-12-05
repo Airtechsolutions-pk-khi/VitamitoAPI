@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="85a41d447a7747ab8c8a8438904b4cb0" Name="Diagram1">
-        <EntityTypeShape EntityType="db_a74425_premiumposModel.Banner" Width="1.5" PointX="11.25" PointY="92.375" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.CardType" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.Category" Width="1.5" PointX="11.25" PointY="72.625" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.City" Width="1.5" PointX="6.75" PointY="88.5" />
@@ -62,7 +61,6 @@
         <EntityTypeShape EntityType="db_a74425_premiumposModel.User" Width="1.5" PointX="0.75" PointY="79.125" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.UserPaymentInfo" Width="1.5" PointX="6.75" PointY="3.75" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.Variant" Width="1.5" PointX="3" PointY="125.875" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK__Banner__Location__44952D46" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_Category_Location" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_SubCategory_Category" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_City_Country" />
@@ -145,6 +143,8 @@
         <AssociationConnector Association="db_a74425_premiumposModel.FK_StockStore_User" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_SubUser_USer" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_Variant_User" />
+        <EntityTypeShape EntityType="db_a74425_premiumposModel.Banner" Width="1.5" PointX="11.25" PointY="93.25" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK__Banner__Location__44952D46" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

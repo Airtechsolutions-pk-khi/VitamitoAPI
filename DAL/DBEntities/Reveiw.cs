@@ -22,6 +22,7 @@ namespace DAL.DBEntities
         public string Contact { get; set; }
         public Nullable<int> StatusID { get; set; }
         public Nullable<int> ItemID { get; set; }
+        public Nullable<int> LocationID { get; set; }
     
         public virtual Item Item { get; set; }
     }

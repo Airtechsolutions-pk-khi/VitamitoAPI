@@ -5,7 +5,10 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using WebAPICode.Helpers;
 
 namespace BAL.Repositories
 {
@@ -87,14 +90,49 @@ namespace BAL.Repositories
         //        return rsp;
         //    }
         //}
+        public static DataTable _dt;
+        public static DataSet _ds;
+        public AppSettings GetSetting(int UserID)
+        {           
+            try
+            {
+                
+                var lst = new AppSettings();
+                var coupon = new List<CouponVM>();
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@UserID", UserID);
+                _ds = (new DBHelper().GetDatasetFromSP)("sp_GetSettings_Vitamito", p);
+                 
+                if (_ds != null)
+                {
+                    if (_ds.Tables[0] != null)
+                    {
+                        lst = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[0])).ToObject<List<AppSettings>>().FirstOrDefault();
+                        //lst = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[0])).ToObject<AppSettings>().FirstOrDefault();                        
+                        //lst = _dt.DataTableToList<AppSettings>();
+                    }
+                    if (_ds.Tables[1] != null)
+                    {
+                        coupon = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[1])).ToObject<List<CouponVM>>();
+                        //lst = _dt.DataTableToList<AppSettings>();
+                    }
+                    lst.Coupons = coupon;
+                }
+                return lst;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+ 
+        }
         public RspBanner GetBanners(int UserID,int LocationID)
         {
             var banners = new List<BannerBLL>();
             var rsp = new RspBanner();
             try
             {
-                var list = DBContext.Banners.Where(x => x.StatusID == 1  && x.LocationID== LocationID).ToList();
-
+                var list = DBContext.Banners.Where(x => x.StatusID == 1  && x.LocationID== LocationID && x.Type == "Header").ToList();
                
                 foreach (var i in list)
                 {
@@ -105,6 +143,7 @@ namespace BAL.Repositories
                         Name = i.Title,
                         UserID = UserID,
                         LocationID = i.LocationID,
+                         Type = i.Type,
                        Image = i.Image == null ? "" : ConfigurationManager.AppSettings["AdminURL"].ToString() + i.Image,
                         StatusID = i.StatusID
                     });

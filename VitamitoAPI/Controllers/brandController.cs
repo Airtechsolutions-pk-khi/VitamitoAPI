@@ -64,16 +64,18 @@ namespace VitamitoAPI.Controllers
         [HttpGet]
         [Route("settings/user/{UserID}")]
         public AppSettings GetSettings(int UserID)
+        
         {
-            return new AppSettings
-            {
-                Currency = "BHD",
-                DeliveryCharges = "0",
-                LocationID = 2195,
-                Status = "1",
-                TaxPercent = "0",
-                UserID = 2313
-            };
+            return loginRepo.GetSetting(UserID);
+            //return new AppSettings
+            //{
+            //    Currency = "BHD",
+            //    DeliveryCharges = "0",
+            //    LocationID = 2195,
+            //    Status = "1",
+            //    TaxPercent = "0",
+            //    UserID = 2313
+            //};
         }
     }
 }

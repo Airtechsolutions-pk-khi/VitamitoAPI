@@ -7,6 +7,7 @@
     <Property Name="BannerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="varchar(max)" />
     <Property Name="Image" Type="varchar(max)" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
     <Property Name="IsSilder" Type="int" />
     <Property Name="IsFeatured" Type="int" />
     <Property Name="LastUpdatedDate" Type="datetime" />
@@ -131,6 +132,8 @@
     <Property Name="StatusID" Type="int" />
     <Property Name="CreatedOn" Type="datetime" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="RedeemPoints" Type="float" />
+    <Property Name="CurrentPoint" Type="float" />
   </EntityType>
   <EntityType Name="CustomerAddress">
     <Key>
@@ -385,6 +388,7 @@
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
     <Property Name="HasVariant" Type="bit" />
     <Property Name="IsVATApplied" Type="bit" />
+    <Property Name="IsFeatured" Type="bit" />
   </EntityType>
   <EntityType Name="ItemImages">
     <Key>
@@ -761,6 +765,7 @@
     <Property Name="Contact" Type="nvarchar" MaxLength="50" />
     <Property Name="StatusID" Type="int" />
     <Property Name="ItemID" Type="int" />
+    <Property Name="LocationID" Type="int" />
   </EntityType>
   <EntityType Name="Status">
     <Key>
