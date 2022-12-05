@@ -105,7 +105,7 @@ namespace BAL.Repositories
                                 {
                                     ID = item.ID,
                                     Name = item.Name,
-                                    Description = "",//item.Description,
+                                    Description = item.Description,
                                     Image = item.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + item.Image,
                                     ItemType = item.ItemType,
                                     SubCategoryID = item.SubCategoryID,
