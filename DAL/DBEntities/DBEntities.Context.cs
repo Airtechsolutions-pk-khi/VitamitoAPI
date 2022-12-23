@@ -84,6 +84,7 @@ namespace DAL.DBEntities
         public virtual DbSet<UserPaymentInfo> UserPaymentInfoes { get; set; }
         public virtual DbSet<Variant> Variants { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
+        public virtual DbSet<PushToken> PushTokens { get; set; }
     
         [DbFunction("db_a74425_premiumposEntities", "SplitString")]
         public virtual IQueryable<SplitString_Result> SplitString(string input, string character)

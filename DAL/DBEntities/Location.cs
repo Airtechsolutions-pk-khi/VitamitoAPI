@@ -31,6 +31,7 @@ namespace DAL.DBEntities
             this.SubUsers = new HashSet<SubUser>();
             this.Suppliers = new HashSet<Supplier>();
             this.Banners = new HashSet<Banner>();
+            this.PushTokens = new HashSet<PushToken>();
         }
     
         public int ID { get; set; }
@@ -102,5 +103,7 @@ namespace DAL.DBEntities
         public virtual ICollection<Supplier> Suppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Banner> Banners { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PushToken> PushTokens { get; set; }
     }
 }

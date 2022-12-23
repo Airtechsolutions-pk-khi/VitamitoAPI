@@ -446,21 +446,21 @@ namespace BAL.Repositories
 
                             dbContextTransaction.Commit();
 
-                            //try
-                            //{
-                            //    var getTokens = DBContext.PushTokens.Where(x => x.LocationID == obj.LocationID).ToList();
-                            //    foreach (var item in getTokens)
-                            //    {
-                            //        var token = new PushNoticationBLL();
-                            //        token.Title = "Lunchbox | New Order";
-                            //        token.Message = "You have new order for delivery.";
-                            //        token.DeviceID = item.Token;
-                            //        PushNotificationAndroid(token);
-                            //    }
-                            //}
-                            //catch (Exception)
-                            //{
-                            //}
+                            try
+                            {
+                                var getTokens = DBContext.PushTokens.Where(x => x.LocationID == obj.LocationID).ToList();
+                                foreach (var item in getTokens)
+                                {
+                                    var token = new PushNoticationBLL();
+                                    token.Title = "Vitamito | New Order";
+                                    token.Message = "You have new order for delivery.";
+                                    token.DeviceID = item.Token;
+                                    PushNotificationAndroid(token);
+                                }
+                            }
+                            catch (Exception)
+                            {
+                            }
 
                             rsp = new RspOrderPunch();
                             rsp.status = (int)eStatus.Success;

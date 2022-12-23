@@ -195,32 +195,32 @@ namespace BAL.Repositories
             }
         }
 
-        //public Rsp InsertToken(TokenBLL obj)
-        //{
-        //    Rsp rsp;
-        //    try
-        //    {
-        //        PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
-        //        token.StatusID = 1;
-        //        var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token).Count();
-        //        if (chk==0)
-        //        {
-        //            PushToken data = DBContext.PushTokens.Add(token);
-        //            DBContext.SaveChanges();
-        //        }
+        public Rsp InsertToken(TokenBLL obj)
+        {
+            Rsp rsp;
+            try
+            {
+                PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
+                token.StatusID = 1;
+                var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token).Count();
+                if (chk == 0)
+                {
+                    PushToken data = DBContext.PushTokens.Add(token);
+                    DBContext.SaveChanges();
+                }
 
 
-        //        rsp = new Rsp();
-        //        rsp.status = (int)eStatus.Success;
-        //        rsp.description = "Token Added";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        rsp = new Rsp();
-        //        rsp.status = (int)eStatus.Exception;
-        //        rsp.description = "Failed to add token";
-        //    }
-        //    return rsp;
-        //}
+                rsp = new Rsp();
+                rsp.status = (int)eStatus.Success;
+                rsp.description = "Token Added";
+            }
+            catch (Exception ex)
+            {
+                rsp = new Rsp();
+                rsp.status = (int)eStatus.Exception;
+                rsp.description = "Failed to add token";
+            }
+            return rsp;
+        }
     }
 }

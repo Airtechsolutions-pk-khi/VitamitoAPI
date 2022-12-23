@@ -313,12 +313,11 @@ namespace DAL.Models
 
     public class TokenBLL
     {
-        public int Device { get; set; }
         public int TokenID { get; set; }
         public string Token { get; set; }
         public Nullable<int> LocationID { get; set; }
         public Nullable<int> StatusID { get; set; }
-
+        public int? Device { get; set; }               
     }
     public class OrdersBLL
     {

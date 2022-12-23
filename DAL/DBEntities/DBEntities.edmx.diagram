@@ -145,6 +145,8 @@
         <AssociationConnector Association="db_a74425_premiumposModel.FK_Variant_User" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.Banner" Width="1.5" PointX="11.25" PointY="93.25" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK__Banner__Location__44952D46" />
+        <EntityTypeShape EntityType="db_a74425_premiumposModel.PushToken" Width="1.5" PointX="11.25" PointY="98.25" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_PushToken_Location" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

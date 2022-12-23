@@ -180,10 +180,7 @@ namespace BAL.Repositories
         public void PushNotificationAndroid(PushNoticationBLL obj)
         {
             try
-            {
-                //var applicationID = "AAAAPxsdYjk:APA91bFwViyZd_VZssMHFTULYr-Y2n5ZWGGh4j37_U2CX9T1etxaak8dOJ2W3biWLOdhyTEutdSsCoL2oEv-UL_c5XbIBIu0COtkH6aayztynjrMCyiNoqEBFx8OkGQW6xftKazp4M4V";
-                //var senderId = "271037850169";
-
+            {              
                 var applicationID = "AAAAOEAc4Ss:APA91bGk3GivYxg0kfQ8l-MDWhBo9jgmgoRI6SDCY-KDDm2EG1cibeTmSKOFLLoFF6mVaV2cmRGwCJRrz-xvKbVYe7twHVwgMjP3luqBuTwcmvDMYSDqjzVjlpRJclXGUaOykMAk9ZdB";
                 var senderId = "241593803051";
                 string deviceId = obj.DeviceID;

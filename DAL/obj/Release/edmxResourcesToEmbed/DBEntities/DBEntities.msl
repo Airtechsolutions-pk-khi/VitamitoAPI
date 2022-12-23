@@ -1435,6 +1435,7 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
           <ScalarProperty Name="CurrentPoint" ColumnName="CurrentPoint" />
           <ScalarProperty Name="RedeemPoints" ColumnName="RedeemPoints" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -2491,6 +2492,17 @@
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="BannerID" ColumnName="BannerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PushTokens">
+      <EntityTypeMapping TypeName="db_a74425_premiumposModel.PushToken">
+        <MappingFragment StoreEntitySet="PushToken">
+          <ScalarProperty Name="Device" ColumnName="Device" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="TokenID" ColumnName="TokenID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

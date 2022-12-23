@@ -36,5 +36,20 @@ namespace VitamitoAPI.Controllers
             return loginRepo.GetLoginAdmin(passcode);
 
         }
+
+        [HttpPost]
+        [Route("login/insert/token")]
+        public HttpResponseMessage PostInsertToken(TokenBLL obj)
+        {
+            Rsp rsp = loginRepo.InsertToken(obj);
+
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(rsp);
+            json = Newtonsoft.Json.Linq.JObject.Parse(json).ToString();
+            return new HttpResponseMessage
+            {
+                Content = new StringContent(json, Encoding.UTF8, "text/json")    //  RETURNING json
+            };
+
+        }
     }
 }

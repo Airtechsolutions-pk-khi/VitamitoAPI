@@ -139,6 +139,7 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="RedeemPoints" Type="float" />
           <Property Name="CurrentPoint" Type="float" />
+          <Property Name="LocationID" Type="int" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
@@ -701,7 +702,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PurchaseOrderID" Type="int" />
           <Property Name="ItemId" Type="int" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
           <Property Name="UnitPrice" Type="float" />
           <Property Name="RequestedQty" Type="int" />
           <Property Name="Remarks" Type="varchar(max)" />
@@ -728,6 +729,16 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="PushToken">
+          <Key>
+            <PropertyRef Name="TokenID" />
+          </Key>
+          <Property Name="TokenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="LocationID" Type="int" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="Device" Type="int" />
         </EntityType>
         <EntityType Name="ReceiptPermissions">
           <Key>
@@ -1856,6 +1867,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PushToken_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="PushToken" Type="Self.PushToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PushToken">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ReceiptPermissions_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="ReceiptPermissions" Type="Self.ReceiptPermissions" Multiplicity="*" />
@@ -2661,6 +2684,7 @@
           <EntitySet Name="PurchaseOrder" EntityType="Self.PurchaseOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseOrderDetail" EntityType="Self.PurchaseOrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseReturn" EntityType="Self.PurchaseReturn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PushToken" EntityType="Self.PushToken" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReceiptPermissions" EntityType="Self.ReceiptPermissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reveiws" EntityType="Self.Reveiws" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
@@ -2938,6 +2962,10 @@
           <AssociationSet Name="FK_PurchaseReturn_PurchaseOrder" Association="Self.FK_PurchaseReturn_PurchaseOrder">
             <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
             <End Role="PurchaseReturn" EntitySet="PurchaseReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PushToken_Location" Association="Self.FK_PushToken_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="PushToken" EntitySet="PushToken" />
           </AssociationSet>
           <AssociationSet Name="FK_ReceiptPermissions_User" Association="Self.FK_ReceiptPermissions_User">
             <End Role="User" EntitySet="User" />
@@ -3951,6 +3979,11 @@
           <AssociationSet Name="FK__Banner__Location__44952D46" Association="db_a74425_premiumposModel.FK__Banner__Location__44952D46">
             <End Role="Location" EntitySet="Locations" />
             <End Role="Banner" EntitySet="Banners" />
+          </AssociationSet>
+          <EntitySet Name="PushTokens" EntityType="db_a74425_premiumposModel.PushToken" />
+          <AssociationSet Name="FK_PushToken_Location" Association="db_a74425_premiumposModel.FK_PushToken_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="PushToken" EntitySet="PushTokens" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="ABC_Result">
@@ -5182,6 +5215,7 @@
           <NavigationProperty Name="OrderCheckouts" Relationship="db_a74425_premiumposModel.FK_OrderCheckout_Customer" FromRole="Customer" ToRole="OrderCheckout" />
           <Property Name="RedeemPoints" Type="Double" />
           <Property Name="CurrentPoint" Type="Double" />
+          <Property Name="LocationID" Type="Int32" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
@@ -5584,6 +5618,7 @@
           <NavigationProperty Name="SubUsers" Relationship="db_a74425_premiumposModel.FK_SubUser_Location" FromRole="Location" ToRole="SubUser" />
           <NavigationProperty Name="Suppliers" Relationship="db_a74425_premiumposModel.FK_Supplier_Location" FromRole="Location" ToRole="Supplier" />
           <NavigationProperty Name="Banners" Relationship="db_a74425_premiumposModel.FK__Banner__Location__44952D46" FromRole="Location" ToRole="Banner" />
+          <NavigationProperty Name="PushTokens" Relationship="db_a74425_premiumposModel.FK_PushToken_Location" FromRole="Location" ToRole="PushToken" />
         </EntityType>
         <EntityType Name="Modifier">
           <Key>
@@ -5841,7 +5876,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PurchaseOrderID" Type="Int32" />
           <Property Name="ItemId" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="UnitPrice" Type="Double" />
           <Property Name="RequestedQty" Type="Int32" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -7303,6 +7338,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PushToken">
+          <Key>
+            <PropertyRef Name="TokenID" />
+          </Key>
+          <Property Name="TokenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="Device" Type="Int32" />
+          <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_PushToken_Location" FromRole="PushToken" ToRole="Location" />
+        </EntityType>
+        <Association Name="FK_PushToken_Location">
+          <End Type="db_a74425_premiumposModel.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.PushToken" Role="PushToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PushToken">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8743,6 +8801,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="CurrentPoint" ColumnName="CurrentPoint" />
                 <ScalarProperty Name="RedeemPoints" ColumnName="RedeemPoints" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -9799,6 +9858,17 @@
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="BannerID" ColumnName="BannerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PushTokens">
+            <EntityTypeMapping TypeName="db_a74425_premiumposModel.PushToken">
+              <MappingFragment StoreEntitySet="PushToken">
+                <ScalarProperty Name="Device" ColumnName="Device" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="TokenID" ColumnName="TokenID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
