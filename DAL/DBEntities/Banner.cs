@@ -18,6 +18,7 @@ namespace DAL.DBEntities
         public string Title { get; set; }
         public string Image { get; set; }
         public string Type { get; set; }
+        public string PlatformType { get; set; }
         public Nullable<int> IsSilder { get; set; }
         public Nullable<int> IsFeatured { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }

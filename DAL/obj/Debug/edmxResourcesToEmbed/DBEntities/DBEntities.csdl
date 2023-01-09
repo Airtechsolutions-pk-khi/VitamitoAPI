@@ -931,15 +931,15 @@
     <FunctionImport Name="sp_GetItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetItem_menu_Result)">
       <Parameter Name="LocationID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="Banners" EntityType="db_a74425_premiumposModel.Banner" />
-    <AssociationSet Name="FK__Banner__Location__44952D46" Association="db_a74425_premiumposModel.FK__Banner__Location__44952D46">
-      <End Role="Location" EntitySet="Locations" />
-      <End Role="Banner" EntitySet="Banners" />
-    </AssociationSet>
     <EntitySet Name="PushTokens" EntityType="db_a74425_premiumposModel.PushToken" />
     <AssociationSet Name="FK_PushToken_Location" Association="db_a74425_premiumposModel.FK_PushToken_Location">
       <End Role="Location" EntitySet="Locations" />
       <End Role="PushToken" EntitySet="PushTokens" />
+    </AssociationSet>
+    <EntitySet Name="Banners" EntityType="db_a74425_premiumposModel.Banner" />
+    <AssociationSet Name="FK__Banner__Location__44952D46" Association="db_a74425_premiumposModel.FK__Banner__Location__44952D46">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="Banner" EntitySet="Banners" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="ABC_Result">
@@ -2469,6 +2469,7 @@
     <NavigationProperty Name="Reveiws" Relationship="db_a74425_premiumposModel.FK_Reveiws_Item" FromRole="Item" ToRole="Reveiw" />
     <NavigationProperty Name="Stocks" Relationship="db_a74425_premiumposModel.FK_Stock_Item" FromRole="Item" ToRole="Stock" />
     <Property Name="IsFeatured" Type="Boolean" />
+    <Property Name="IsStockOut" Type="Boolean" />
   </EntityType>
   <EntityType Name="ItemImage">
     <Key>
@@ -2573,8 +2574,8 @@
     <NavigationProperty Name="Stores" Relationship="db_a74425_premiumposModel.FK_Store_Location" FromRole="Location" ToRole="Store" />
     <NavigationProperty Name="SubUsers" Relationship="db_a74425_premiumposModel.FK_SubUser_Location" FromRole="Location" ToRole="SubUser" />
     <NavigationProperty Name="Suppliers" Relationship="db_a74425_premiumposModel.FK_Supplier_Location" FromRole="Location" ToRole="Supplier" />
-    <NavigationProperty Name="Banners" Relationship="db_a74425_premiumposModel.FK__Banner__Location__44952D46" FromRole="Location" ToRole="Banner" />
     <NavigationProperty Name="PushTokens" Relationship="db_a74425_premiumposModel.FK_PushToken_Location" FromRole="Location" ToRole="PushToken" />
+    <NavigationProperty Name="Banners" Relationship="db_a74425_premiumposModel.FK__Banner__Location__44952D46" FromRole="Location" ToRole="Banner" />
   </EntityType>
   <EntityType Name="Modifier">
     <Key>
@@ -4262,6 +4263,29 @@
     <Property Type="Double" Name="CurrentStock" Nullable="false" />
     <Property Type="Int32" Name="IsInventoryItem" Nullable="false" />
   </ComplexType>
+  <EntityType Name="PushToken">
+    <Key>
+      <PropertyRef Name="TokenID" />
+    </Key>
+    <Property Name="TokenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LocationID" Type="Int32" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="Device" Type="Int32" />
+    <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_PushToken_Location" FromRole="PushToken" ToRole="Location" />
+  </EntityType>
+  <Association Name="FK_PushToken_Location">
+    <End Type="db_a74425_premiumposModel.Location" Role="Location" Multiplicity="0..1" />
+    <End Type="db_a74425_premiumposModel.PushToken" Role="PushToken" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PushToken">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityType Name="Banner">
     <Key>
       <PropertyRef Name="BannerID" />
@@ -4270,6 +4294,7 @@
     <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PlatformType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsSilder" Type="Int32" />
     <Property Name="IsFeatured" Type="Int32" />
     <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
@@ -4290,29 +4315,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Banner">
-        <PropertyRef Name="LocationID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="PushToken">
-    <Key>
-      <PropertyRef Name="TokenID" />
-    </Key>
-    <Property Name="TokenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="LocationID" Type="Int32" />
-    <Property Name="StatusID" Type="Int32" />
-    <Property Name="Device" Type="Int32" />
-    <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_PushToken_Location" FromRole="PushToken" ToRole="Location" />
-  </EntityType>
-  <Association Name="FK_PushToken_Location">
-    <End Type="db_a74425_premiumposModel.Location" Role="Location" Multiplicity="0..1" />
-    <End Type="db_a74425_premiumposModel.PushToken" Role="PushToken" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Location">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PushToken">
         <PropertyRef Name="LocationID" />
       </Dependent>
     </ReferentialConstraint>

@@ -117,6 +117,12 @@
     <Content Include="Assets\images\defaultimg.jpg" />
     <Content Include="Assets\images\NA.png" />
     <Content Include="Global.asax" />
+    <Content Include="Template\contact.txt" />
+    <Content Include="Template\emailpattern-admin.txt" />
+    <Content Include="Template\emailpattern.txt" />
+    <Content Include="Template\error.txt" />
+    <Content Include="Template\HtmlPage1.html" />
+    <Content Include="Template\newsletter.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

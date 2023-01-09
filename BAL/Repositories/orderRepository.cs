@@ -1,4 +1,5 @@
-﻿using DAL.DBEntities;
+﻿using BAL.BLL;
+using DAL.DBEntities;
 using DAL.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -10,6 +11,7 @@ using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Linq;
 using WebAPICode.Helpers;
+using static BAL.BLL.myorderBLL;
 
 namespace BAL.Repositories
 {
@@ -339,6 +341,7 @@ namespace BAL.Repositories
                 return rsp;
             }
         }
+       
         public RspOrderPunch OrderPunch(OrdersBLL obj)
         {
             RspOrderPunch rsp;
@@ -369,18 +372,17 @@ namespace BAL.Repositories
 
                             if (tempCustomerOrders != null)
                             {
-                                orders.CustomerOrders1 = new List<CustomerOrder1>();
-                                orders.CustomerOrders1.Add(new CustomerOrder1
+                                orders.CustomerOrders = new List<CustomerOrder>();
+                                orders.CustomerOrders.Add(new CustomerOrder
                                 {
-                                    Address = tempCustomerOrders.Address,
-                                    Description = tempCustomerOrders.Description,
+                                    Address = tempCustomerOrders.AddressNickName +", "+ tempCustomerOrders.Address,
+                                     
                                     Email = tempCustomerOrders.Email,
                                     Latitude = tempCustomerOrders.Latitude,
                                     Longitude = tempCustomerOrders.Longitude,
-                                    Mobile = tempCustomerOrders.Mobile,
-                                    Name = tempCustomerOrders.Name,
-                                    AddressNickName = tempCustomerOrders.AddressNickName,
-                                    AddressType = tempCustomerOrders.AddressType
+                                    ContactNo = tempCustomerOrders.Mobile,
+                                    CustomerName = tempCustomerOrders.Name,                                     
+                                    PlaceType = tempCustomerOrders.AddressType
                                 });
                             }
                             if (tempCheckout != null)

@@ -30,8 +30,8 @@ namespace DAL.DBEntities
             this.Stores = new HashSet<Store>();
             this.SubUsers = new HashSet<SubUser>();
             this.Suppliers = new HashSet<Supplier>();
-            this.Banners = new HashSet<Banner>();
             this.PushTokens = new HashSet<PushToken>();
+            this.Banners = new HashSet<Banner>();
         }
     
         public int ID { get; set; }
@@ -102,8 +102,8 @@ namespace DAL.DBEntities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supplier> Suppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Banner> Banners { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PushToken> PushTokens { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Banner> Banners { get; set; }
     }
 }

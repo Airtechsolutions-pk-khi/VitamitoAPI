@@ -52,6 +52,7 @@ namespace DAL.DBEntities
         public Nullable<bool> HasVariant { get; set; }
         public Nullable<bool> IsVATApplied { get; set; }
         public Nullable<bool> IsFeatured { get; set; }
+        public Nullable<bool> IsStockOut { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerWishList> CustomerWishLists { get; set; }

@@ -132,7 +132,7 @@ namespace BAL.Repositories
             var rsp = new RspBanner();
             try
             {
-                var list = DBContext.Banners.Where(x => x.StatusID == 1  && x.LocationID== LocationID ).ToList();
+                var list = DBContext.Banners.Where(x => x.StatusID == 1  && x.LocationID == LocationID).Where(x => x.PlatformType == "App Header" || x.PlatformType == "App Featured").ToList();
                
                 foreach (var i in list)
                 {

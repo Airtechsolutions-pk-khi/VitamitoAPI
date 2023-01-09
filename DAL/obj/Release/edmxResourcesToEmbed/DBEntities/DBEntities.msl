@@ -1706,6 +1706,7 @@
     <EntitySetMapping Name="Items">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.Item">
         <MappingFragment StoreEntitySet="Item">
+          <ScalarProperty Name="IsStockOut" ColumnName="IsStockOut" />
           <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
           <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
           <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
@@ -2475,6 +2476,17 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="PushTokens">
+      <EntityTypeMapping TypeName="db_a74425_premiumposModel.PushToken">
+        <MappingFragment StoreEntitySet="PushToken">
+          <ScalarProperty Name="Device" ColumnName="Device" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="TokenID" ColumnName="TokenID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Banners">
       <EntityTypeMapping TypeName="db_a74425_premiumposModel.Banner">
         <MappingFragment StoreEntitySet="Banner">
@@ -2488,21 +2500,11 @@
           <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
           <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
           <ScalarProperty Name="IsSilder" ColumnName="IsSilder" />
+          <ScalarProperty Name="PlatformType" ColumnName="PlatformType" />
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="BannerID" ColumnName="BannerID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PushTokens">
-      <EntityTypeMapping TypeName="db_a74425_premiumposModel.PushToken">
-        <MappingFragment StoreEntitySet="PushToken">
-          <ScalarProperty Name="Device" ColumnName="Device" />
-          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-          <ScalarProperty Name="Token" ColumnName="Token" />
-          <ScalarProperty Name="TokenID" ColumnName="TokenID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
