@@ -132,7 +132,14 @@ namespace VitamitoAPI.Controllers
                         BodyEmailadmin = BodyEmailadmin.Replace("#OrderDate#", dateTime.ToString("dd/MMM/yyyy"));
                         BodyEmailadmin = BodyEmailadmin.Replace("#Address#", data.Address.ToString());
 
-                        BodyEmail = BodyEmail.Replace("#Description#", data.CardNotes.ToString());
+                        if (data.CardNotes != null)
+                        {
+                            BodyEmail = BodyEmail.Replace("#Description#", data.CardNotes.ToString());
+                        }
+                        else
+                        {
+                            BodyEmail = BodyEmail.Replace("#Description#", "N/A");
+                        }
                         //BodyEmail = BodyEmail.Replace("#PaymentMethod#", data.PaymentMethodTitle.ToString());
                         //BodyEmail = BodyEmail.Replace("#TotalItems#", data.TotalItems.ToString());
                         BodyEmail = BodyEmail.Replace("#SubTotal#", data.AmountTotal.ToString());

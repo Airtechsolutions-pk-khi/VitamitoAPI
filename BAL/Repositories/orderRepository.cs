@@ -142,7 +142,7 @@ namespace BAL.Repositories
                         ocustomer = new OrderCustomerBLL();
                         ocustomer.OrderID = _OCustomer.OrderID;
                         ocustomer.Address = _OCustomer.Address;
-                        ocustomer.Name = _OCustomer.Name;
+                        ocustomer.CustomerName = _OCustomer.CustomerName;
                         ocustomer.CustomerOrderID = _OCustomer.CustomerOrderID;
                         ocustomer.Mobile = _OCustomer.Mobile;
                         ocustomer.Email = _OCustomer.Email;
@@ -289,7 +289,7 @@ namespace BAL.Repositories
                         ocustomer = new OrderCustomerBLL();
                         ocustomer.OrderID = _OCustomer.OrderID;
                         ocustomer.Address = _OCustomer.Address;
-                        ocustomer.Name = _OCustomer.Name;
+                        ocustomer.CustomerName = _OCustomer.CustomerName;
                         ocustomer.CustomerOrderID = _OCustomer.CustomerOrderID;
                         ocustomer.Description = _OCustomer.Description;
                         ocustomer.Mobile = _OCustomer.Mobile;
@@ -381,7 +381,7 @@ namespace BAL.Repositories
                                     Latitude = tempCustomerOrders.Latitude,
                                     Longitude = tempCustomerOrders.Longitude,
                                     ContactNo = tempCustomerOrders.Mobile,
-                                    CustomerName = tempCustomerOrders.Name,                                     
+                                    CustomerName = tempCustomerOrders.CustomerName,                                     
                                     PlaceType = tempCustomerOrders.AddressType
                                 });
                             }

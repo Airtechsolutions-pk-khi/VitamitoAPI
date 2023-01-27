@@ -31,7 +31,7 @@ namespace BAL.BLL
         public DateTime OrderDate { get; set; }
         [DisplayFormat(DataFormatString = "{0: dd, MMM, yyyy}")]
         public DateTime? CheckoutDate { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public DateTime? LastUpdatedDate { get; set; }
         public int? LastUpdatedBy { get; set; }
         /*Cust Order Info*/
         public string Address { get; set; }
