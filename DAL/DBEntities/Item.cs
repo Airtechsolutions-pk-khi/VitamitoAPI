@@ -42,6 +42,7 @@ namespace DAL.DBEntities
         public Nullable<int> DisplayOrder { get; set; }
         public Nullable<bool> SortByAlpha { get; set; }
         public Nullable<double> Price { get; set; }
+        public Nullable<double> NewPrice { get; set; }
         public Nullable<double> Cost { get; set; }
         public string ItemType { get; set; }
         public string LastUpdatedBy { get; set; }

@@ -75,6 +75,7 @@
           <Property Name="Contact" Type="varchar" MaxLength="50" />
           <Property Name="LocationID" Type="int" />
           <Property Name="TAX" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TAXWebApp" Type="decimal" Precision="18" Scale="2" />
           <Property Name="NTN" Type="nvarchar" MaxLength="100" />
           <Property Name="StatusID" Type="int" />
           <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="150" />
@@ -386,6 +387,7 @@
           <Property Name="DisplayOrder" Type="int" />
           <Property Name="SortByAlpha" Type="bit" />
           <Property Name="Price" Type="float" />
+          <Property Name="NewPrice" Type="float" />
           <Property Name="Cost" Type="float" />
           <Property Name="ItemType" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="50" />
@@ -770,6 +772,8 @@
           <Property Name="IsA4Print" Type="bit" />
           <Property Name="AllowNegativeInventroy" Type="bit" />
           <Property Name="TaxName" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsCustomerRequired" Type="bit" />
+          <Property Name="IsCentralizedCustomer" Type="bit" />
         </EntityType>
         <EntityType Name="Reveiws">
           <Key>
@@ -3611,7 +3615,6 @@
           <EntitySet Name="InventoryRequests" EntityType="db_a74425_premiumposModel.InventoryRequest" />
           <EntitySet Name="IssueStocks" EntityType="db_a74425_premiumposModel.IssueStock" />
           <EntitySet Name="IssueStockDetails" EntityType="db_a74425_premiumposModel.IssueStockDetail" />
-          <EntitySet Name="Items" EntityType="db_a74425_premiumposModel.Item" />
           <EntitySet Name="ItemImages" EntityType="db_a74425_premiumposModel.ItemImage" />
           <EntitySet Name="ItemModiferMappings" EntityType="db_a74425_premiumposModel.ItemModiferMapping" />
           <EntitySet Name="ItemVariants" EntityType="db_a74425_premiumposModel.ItemVariant" />
@@ -3734,20 +3737,12 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="CustomerOrder1" EntitySet="CustomerOrders1" />
           </AssociationSet>
-          <AssociationSet Name="FK_CustomerWishList_Item" Association="db_a74425_premiumposModel.FK_CustomerWishList_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="CustomerWishList" EntitySet="CustomerWishLists" />
-          </AssociationSet>
           <AssociationSet Name="FK_DealsCategory_DealsHeader" Association="db_a74425_premiumposModel.FK_DealsCategory_DealsHeader">
             <End Role="DealsHeader" EntitySet="DealsHeaders" />
             <End Role="DealsCategory" EntitySet="DealsCategories" />
           </AssociationSet>
           <AssociationSet Name="FK_DealsDetail_DealsHeader" Association="db_a74425_premiumposModel.FK_DealsDetail_DealsHeader">
             <End Role="DealsHeader" EntitySet="DealsHeaders" />
-            <End Role="DealsDetail" EntitySet="DealsDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DealsDetail_Item" Association="db_a74425_premiumposModel.FK_DealsDetail_Item">
-            <End Role="Item" EntitySet="Items" />
             <End Role="DealsDetail" EntitySet="DealsDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_DealsHeader_Location" Association="db_a74425_premiumposModel.FK_DealsHeader_Location">
@@ -3765,10 +3760,6 @@
           <AssociationSet Name="FK_Inventory_Inventory" Association="db_a74425_premiumposModel.FK_Inventory_Inventory">
             <End Role="Inventory" EntitySet="Inventories" />
             <End Role="Inventory1" EntitySet="Inventories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inventory_Item" Association="db_a74425_premiumposModel.FK_Inventory_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="Inventory" EntitySet="Inventories" />
           </AssociationSet>
           <AssociationSet Name="FK_Inventory_Location" Association="db_a74425_premiumposModel.FK_Inventory_Location">
             <End Role="Location" EntitySet="Locations" />
@@ -3801,46 +3792,6 @@
           <AssociationSet Name="FK_IssueStockDetail_IssueStock" Association="db_a74425_premiumposModel.FK_IssueStockDetail_IssueStock">
             <End Role="IssueStock" EntitySet="IssueStocks" />
             <End Role="IssueStockDetail" EntitySet="IssueStockDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IssueStockDetail_Item" Association="db_a74425_premiumposModel.FK_IssueStockDetail_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="IssueStockDetail" EntitySet="IssueStockDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Item_SubCategory" Association="db_a74425_premiumposModel.FK_Item_SubCategory">
-            <End Role="SubCategory" EntitySet="SubCategories" />
-            <End Role="Item" EntitySet="Items" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Item_Unit" Association="db_a74425_premiumposModel.FK_Item_Unit">
-            <End Role="Unit" EntitySet="Units" />
-            <End Role="Item" EntitySet="Items" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemModiferMapping_Item" Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="ItemModiferMapping" EntitySet="ItemModiferMappings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemVariant_Item" Association="db_a74425_premiumposModel.FK_ItemVariant_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="ItemVariant" EntitySet="ItemVariants" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDealDetail_Item" Association="db_a74425_premiumposModel.FK_OrderDealDetail_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="OrderDealDetail" EntitySet="OrderDealDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Item" Association="db_a74425_premiumposModel.FK_OrderDetail_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderDetail_Item" Association="db_a74425_premiumposModel.FK_PurchaseOrderDetail_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Reveiws_Item" Association="db_a74425_premiumposModel.FK_Reveiws_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="Reveiw" EntitySet="Reveiws" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Stock_Item" Association="db_a74425_premiumposModel.FK_Stock_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemModiferMapping_Modifiers" Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Modifiers">
             <End Role="Modifier" EntitySet="Modifiers" />
@@ -3974,9 +3925,6 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Variant" EntitySet="Variants" />
           </AssociationSet>
-          <FunctionImport Name="sp_GetItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetItem_menu_Result)">
-          <Parameter Name="LocationID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="PushTokens" EntityType="db_a74425_premiumposModel.PushToken" />
           <AssociationSet Name="FK_PushToken_Location" Association="db_a74425_premiumposModel.FK_PushToken_Location">
             <End Role="Location" EntitySet="Locations" />
@@ -3987,6 +3935,62 @@
             <End Role="Location" EntitySet="Locations" />
             <End Role="Banner" EntitySet="Banners" />
           </AssociationSet>
+          <EntitySet Name="Items" EntityType="db_a74425_premiumposModel.Item" />
+          <AssociationSet Name="FK_CustomerWishList_Item" Association="db_a74425_premiumposModel.FK_CustomerWishList_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="CustomerWishList" EntitySet="CustomerWishLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealsDetail_Item" Association="db_a74425_premiumposModel.FK_DealsDetail_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="DealsDetail" EntitySet="DealsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Item" Association="db_a74425_premiumposModel.FK_Inventory_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IssueStockDetail_Item" Association="db_a74425_premiumposModel.FK_IssueStockDetail_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="IssueStockDetail" EntitySet="IssueStockDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_SubCategory" Association="db_a74425_premiumposModel.FK_Item_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategories" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Unit" Association="db_a74425_premiumposModel.FK_Item_Unit">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemModiferMapping_Item" Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ItemModiferMapping" EntitySet="ItemModiferMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemVariant_Item" Association="db_a74425_premiumposModel.FK_ItemVariant_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ItemVariant" EntitySet="ItemVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDealDetail_Item" Association="db_a74425_premiumposModel.FK_OrderDealDetail_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="OrderDealDetail" EntitySet="OrderDealDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Item" Association="db_a74425_premiumposModel.FK_OrderDetail_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetail_Item" Association="db_a74425_premiumposModel.FK_PurchaseOrderDetail_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reveiws_Item" Association="db_a74425_premiumposModel.FK_Reveiws_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Reveiw" EntitySet="Reveiws" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Item" Association="db_a74425_premiumposModel.FK_Stock_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetItem_menu_Result)">
+            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="ABC_Result">
           <Property Type="DateTime" Name="Date" Nullable="true" />
@@ -5147,6 +5151,7 @@
           <Property Name="SNTN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_Company_Location" FromRole="Company" ToRole="Location" />
           <NavigationProperty Name="User" Relationship="db_a74425_premiumposModel.FK_Company_User" FromRole="Company" ToRole="User" />
+          <Property Name="TAXWebApp" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -5401,9 +5406,9 @@
           <Property Name="StatusId" Type="Int32" />
           <NavigationProperty Name="Inventory1" Relationship="db_a74425_premiumposModel.FK_Inventory_Inventory" FromRole="Inventory" ToRole="Inventory1" />
           <NavigationProperty Name="Inventory2" Relationship="db_a74425_premiumposModel.FK_Inventory_Inventory" FromRole="Inventory1" ToRole="Inventory" />
-          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_Inventory_Item" FromRole="Inventory" ToRole="Item" />
           <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_Inventory_Location" FromRole="Inventory" ToRole="Location" />
           <NavigationProperty Name="Supplier" Relationship="db_a74425_premiumposModel.FK_Inventory_Supplier" FromRole="Inventory" ToRole="Supplier" />
+          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_Inventory_Item" FromRole="Inventory" ToRole="Item" />
         </EntityType>
         <EntityType Name="InventoryRecieve">
           <Key>
@@ -5476,47 +5481,6 @@
           <NavigationProperty Name="IssueStock" Relationship="db_a74425_premiumposModel.FK_IssueStockDetail_IssueStock" FromRole="IssueStockDetail" ToRole="IssueStock" />
           <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_IssueStockDetail_Item" FromRole="IssueStockDetail" ToRole="Item" />
         </EntityType>
-        <EntityType Name="Item">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SubCategoryID" Type="Int32" />
-          <Property Name="UnitID" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NameOnReceipt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayOrder" Type="Int32" />
-          <Property Name="SortByAlpha" Type="Boolean" />
-          <Property Name="Price" Type="Double" />
-          <Property Name="Cost" Type="Double" />
-          <Property Name="ItemType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="StatusID" Type="Int32" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="HasVariant" Type="Boolean" />
-          <Property Name="IsVATApplied" Type="Boolean" />
-          <NavigationProperty Name="CustomerWishLists" Relationship="db_a74425_premiumposModel.FK_CustomerWishList_Item" FromRole="Item" ToRole="CustomerWishList" />
-          <NavigationProperty Name="DealsDetails" Relationship="db_a74425_premiumposModel.FK_DealsDetail_Item" FromRole="Item" ToRole="DealsDetail" />
-          <NavigationProperty Name="Inventories" Relationship="db_a74425_premiumposModel.FK_Inventory_Item" FromRole="Item" ToRole="Inventory" />
-          <NavigationProperty Name="IssueStockDetails" Relationship="db_a74425_premiumposModel.FK_IssueStockDetail_Item" FromRole="Item" ToRole="IssueStockDetail" />
-          <NavigationProperty Name="SubCategory" Relationship="db_a74425_premiumposModel.FK_Item_SubCategory" FromRole="Item" ToRole="SubCategory" />
-          <NavigationProperty Name="Unit" Relationship="db_a74425_premiumposModel.FK_Item_Unit" FromRole="Item" ToRole="Unit" />
-          <NavigationProperty Name="ItemModiferMappings" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Item" FromRole="Item" ToRole="ItemModiferMapping" />
-          <NavigationProperty Name="ItemVariants" Relationship="db_a74425_premiumposModel.FK_ItemVariant_Item" FromRole="Item" ToRole="ItemVariant" />
-          <NavigationProperty Name="OrderDealDetails" Relationship="db_a74425_premiumposModel.FK_OrderDealDetail_Item" FromRole="Item" ToRole="OrderDealDetail" />
-          <NavigationProperty Name="OrderDetails" Relationship="db_a74425_premiumposModel.FK_OrderDetail_Item" FromRole="Item" ToRole="OrderDetail" />
-          <NavigationProperty Name="PurchaseOrderDetails" Relationship="db_a74425_premiumposModel.FK_PurchaseOrderDetail_Item" FromRole="Item" ToRole="PurchaseOrderDetail" />
-          <NavigationProperty Name="Reveiws" Relationship="db_a74425_premiumposModel.FK_Reveiws_Item" FromRole="Item" ToRole="Reveiw" />
-          <NavigationProperty Name="Stocks" Relationship="db_a74425_premiumposModel.FK_Stock_Item" FromRole="Item" ToRole="Stock" />
-          <Property Name="IsFeatured" Type="Boolean" />
-          <Property Name="IsStockOut" Type="Boolean" />
-        </EntityType>
         <EntityType Name="ItemImage">
           <Key>
             <PropertyRef Name="ItemImagesID" />
@@ -5535,9 +5499,9 @@
           <Property Name="ModifierID" Type="Int32" />
           <Property Name="VariantID" Type="Int32" />
           <Property Name="Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Item" FromRole="ItemModiferMapping" ToRole="Item" />
           <NavigationProperty Name="Modifier" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Modifiers" FromRole="ItemModiferMapping" ToRole="Modifier" />
           <NavigationProperty Name="Variant" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Variant" FromRole="ItemModiferMapping" ToRole="Variant" />
+          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Item" FromRole="ItemModiferMapping" ToRole="Item" />
         </EntityType>
         <EntityType Name="ItemVariant">
           <Key>
@@ -5560,8 +5524,8 @@
           <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="Int32" />
           <Property Name="LocationID" Type="Int32" />
-          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_ItemVariant_Item" FromRole="ItemVariant" ToRole="Item" />
           <NavigationProperty Name="Variant" Relationship="db_a74425_premiumposModel.FK_ItemVariant_Variant" FromRole="ItemVariant" ToRole="Variant" />
+          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_ItemVariant_Item" FromRole="ItemVariant" ToRole="Item" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -5739,8 +5703,8 @@
           <Property Name="ItemID" Type="Int32" />
           <Property Name="Price" Type="Double" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_OrderDealDetail_Item" FromRole="OrderDealDetail" ToRole="Item" />
           <NavigationProperty Name="OrderDetail" Relationship="db_a74425_premiumposModel.FK_OrderDealDetail_OrderDetail" FromRole="OrderDealDetail" ToRole="OrderDetail" />
+          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_OrderDealDetail_Item" FromRole="OrderDealDetail" ToRole="Item" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -5771,12 +5735,12 @@
           <Property Name="ItemType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DealID" Type="Int32" />
           <Property Name="IsVATApplied" Type="Boolean" />
-          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_OrderDetail_Item" FromRole="OrderDetail" ToRole="Item" />
           <NavigationProperty Name="Order" Relationship="db_a74425_premiumposModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
           <NavigationProperty Name="OrderDealDetails" Relationship="db_a74425_premiumposModel.FK_OrderDealDetail_OrderDetail" FromRole="OrderDetail" ToRole="OrderDealDetail" />
           <NavigationProperty Name="OrderModifierDetails" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_OrderDetail" FromRole="OrderDetail" ToRole="OrderModifierDetail" />
           <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_OrderDetail_Item" FromRole="OrderDetail" ToRole="Item" />
         </EntityType>
         <EntityType Name="OrderModifierDetail">
           <Key>
@@ -5889,8 +5853,8 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StatusId" Type="Int32" />
-          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_PurchaseOrderDetail_Item" FromRole="PurchaseOrderDetail" ToRole="Item" />
           <NavigationProperty Name="PurchaseOrder" Relationship="db_a74425_premiumposModel.FK_PurchaseOrderDetail_PurchaseOrder1" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_PurchaseOrderDetail_Item" FromRole="PurchaseOrderDetail" ToRole="Item" />
         </EntityType>
         <EntityType Name="PurchaseReturn">
           <Key>
@@ -5939,6 +5903,8 @@
           <Property Name="IsA4Print" Type="Boolean" />
           <Property Name="AllowNegativeInventroy" Type="Boolean" />
           <Property Name="TaxName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsCustomerRequired" Type="Boolean" />
+          <Property Name="IsCentralizedCustomer" Type="Boolean" />
         </EntityType>
         <EntityType Name="Reveiw">
           <Key>
@@ -5952,8 +5918,8 @@
           <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int32" />
           <Property Name="ItemID" Type="Int32" />
-          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_Reveiws_Item" FromRole="Reveiw" ToRole="Item" />
           <Property Name="LocationID" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_Reveiws_Item" FromRole="Reveiw" ToRole="Item" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -5988,9 +5954,9 @@
           <Property Name="StatusId" Type="Int32" />
           <Property Name="PurshaseOrderID" Type="Int32" />
           <Property Name="PONum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_Stock_Item" FromRole="Stock" ToRole="Item" />
           <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_Stock_Location" FromRole="Stock" ToRole="Location" />
           <NavigationProperty Name="PurchaseOrder" Relationship="db_a74425_premiumposModel.FK_Stock_PurchaseOrder" FromRole="Stock" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_Stock_Item" FromRole="Stock" ToRole="Item" />
         </EntityType>
         <EntityType Name="StockStore">
           <Key>
@@ -6564,18 +6530,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CustomerWishList_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="1" />
-          <End Type="db_a74425_premiumposModel.CustomerWishList" Role="CustomerWishList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CustomerWishList">
-              <PropertyRef Name="ItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DealsCategory_DealsHeader">
           <End Type="db_a74425_premiumposModel.DealsHeader" Role="DealsHeader" Multiplicity="0..1" />
           <End Type="db_a74425_premiumposModel.DealsCategory" Role="DealsCategory" Multiplicity="*" />
@@ -6597,18 +6551,6 @@
             </Principal>
             <Dependent Role="DealsDetail">
               <PropertyRef Name="DealID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DealsDetail_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.DealsDetail" Role="DealsDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DealsDetail">
-              <PropertyRef Name="ItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6657,18 +6599,6 @@
             </Principal>
             <Dependent Role="Inventory1">
               <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Inventory_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.Inventory" Role="Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="ItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6765,126 +6695,6 @@
             </Principal>
             <Dependent Role="IssueStockDetail">
               <PropertyRef Name="IssueStockID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_IssueStockDetail_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.IssueStockDetail" Role="IssueStockDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="IssueStockDetail">
-              <PropertyRef Name="ItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Item_SubCategory">
-          <End Type="db_a74425_premiumposModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SubCategory">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Item">
-              <PropertyRef Name="SubCategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Item_Unit">
-          <End Type="db_a74425_premiumposModel.Unit" Role="Unit" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Unit">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Item">
-              <PropertyRef Name="UnitID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ItemModiferMapping_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.ItemModiferMapping" Role="ItemModiferMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ItemModiferMapping">
-              <PropertyRef Name="ItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ItemVariant_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.ItemVariant" Role="ItemVariant" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ItemVariant">
-              <PropertyRef Name="ItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderDealDetail_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.OrderDealDetail" Role="OrderDealDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="OrderDealDetail">
-              <PropertyRef Name="ItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderDetail_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="ItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderDetail_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.PurchaseOrderDetail" Role="PurchaseOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetail">
-              <PropertyRef Name="ItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Reveiws_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.Reveiw" Role="Reveiw" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Reveiw">
-              <PropertyRef Name="ItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Stock_Item">
-          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.Stock" Role="Stock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Stock">
-              <PropertyRef Name="ItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7284,31 +7094,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="sp_GetItem_menu_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="SubCategoryID" Nullable="true" />
-          <Property Type="Int32" Name="UnitID" Nullable="true" />
-          <Property Type="String" Name="Name" Nullable="true" />
-          <Property Type="String" Name="NameOnReceipt" Nullable="true" />
-          <Property Type="String" Name="Description" Nullable="true" />
-          <Property Type="String" Name="Image" Nullable="true" />
-          <Property Type="String" Name="Barcode" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="SKU" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
-          <Property Type="Boolean" Name="SortByAlpha" Nullable="true" />
-          <Property Type="Double" Name="Price" Nullable="true" />
-          <Property Type="Double" Name="Cost" Nullable="true" />
-          <Property Type="String" Name="ItemType" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="StatusID" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
-          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
-          <Property Type="Boolean" Name="HasVariant" Nullable="true" />
-          <Property Type="Boolean" Name="IsVATApplied" Nullable="true" />
-          <Property Type="Double" Name="CurrentStock" Nullable="false" />
-          <Property Type="Int32" Name="IsInventoryItem" Nullable="false" />
-        </ComplexType>
         <EntityType Name="PushToken">
           <Key>
             <PropertyRef Name="TokenID" />
@@ -7365,6 +7150,232 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubCategoryID" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NameOnReceipt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="SortByAlpha" Type="Boolean" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="NewPrice" Type="Double" />
+          <Property Name="Cost" Type="Double" />
+          <Property Name="ItemType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HasVariant" Type="Boolean" />
+          <Property Name="IsVATApplied" Type="Boolean" />
+          <Property Name="IsFeatured" Type="Boolean" />
+          <Property Name="IsStockOut" Type="Boolean" />
+          <NavigationProperty Name="CustomerWishLists" Relationship="db_a74425_premiumposModel.FK_CustomerWishList_Item" FromRole="Item" ToRole="CustomerWishList" />
+          <NavigationProperty Name="DealsDetails" Relationship="db_a74425_premiumposModel.FK_DealsDetail_Item" FromRole="Item" ToRole="DealsDetail" />
+          <NavigationProperty Name="Inventories" Relationship="db_a74425_premiumposModel.FK_Inventory_Item" FromRole="Item" ToRole="Inventory" />
+          <NavigationProperty Name="IssueStockDetails" Relationship="db_a74425_premiumposModel.FK_IssueStockDetail_Item" FromRole="Item" ToRole="IssueStockDetail" />
+          <NavigationProperty Name="SubCategory" Relationship="db_a74425_premiumposModel.FK_Item_SubCategory" FromRole="Item" ToRole="SubCategory" />
+          <NavigationProperty Name="Unit" Relationship="db_a74425_premiumposModel.FK_Item_Unit" FromRole="Item" ToRole="Unit" />
+          <NavigationProperty Name="ItemModiferMappings" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Item" FromRole="Item" ToRole="ItemModiferMapping" />
+          <NavigationProperty Name="ItemVariants" Relationship="db_a74425_premiumposModel.FK_ItemVariant_Item" FromRole="Item" ToRole="ItemVariant" />
+          <NavigationProperty Name="OrderDealDetails" Relationship="db_a74425_premiumposModel.FK_OrderDealDetail_Item" FromRole="Item" ToRole="OrderDealDetail" />
+          <NavigationProperty Name="OrderDetails" Relationship="db_a74425_premiumposModel.FK_OrderDetail_Item" FromRole="Item" ToRole="OrderDetail" />
+          <NavigationProperty Name="PurchaseOrderDetails" Relationship="db_a74425_premiumposModel.FK_PurchaseOrderDetail_Item" FromRole="Item" ToRole="PurchaseOrderDetail" />
+          <NavigationProperty Name="Reveiws" Relationship="db_a74425_premiumposModel.FK_Reveiws_Item" FromRole="Item" ToRole="Reveiw" />
+          <NavigationProperty Name="Stocks" Relationship="db_a74425_premiumposModel.FK_Stock_Item" FromRole="Item" ToRole="Stock" />
+        </EntityType>
+        <Association Name="FK_CustomerWishList_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="db_a74425_premiumposModel.CustomerWishList" Role="CustomerWishList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerWishList">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealsDetail_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.DealsDetail" Role="DealsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealsDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.Inventory" Role="Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IssueStockDetail_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.IssueStockDetail" Role="IssueStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IssueStockDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_SubCategory">
+          <End Type="db_a74425_premiumposModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="SubCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Unit">
+          <End Type="db_a74425_premiumposModel.Unit" Role="Unit" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemModiferMapping_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.ItemModiferMapping" Role="ItemModiferMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemModiferMapping">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemVariant_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.ItemVariant" Role="ItemVariant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemVariant">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDealDetail_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.OrderDealDetail" Role="OrderDealDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDealDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetail_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.PurchaseOrderDetail" Role="PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reveiws_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.Reveiw" Role="Reveiw" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reveiw">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Item">
+          <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetItem_menu_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="SubCategoryID" Nullable="true" />
+          <Property Type="Int32" Name="UnitID" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="NameOnReceipt" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" />
+          <Property Type="String" Name="Barcode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SKU" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+          <Property Type="Boolean" Name="SortByAlpha" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Double" Name="NewPrice" Nullable="true" />
+          <Property Type="Double" Name="Cost" Nullable="true" />
+          <Property Type="String" Name="ItemType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="HasVariant" Nullable="true" />
+          <Property Type="Boolean" Name="IsVATApplied" Nullable="true" />
+          <Property Type="Boolean" Name="IsFeatured" Nullable="true" />
+          <Property Type="Boolean" Name="IsStockOut" Nullable="true" />
+          <Property Type="Double" Name="CurrentStock" Nullable="false" />
+          <Property Type="Int32" Name="IsInventoryItem" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8751,6 +8762,7 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="TAXWebApp" ColumnName="TAXWebApp" />
                 <ScalarProperty Name="SNTN" ColumnName="SNTN" />
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="logo" ColumnName="logo" />
@@ -9069,35 +9081,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="IssueStockID" ColumnName="IssueStockID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Items">
-            <EntityTypeMapping TypeName="db_a74425_premiumposModel.Item">
-              <MappingFragment StoreEntitySet="Item">
-                <ScalarProperty Name="IsStockOut" ColumnName="IsStockOut" />
-                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
-                <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
-                <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="SKU" ColumnName="SKU" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="NameOnReceipt" ColumnName="NameOnReceipt" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
-                <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -9455,6 +9438,8 @@
           <EntitySetMapping Name="ReceiptPermissions">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.ReceiptPermission">
               <MappingFragment StoreEntitySet="ReceiptPermissions">
+                <ScalarProperty Name="IsCentralizedCustomer" ColumnName="IsCentralizedCustomer" />
+                <ScalarProperty Name="IsCustomerRequired" ColumnName="IsCustomerRequired" />
                 <ScalarProperty Name="TaxName" ColumnName="TaxName" />
                 <ScalarProperty Name="AllowNegativeInventroy" ColumnName="AllowNegativeInventroy" />
                 <ScalarProperty Name="IsA4Print" ColumnName="IsA4Print" />
@@ -9817,35 +9802,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetItem_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetItem_menu">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetItem_menu_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
-                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="NameOnReceipt" ColumnName="NameOnReceipt" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-                <ScalarProperty Name="SKU" ColumnName="SKU" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
-                <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
-                <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
-                <ScalarProperty Name="IsInventoryItem" ColumnName="IsInventoryItem" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="PushTokens">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.PushToken">
               <MappingFragment StoreEntitySet="PushToken">
@@ -9878,6 +9834,68 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="db_a74425_premiumposModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="IsStockOut" ColumnName="IsStockOut" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
+                <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NameOnReceipt" ColumnName="NameOnReceipt" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetItem_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetItem_menu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetItem_menu_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NameOnReceipt" ColumnName="NameOnReceipt" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="HasVariant" ColumnName="HasVariant" />
+                <ScalarProperty Name="IsVATApplied" ColumnName="IsVATApplied" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="IsStockOut" ColumnName="IsStockOut" />
+                <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+                <ScalarProperty Name="IsInventoryItem" ColumnName="IsInventoryItem" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

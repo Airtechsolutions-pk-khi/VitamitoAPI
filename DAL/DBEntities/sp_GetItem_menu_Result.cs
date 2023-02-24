@@ -25,6 +25,7 @@ namespace DAL.DBEntities
         public Nullable<int> DisplayOrder { get; set; }
         public Nullable<bool> SortByAlpha { get; set; }
         public Nullable<double> Price { get; set; }
+        public Nullable<double> NewPrice { get; set; }
         public Nullable<double> Cost { get; set; }
         public string ItemType { get; set; }
         public string LastUpdatedBy { get; set; }
@@ -34,6 +35,8 @@ namespace DAL.DBEntities
         public string CreatedBy { get; set; }
         public Nullable<bool> HasVariant { get; set; }
         public Nullable<bool> IsVATApplied { get; set; }
+        public Nullable<bool> IsFeatured { get; set; }
+        public Nullable<bool> IsStockOut { get; set; }
         public double CurrentStock { get; set; }
         public int IsInventoryItem { get; set; }
     }

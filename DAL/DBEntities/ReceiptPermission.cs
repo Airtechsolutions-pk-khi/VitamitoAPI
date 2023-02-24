@@ -38,6 +38,8 @@ namespace DAL.DBEntities
         public Nullable<bool> IsA4Print { get; set; }
         public Nullable<bool> AllowNegativeInventroy { get; set; }
         public string TaxName { get; set; }
+        public Nullable<bool> IsCustomerRequired { get; set; }
+        public Nullable<bool> IsCentralizedCustomer { get; set; }
     
         public virtual User User { get; set; }
     }

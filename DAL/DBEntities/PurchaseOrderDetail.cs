@@ -28,7 +28,7 @@ namespace DAL.DBEntities
         public string CreatedBy { get; set; }
         public Nullable<int> StatusId { get; set; }
     
-        public virtual Item Item { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }
+        public virtual Item Item { get; set; }
     }
 }

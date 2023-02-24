@@ -48,7 +48,6 @@ namespace DAL.DBEntities
         public virtual DbSet<InventoryRequest> InventoryRequests { get; set; }
         public virtual DbSet<IssueStock> IssueStocks { get; set; }
         public virtual DbSet<IssueStockDetail> IssueStockDetails { get; set; }
-        public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<ItemImage> ItemImages { get; set; }
         public virtual DbSet<ItemModiferMapping> ItemModiferMappings { get; set; }
         public virtual DbSet<ItemVariant> ItemVariants { get; set; }
@@ -85,6 +84,7 @@ namespace DAL.DBEntities
         public virtual DbSet<Variant> Variants { get; set; }
         public virtual DbSet<PushToken> PushTokens { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
     
         [DbFunction("db_a74425_premiumposEntities", "SplitString")]
         public virtual IQueryable<SplitString_Result> SplitString(string input, string character)

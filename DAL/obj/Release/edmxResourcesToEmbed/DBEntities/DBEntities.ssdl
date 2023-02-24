@@ -70,6 +70,7 @@
     <Property Name="Contact" Type="varchar" MaxLength="50" />
     <Property Name="LocationID" Type="int" />
     <Property Name="TAX" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TAXWebApp" Type="decimal" Precision="18" Scale="2" />
     <Property Name="NTN" Type="nvarchar" MaxLength="100" />
     <Property Name="StatusID" Type="int" />
     <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="150" />
@@ -381,6 +382,7 @@
     <Property Name="DisplayOrder" Type="int" />
     <Property Name="SortByAlpha" Type="bit" />
     <Property Name="Price" Type="float" />
+    <Property Name="NewPrice" Type="float" />
     <Property Name="Cost" Type="float" />
     <Property Name="ItemType" Type="nvarchar" MaxLength="50" />
     <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="50" />
@@ -765,6 +767,8 @@
     <Property Name="IsA4Print" Type="bit" />
     <Property Name="AllowNegativeInventroy" Type="bit" />
     <Property Name="TaxName" Type="nvarchar" MaxLength="10" />
+    <Property Name="IsCustomerRequired" Type="bit" />
+    <Property Name="IsCentralizedCustomer" Type="bit" />
   </EntityType>
   <EntityType Name="Reveiws">
     <Key>

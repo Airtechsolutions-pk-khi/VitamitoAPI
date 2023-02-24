@@ -20,8 +20,8 @@ namespace DAL.DBEntities
         public Nullable<int> VariantID { get; set; }
         public string Type { get; set; }
     
-        public virtual Item Item { get; set; }
         public virtual Modifier Modifier { get; set; }
         public virtual Variant Variant { get; set; }
+        public virtual Item Item { get; set; }
     }
 }

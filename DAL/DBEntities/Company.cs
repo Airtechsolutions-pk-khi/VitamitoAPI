@@ -31,6 +31,7 @@ namespace DAL.DBEntities
         public string logo { get; set; }
         public string Currency { get; set; }
         public string SNTN { get; set; }
+        public Nullable<decimal> TAXWebApp { get; set; }
     
         public virtual Location Location { get; set; }
         public virtual User User { get; set; }

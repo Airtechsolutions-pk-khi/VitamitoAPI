@@ -100,9 +100,13 @@ namespace BAL.Repositories
 
                                 var random = new Random();
                                 var randomIF = new List<string> { "true","false"};
-                             
+
+                                var dis = (item.NewPrice / item.Price) * 100;
+                                var per = 100 - dis;
+                                var DiscountPercent = per;
                                 ItemLst.Add(new ItemBLL
                                 {
+                                    
                                     ID = item.ID,
                                     Name = item.Name,
                                     Description = item.Description,
@@ -114,6 +118,8 @@ namespace BAL.Repositories
                                     Barcode = item.Barcode,
                                     SKU = item.SKU,
                                     Price = item.Price,
+                                    NewPrice = item.NewPrice,
+                                    DiscountPercent = DiscountPercent,
                                     Cost = item.Cost,
                                     Modifiers = lstModifier,
                                     Variants = lstVariant,

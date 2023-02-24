@@ -211,6 +211,8 @@ namespace DAL.Models
         public string Barcode { get; set; }
         public string SKU { get; set; }
         public Nullable<double> Price { get; set; }
+        public Nullable<double> NewPrice { get; set; }
+        public Nullable<double> DiscountPercent { get; set; }
         public Nullable<double> Cost { get; set; }
         public string ItemType { get; set; }
         public Nullable<int> StatusID { get; set; }

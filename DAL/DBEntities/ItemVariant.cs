@@ -32,7 +32,7 @@ namespace DAL.DBEntities
         public Nullable<int> LastUpdatedBy { get; set; }
         public Nullable<int> LocationID { get; set; }
     
-        public virtual Item Item { get; set; }
         public virtual Variant Variant { get; set; }
+        public virtual Item Item { get; set; }
     }
 }

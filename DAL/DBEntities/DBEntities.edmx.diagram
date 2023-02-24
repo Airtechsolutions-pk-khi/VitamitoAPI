@@ -26,7 +26,6 @@
         <EntityTypeShape EntityType="db_a74425_premiumposModel.InventoryRequest" Width="1.5" PointX="13.5" PointY="107.375" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.IssueStock" Width="1.5" PointX="3" PointY="82.25" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.IssueStockDetail" Width="1.5" PointX="5.25" PointY="76.375" />
-        <EntityTypeShape EntityType="db_a74425_premiumposModel.Item" Width="1.5" PointX="15.75" PointY="67.75" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.ItemImage" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.ItemModiferMapping" Width="1.5" PointX="22" PointY="104.625" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.ItemVariant" Width="1.5" PointX="22" PointY="96.75" />
@@ -83,15 +82,12 @@
         <AssociationConnector Association="db_a74425_premiumposModel.FK_CustomerDetail_Order" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_CustomerOrder_Order" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_CustomerOrders_Order" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_CustomerWishList_Item" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_DealsCategory_DealsHeader" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_DealsDetail_DealsHeader" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_DealsDetail_Item" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_DealsHeader_Location" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_Floors_Location" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_Tables_Floors" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_Inventory_Inventory" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_Inventory_Item" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_Inventory_Location" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_Inventory_Supplier" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_InventoryRecieve_Store" />
@@ -100,16 +96,6 @@
         <AssociationConnector Association="db_a74425_premiumposModel.FK_IssueStock_Store1" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_IssueStock_User" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_IssueStockDetail_IssueStock" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_IssueStockDetail_Item" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_Item_SubCategory" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_Item_Unit" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Item" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_ItemVariant_Item" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_OrderDealDetail_Item" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_OrderDetail_Item" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_PurchaseOrderDetail_Item" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_Reveiws_Item" />
-        <AssociationConnector Association="db_a74425_premiumposModel.FK_Stock_Item" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Modifiers" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Variant" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK_ItemVariant_Variant" />
@@ -147,6 +133,20 @@
         <AssociationConnector Association="db_a74425_premiumposModel.FK_PushToken_Location" />
         <EntityTypeShape EntityType="db_a74425_premiumposModel.Banner" Width="1.5" PointX="11.25" PointY="93.25" />
         <AssociationConnector Association="db_a74425_premiumposModel.FK__Banner__Location__44952D46" />
+        <EntityTypeShape EntityType="db_a74425_premiumposModel.Item" Width="1.5" PointX="15.75" PointY="66.125" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_CustomerWishList_Item" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_DealsDetail_Item" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_Inventory_Item" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_IssueStockDetail_Item" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_Item_SubCategory" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_Item_Unit" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Item" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_ItemVariant_Item" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_OrderDealDetail_Item" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_OrderDetail_Item" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_PurchaseOrderDetail_Item" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_Reveiws_Item" />
+        <AssociationConnector Association="db_a74425_premiumposModel.FK_Stock_Item" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
