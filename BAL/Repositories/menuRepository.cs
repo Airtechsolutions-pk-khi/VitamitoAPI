@@ -36,7 +36,12 @@ namespace BAL.Repositories
             var SubCategoryLst = new List<SubCategoryBLL>();
             var lstModifier = new List<ModifierBLL>();
             var lstVariant = new List<VariantsBLL>();
-            var lstIM= new List<string>();
+
+            var lstFeatured = new List<FeaturedBLL>();
+            var lstNewArrival = new List<NewArrivalBLL>();
+            var lstPopular = new List<PopularBLL>();
+
+            var lstIM = new List<string>();
             var rsp = new RspMenu();
             try
             {
@@ -48,6 +53,52 @@ namespace BAL.Repositories
 
                 if (catlist != null && catlist.Count() > 0)
                 {
+                    lstFeatured = new List<FeaturedBLL>();
+                    foreach (var featured in itemslist.OrderByDescending(x => x.DisplayOrder).Where(x => x.IsFeatured == true).OrderBy(c => Guid.NewGuid()).Take(6).ToList())
+                    {
+                        lstFeatured.Add(new FeaturedBLL
+                        {
+                            ID = featured.ID,
+                            Name = featured.Name,
+                            Description = featured.Description,
+                            Barcode = featured.Barcode,
+                            SKU = featured.SKU,
+                            Price = Convert.ToDouble(featured.Price),
+                            NewPrice = Convert.ToDouble(featured.NewPrice),
+                            StatusID = Convert.ToInt32(featured.StatusID)
+                        });
+                    }
+                    lstNewArrival = new List<NewArrivalBLL>();
+                    foreach (var newArrival in itemslist.OrderByDescending(c => c.LastUpdatedDate).Take(7).OrderBy(c => Guid.NewGuid()).ToList())
+                    {
+                        lstNewArrival.Add(new NewArrivalBLL
+                        {
+                            ID = newArrival.ID,
+                            Name = newArrival.Name,
+                            Description = newArrival.Description,
+                            Barcode = newArrival.Barcode,
+                            SKU = newArrival.SKU,
+                            Price = Convert.ToDouble(newArrival.Price),
+                            NewPrice = Convert.ToDouble(newArrival.NewPrice),
+                            StatusID = Convert.ToInt32(newArrival.StatusID)
+                        });
+                    }
+
+                    lstPopular = new List<PopularBLL>();
+                    foreach (var popular in itemslist.OrderByDescending(c => c.LastUpdatedDate).Take(7).OrderBy(c => Guid.NewGuid()).ToList())
+                    {
+                        lstPopular.Add(new PopularBLL
+                        {
+                            ID = popular.ID,
+                            Name = popular.Name,
+                            Description = popular.Description,
+                            Barcode = popular.Barcode,
+                            SKU = popular.SKU,
+                            Price = Convert.ToDouble(popular.Price),
+                            NewPrice = Convert.ToDouble(popular.NewPrice),
+                            StatusID = Convert.ToInt32(popular.StatusID)
+                        });
+                    }
                     #region category
                     CategoryLst = new List<CategoryBLL>();
                     foreach (var Cat in catlist)
@@ -95,6 +146,10 @@ namespace BAL.Repositories
                                     });
                                 }
 
+                                
+
+                               
+
                                 lstIM = new List<string>();
                                 lstIM.Add(item.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + item.Image) ;
 
@@ -122,7 +177,7 @@ namespace BAL.Repositories
                                     DiscountPercent = DiscountPercent,
                                     Cost = item.Cost,
                                     Modifiers = lstModifier,
-                                    Variants = lstVariant,
+                                    Variants = lstVariant,                                   
                                     ItemImages=lstIM.ToArray(),
                                     DisplayOrder=item.DisplayOrder,
                                     IsFeatured= false,
@@ -158,6 +213,9 @@ namespace BAL.Repositories
                     #endregion category
                 }
                 rsp.Categories = CategoryLst;
+                rsp.FeaturedProducts = lstFeatured;
+                rsp.PopularProducts = lstPopular;
+                rsp.NewArrival = lstNewArrival;
                 rsp.status = 1;
                 rsp.description = "Success";
 

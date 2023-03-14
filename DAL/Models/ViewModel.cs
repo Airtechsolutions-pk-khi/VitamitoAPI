@@ -101,6 +101,9 @@ namespace DAL.Models
     public class RspMenu : Rsp
     {
         public List<CategoryBLL> Categories { get; set; }
+        public List<FeaturedBLL> FeaturedProducts { get; set; }
+        public List<NewArrivalBLL> NewArrival { get; set; }
+        public List<PopularBLL> PopularProducts { get; set; }
     }
 
     public class RspOrdersCustomer : Rsp
@@ -223,6 +226,48 @@ namespace DAL.Models
         public bool? IsFeatured { get; set; }
         public List<ModifierBLL> Modifiers { get; set; }
         public List<VariantsBLL> Variants { get; set; }
+ 
+    }
+    public class FeaturedBLL
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }        
+        public string Description { get; set; }
+        public string Type { get; set; }
+        public string Barcode { get; set; }
+        public string SKU { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<double> NewPrice { get; set; }
+        public Nullable<int> StatusID { get; set; }
+
+    }
+    public class NewArrivalBLL
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string ArabicName { get; set; }
+        public string Description { get; set; }
+        public string Type { get; set; }
+        public string Barcode { get; set; }
+        public string SKU { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<double> NewPrice { get; set; }
+        public Nullable<int> StatusID { get; set; }
+
+    }
+    public class PopularBLL
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string ArabicName { get; set; }
+        public string Description { get; set; }
+        public string Type { get; set; }
+        public string Barcode { get; set; }
+        public string SKU { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<double> NewPrice { get; set; }
+        public Nullable<int> StatusID { get; set; }
+
     }
     public class VariantsBLL
     {
