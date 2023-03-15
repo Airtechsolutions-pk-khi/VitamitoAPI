@@ -79,6 +79,8 @@ namespace BAL.Repositories
                             ItemImages = lstIM.ToArray(),
                             DisplayOrder = featured.DisplayOrder,
                             IsFeatured = false,
+                            Modifiers = lstModifier,
+                            Variants = lstVariant,
                             CurrentStock = featured.CurrentStock,
                             IsInventoryItem = featured.IsInventoryItem > 0 ? true : false
                         });
@@ -109,6 +111,8 @@ namespace BAL.Repositories
                             ItemImages = lstIM.ToArray(),
                             DisplayOrder = newArrival.DisplayOrder,
                             IsFeatured = false,
+                            Modifiers = lstModifier,
+                            Variants = lstVariant,
                             CurrentStock = newArrival.CurrentStock,
                             IsInventoryItem = newArrival.IsInventoryItem > 0 ? true : false
                         });
@@ -140,6 +144,8 @@ namespace BAL.Repositories
                             ItemImages = lstIM.ToArray(),
                             DisplayOrder = popular.DisplayOrder,
                             IsFeatured = false,
+                            Modifiers = lstModifier,
+                            Variants = lstVariant,
                             CurrentStock = popular.CurrentStock,
                             IsInventoryItem = popular.IsInventoryItem > 0 ? true : false
                         });

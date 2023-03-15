@@ -249,6 +249,8 @@ namespace DAL.Models
         public double? CurrentStock { get; set; }
         public bool? IsInventoryItem { get; set; }
         public bool? IsFeatured { get; set; }
+        public List<ModifierBLL> Modifiers { get; set; }
+        public List<VariantsBLL> Variants { get; set; }
     }
     public class NewArrivalBLL
     {
@@ -271,6 +273,8 @@ namespace DAL.Models
         public double? CurrentStock { get; set; }
         public bool? IsInventoryItem { get; set; }
         public bool? IsFeatured { get; set; }
+        public List<ModifierBLL> Modifiers { get; set; }
+        public List<VariantsBLL> Variants { get; set; }
     }
     public class PopularBLL
     {
@@ -293,6 +297,8 @@ namespace DAL.Models
         public double? CurrentStock { get; set; }
         public bool? IsInventoryItem { get; set; }
         public bool? IsFeatured { get; set; }
+        public List<ModifierBLL> Modifiers { get; set; }
+        public List<VariantsBLL> Variants { get; set; }
     }
     public class VariantsBLL
     {
