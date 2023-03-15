@@ -36,7 +36,6 @@ namespace BAL.Repositories
             var SubCategoryLst = new List<SubCategoryBLL>();
             var lstModifier = new List<ModifierBLL>();
             var lstVariant = new List<VariantsBLL>();
-
             var lstFeatured = new List<FeaturedBLL>();
             var lstNewArrival = new List<NewArrivalBLL>();
             var lstPopular = new List<PopularBLL>();
@@ -50,53 +49,99 @@ namespace BAL.Repositories
                 var itemslist = DBContext.sp_GetItem_menu(locationID).ToList();
                 var modifierlist = DBContext.sp_GetModifiersForItem_menu(UserID).ToList();
                 var variantlist = DBContext.sp_GetVariantsForItem_menu(UserID).ToList();
-
+                 
                 if (catlist != null && catlist.Count() > 0)
                 {
                     lstFeatured = new List<FeaturedBLL>();
+
                     foreach (var featured in itemslist.OrderByDescending(x => x.DisplayOrder).Where(x => x.IsFeatured == true).OrderBy(c => Guid.NewGuid()).Take(6).ToList())
                     {
+                        lstIM = new List<string>();
+                        lstIM.Add(featured.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + featured.Image);
+
+
                         lstFeatured.Add(new FeaturedBLL
-                        {
+                        {                          
                             ID = featured.ID,
                             Name = featured.Name,
                             Description = featured.Description,
+                            Image = featured.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + featured.Image,
+                            ItemType = featured.ItemType,
+                            SubCategoryID = featured.SubCategoryID,
+                            NameOnReceipt = featured.NameOnReceipt,
+                            StatusID = featured.StatusID,
                             Barcode = featured.Barcode,
                             SKU = featured.SKU,
-                            Price = Convert.ToDouble(featured.Price),
-                            NewPrice = Convert.ToDouble(featured.NewPrice),
-                            StatusID = Convert.ToInt32(featured.StatusID)
+                            Price = featured.Price,
+                            NewPrice = featured.NewPrice,
+                            //DiscountPercent = DiscountPercent,
+                            Cost = featured.Cost,
+                            ItemImages = lstIM.ToArray(),
+                            DisplayOrder = featured.DisplayOrder,
+                            IsFeatured = false,
+                            CurrentStock = featured.CurrentStock,
+                            IsInventoryItem = featured.IsInventoryItem > 0 ? true : false
                         });
                     }
                     lstNewArrival = new List<NewArrivalBLL>();
                     foreach (var newArrival in itemslist.OrderByDescending(c => c.LastUpdatedDate).Take(7).OrderBy(c => Guid.NewGuid()).ToList())
                     {
+                        lstIM = new List<string>();
+                        lstIM.Add(newArrival.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + newArrival.Image);
+
+
                         lstNewArrival.Add(new NewArrivalBLL
                         {
                             ID = newArrival.ID,
                             Name = newArrival.Name,
                             Description = newArrival.Description,
+                            Image = newArrival.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + newArrival.Image,
+                            ItemType = newArrival.ItemType,
+                            SubCategoryID = newArrival.SubCategoryID,
+                            NameOnReceipt = newArrival.NameOnReceipt,
+                            StatusID = newArrival.StatusID,
                             Barcode = newArrival.Barcode,
                             SKU = newArrival.SKU,
-                            Price = Convert.ToDouble(newArrival.Price),
-                            NewPrice = Convert.ToDouble(newArrival.NewPrice),
-                            StatusID = Convert.ToInt32(newArrival.StatusID)
+                            Price = newArrival.Price,
+                            NewPrice = newArrival.NewPrice,
+                            //DiscountPercent = DiscountPercent,
+                            Cost = newArrival.Cost,
+                            ItemImages = lstIM.ToArray(),
+                            DisplayOrder = newArrival.DisplayOrder,
+                            IsFeatured = false,
+                            CurrentStock = newArrival.CurrentStock,
+                            IsInventoryItem = newArrival.IsInventoryItem > 0 ? true : false
                         });
                     }
 
-                    lstPopular = new List<PopularBLL>();
+                    
                     foreach (var popular in itemslist.OrderByDescending(c => c.LastUpdatedDate).Take(7).OrderBy(c => Guid.NewGuid()).ToList())
                     {
+                        lstIM = new List<string>();
+                        lstIM.Add(popular.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + popular.Image);
+
+
                         lstPopular.Add(new PopularBLL
                         {
                             ID = popular.ID,
                             Name = popular.Name,
                             Description = popular.Description,
+                            Image = popular.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + popular.Image,
+                            ItemType = popular.ItemType,
+                            SubCategoryID = popular.SubCategoryID,
+                            NameOnReceipt = popular.NameOnReceipt,
+                            StatusID = popular.StatusID,
                             Barcode = popular.Barcode,
                             SKU = popular.SKU,
-                            Price = Convert.ToDouble(popular.Price),
-                            NewPrice = Convert.ToDouble(popular.NewPrice),
-                            StatusID = Convert.ToInt32(popular.StatusID)
+                            Price = popular.Price,
+                            NewPrice = popular.NewPrice,
+                            //DiscountPercent = DiscountPercent,
+                            Cost = popular.Cost,                           
+                            ItemImages = lstIM.ToArray(),
+                            DisplayOrder = popular.DisplayOrder,
+                            IsFeatured = false,
+                            CurrentStock = popular.CurrentStock,
+                            IsInventoryItem = popular.IsInventoryItem > 0 ? true : false
                         });
                     }
                     #region category

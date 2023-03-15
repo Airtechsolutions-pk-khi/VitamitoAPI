@@ -231,43 +231,68 @@ namespace DAL.Models
     public class FeaturedBLL
     {
         public int ID { get; set; }
-        public string Name { get; set; }        
+        public Nullable<int> SubCategoryID { get; set; }
+        public string Name { get; set; }
+        public string NameOnReceipt { get; set; }
         public string Description { get; set; }
-        public string Type { get; set; }
+        public string Image { get; set; }
         public string Barcode { get; set; }
         public string SKU { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<double> NewPrice { get; set; }
+        public Nullable<double> DiscountPercent { get; set; }
+        public Nullable<double> Cost { get; set; }
+        public string ItemType { get; set; }
         public Nullable<int> StatusID { get; set; }
-
+        public string[] ItemImages { get; set; }
+        public int? DisplayOrder { get; set; }
+        public double? CurrentStock { get; set; }
+        public bool? IsInventoryItem { get; set; }
+        public bool? IsFeatured { get; set; }
     }
     public class NewArrivalBLL
     {
         public int ID { get; set; }
+        public Nullable<int> SubCategoryID { get; set; }
         public string Name { get; set; }
-        public string ArabicName { get; set; }
+        public string NameOnReceipt { get; set; }
         public string Description { get; set; }
-        public string Type { get; set; }
+        public string Image { get; set; }
         public string Barcode { get; set; }
         public string SKU { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<double> NewPrice { get; set; }
+        public Nullable<double> DiscountPercent { get; set; }
+        public Nullable<double> Cost { get; set; }
+        public string ItemType { get; set; }
         public Nullable<int> StatusID { get; set; }
-
+        public string[] ItemImages { get; set; }
+        public int? DisplayOrder { get; set; }
+        public double? CurrentStock { get; set; }
+        public bool? IsInventoryItem { get; set; }
+        public bool? IsFeatured { get; set; }
     }
     public class PopularBLL
     {
         public int ID { get; set; }
+        public Nullable<int> SubCategoryID { get; set; }
         public string Name { get; set; }
-        public string ArabicName { get; set; }
+        public string NameOnReceipt { get; set; }
         public string Description { get; set; }
-        public string Type { get; set; }
+        public string Image { get; set; }
         public string Barcode { get; set; }
         public string SKU { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<double> NewPrice { get; set; }
+        public Nullable<double> DiscountPercent { get; set; }
+        public Nullable<double> Cost { get; set; }
+        public string ItemType { get; set; }
         public Nullable<int> StatusID { get; set; }
-
+        public string[] ItemImages { get; set; }
+        public int? DisplayOrder { get; set; }
+        public double? CurrentStock { get; set; }
+        public bool? IsInventoryItem { get; set; }
+        public bool? IsFeatured { get; set; }
     }
     public class VariantsBLL
     {
