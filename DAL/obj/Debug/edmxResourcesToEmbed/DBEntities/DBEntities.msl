@@ -2515,5 +2515,20 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetSelectedFlashItem" FunctionName="db_a74425_premiumposModel.Store.sp_GetSelectedFlashItem">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetSelectedFlashItem_Result">
+          <ScalarProperty Name="WebCustomisedSaleID" ColumnName="WebCustomisedSaleID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -941,6 +941,9 @@
     <FunctionImport Name="sp_GetItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetItem_menu_Result)">
       <Parameter Name="LocationID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="sp_GetSelectedFlashItem" ReturnType="Collection(db_a74425_premiumposModel.sp_GetSelectedFlashItem_Result)">
+      <Parameter Name="LocationID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ABC_Result">
     <Property Type="DateTime" Name="Date" Nullable="true" />
@@ -4325,5 +4328,16 @@
     <Property Type="Boolean" Name="IsStockOut" Nullable="true" />
     <Property Type="Double" Name="CurrentStock" Nullable="false" />
     <Property Type="Int32" Name="IsInventoryItem" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_GetSelectedFlashItem_Result">
+    <Property Type="Int32" Name="WebCustomisedSaleID" Nullable="false" />
+    <Property Type="Int32" Name="LocationID" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
   </ComplexType>
 </Schema>

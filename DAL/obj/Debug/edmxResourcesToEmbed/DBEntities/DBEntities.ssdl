@@ -2254,6 +2254,9 @@
     <Parameter Name="UserID" Type="int" Mode="In" />
     <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_GetSelectedFlashItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_GetStockOfMultipleItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
     <Parameter Name="ItemIDs" Type="varchar(max)" Mode="In" />

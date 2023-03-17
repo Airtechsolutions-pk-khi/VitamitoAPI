@@ -1992,5 +1992,14 @@ namespace DAL.DBEntities
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetItem_menu_Result>("sp_GetItem_menu", locationIDParameter);
         }
+    
+        public virtual ObjectResult<sp_GetSelectedFlashItem_Result> sp_GetSelectedFlashItem(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSelectedFlashItem_Result>("sp_GetSelectedFlashItem", locationIDParameter);
+        }
     }
 }

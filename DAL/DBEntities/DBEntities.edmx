@@ -2259,6 +2259,9 @@
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="LocationID" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_GetSelectedFlashItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_GetStockOfMultipleItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
           <Parameter Name="ItemIDs" Type="varchar(max)" Mode="In" />
@@ -3989,6 +3992,9 @@
             <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
           <FunctionImport Name="sp_GetItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetItem_menu_Result)">
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetSelectedFlashItem" ReturnType="Collection(db_a74425_premiumposModel.sp_GetSelectedFlashItem_Result)">
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -7376,6 +7382,17 @@
           <Property Type="Double" Name="CurrentStock" Nullable="false" />
           <Property Type="Int32" Name="IsInventoryItem" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="sp_GetSelectedFlashItem_Result">
+          <Property Type="Int32" Name="WebCustomisedSaleID" Nullable="false" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9893,6 +9910,21 @@
                 <ScalarProperty Name="IsStockOut" ColumnName="IsStockOut" />
                 <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
                 <ScalarProperty Name="IsInventoryItem" ColumnName="IsInventoryItem" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetSelectedFlashItem" FunctionName="db_a74425_premiumposModel.Store.sp_GetSelectedFlashItem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetSelectedFlashItem_Result">
+                <ScalarProperty Name="WebCustomisedSaleID" ColumnName="WebCustomisedSaleID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

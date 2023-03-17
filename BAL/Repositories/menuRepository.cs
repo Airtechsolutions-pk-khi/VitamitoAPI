@@ -37,7 +37,7 @@ namespace BAL.Repositories
             var lstModifier = new List<ModifierBLL>();
             var lstVariant = new List<VariantsBLL>();
             var lstFeatured = new List<FeaturedBLL>();
-            var lstNewArrival = new List<NewArrivalBLL>();
+            //var lstNewArrival = new List<NewArrivalBLL>();
             var lstPopular = new List<PopularBLL>();
 
             var lstIM = new List<string>();
@@ -49,7 +49,10 @@ namespace BAL.Repositories
                 var itemslist = DBContext.sp_GetItem_menu(locationID).ToList();
                 var modifierlist = DBContext.sp_GetModifiersForItem_menu(UserID).ToList();
                 var variantlist = DBContext.sp_GetVariantsForItem_menu(UserID).ToList();
-                 
+
+                
+
+
                 if (catlist != null && catlist.Count() > 0)
                 {
                     lstFeatured = new List<FeaturedBLL>();
@@ -85,40 +88,68 @@ namespace BAL.Repositories
                             IsInventoryItem = featured.IsInventoryItem > 0 ? true : false
                         });
                     }
-                    lstNewArrival = new List<NewArrivalBLL>();
-                    foreach (var newArrival in itemslist.OrderByDescending(c => c.LastUpdatedDate).Take(7).OrderBy(c => Guid.NewGuid()).ToList())
+
+
+                    try
                     {
-                        lstIM = new List<string>();
-                        lstIM.Add(newArrival.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + newArrival.Image);
+                        DataSet _ds;
+                        SqlParameter[] p = new SqlParameter[1];
+                        p[0] = new SqlParameter("@LocationID", locationID);
+                        _ds = (new DBHelper().GetDatasetFromSP)("sp_GetSelectedFlashItem", p);
 
+                        
+                        var _dt1 = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[0])).ToObject<List<WebSalesBLL>>().ToList();
+                        var _dt2 = _ds.Tables[1] == null ? new List<WebSalesDetailBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[1])).ToObject<List<WebSalesDetailBLL>>().ToList();
 
-                        lstNewArrival.Add(new NewArrivalBLL
+                        foreach (var item in _dt1)
                         {
-                            ID = newArrival.ID,
-                            Name = newArrival.Name,
-                            Description = newArrival.Description,
-                            Image = newArrival.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + newArrival.Image,
-                            ItemType = newArrival.ItemType,
-                            SubCategoryID = newArrival.SubCategoryID,
-                            NameOnReceipt = newArrival.NameOnReceipt,
-                            StatusID = newArrival.StatusID,
-                            Barcode = newArrival.Barcode,
-                            SKU = newArrival.SKU,
-                            Price = newArrival.Price,
-                            NewPrice = newArrival.NewPrice,
-                            //DiscountPercent = DiscountPercent,
-                            Cost = newArrival.Cost,
-                            ItemImages = lstIM.ToArray(),
-                            DisplayOrder = newArrival.DisplayOrder,
-                            IsFeatured = false,
-                            Modifiers = lstModifier,
-                            Variants = lstVariant,
-                            CurrentStock = newArrival.CurrentStock,
-                            IsInventoryItem = newArrival.IsInventoryItem > 0 ? true : false
-                        });
-                    }
+                            item.WebSaleDetails = _dt2.Where(x => x.WebCustomizedSaleID == item.WebCustomisedSaleID).ToList();
+                        }
+                        
+                        rsp.FlashSale = _dt1.Where(x => x.Type == "flash").FirstOrDefault();
+                        rsp.NewArrival = _dt1.Where(x => x.Type == "newarrival").FirstOrDefault();
+                        rsp.Clearance = _dt1.Where(x => x.Type == "clearance").FirstOrDefault();
 
-                    
+
+                    }
+                    catch(Exception ex)
+                    { }
+
+
+                    //lstNewArrival = new List<NewArrivalBLL>();
+                    //foreach (var newArrival in itemslist.OrderByDescending(c => c.LastUpdatedDate).Take(7).OrderBy(c => Guid.NewGuid()).ToList())
+                    //{
+                    //    lstIM = new List<string>();
+                    //    lstIM.Add(newArrival.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + newArrival.Image);
+
+
+                    //    lstNewArrival.Add(new NewArrivalBLL
+                    //    {
+                    //        ID = newArrival.ID,
+                    //        Name = newArrival.Name,
+                    //        Description = newArrival.Description,
+                    //        Image = newArrival.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + newArrival.Image,
+                    //        ItemType = newArrival.ItemType,
+                    //        SubCategoryID = newArrival.SubCategoryID,
+                    //        NameOnReceipt = newArrival.NameOnReceipt,
+                    //        StatusID = newArrival.StatusID,
+                    //        Barcode = newArrival.Barcode,
+                    //        SKU = newArrival.SKU,
+                    //        Price = newArrival.Price,
+                    //        NewPrice = newArrival.NewPrice,
+                    //        //DiscountPercent = DiscountPercent,
+                    //        Cost = newArrival.Cost,
+                    //        ItemImages = lstIM.ToArray(),
+                    //        DisplayOrder = newArrival.DisplayOrder,
+                    //        IsFeatured = false,
+                    //        Modifiers = lstModifier,
+                    //        Variants = lstVariant,
+                    //        CurrentStock = newArrival.CurrentStock,
+                    //        IsInventoryItem = newArrival.IsInventoryItem > 0 ? true : false
+                    //    });
+                    //}
+
+
                     foreach (var popular in itemslist.OrderByDescending(c => c.LastUpdatedDate).Take(7).OrderBy(c => Guid.NewGuid()).ToList())
                     {
                         lstIM = new List<string>();
@@ -266,7 +297,9 @@ namespace BAL.Repositories
                 rsp.Categories = CategoryLst;
                 rsp.FeaturedProducts = lstFeatured;
                 rsp.PopularProducts = lstPopular;
-                rsp.NewArrival = lstNewArrival;
+                //rsp.NewArrival = lstNewArrival;
+
+               
                 rsp.status = 1;
                 rsp.description = "Success";
 
