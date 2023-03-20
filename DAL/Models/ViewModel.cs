@@ -57,8 +57,8 @@ namespace DAL.Models
         public double? Discount { get; set; }
         public double? MinOrderAmount { get; set; }
         public string DeliveryCharges { get; set; }
-        
-         
+
+
 
         public List<CouponVM> Coupons = new List<CouponVM>();
 
@@ -107,7 +107,7 @@ namespace DAL.Models
 
         public WebSalesBLL FlashSale { get; set; }
 
-        public  WebSalesBLL Clearance { get; set; }
+        public WebSalesBLL Clearance { get; set; }
 
         public WebSalesBLL NewArrival { get; set; }
     }
@@ -232,7 +232,7 @@ namespace DAL.Models
         public bool? IsFeatured { get; set; }
         public List<ModifierBLL> Modifiers { get; set; }
         public List<VariantsBLL> Variants { get; set; }
- 
+
     }
     public class FeaturedBLL
     {
@@ -401,7 +401,7 @@ namespace DAL.Models
         public string Token { get; set; }
         public Nullable<int> LocationID { get; set; }
         public Nullable<int> StatusID { get; set; }
-        public int? Device { get; set; }               
+        public int? Device { get; set; }
     }
     public class OrdersBLL
     {
@@ -427,16 +427,16 @@ namespace DAL.Models
 
         public Nullable<double> Points { get; set; }
         public string OrderMode { get; set; }
-        public int UserID{ get; set; }
-        
+        public int UserID { get; set; }
+
         //public string OrderCreatedDT { get; set; }
         public string OrderDate { get; set; }
         public Nullable<int> StatusID { get; set; }
-       
+
         public Nullable<int> DeliverUserID { get; set; }
         public string LastUpdateBy { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
-       
+
         public OrderCheckoutBLL OrderCheckouts { get; set; }
         public OrderCustomerBLL CustomerOrders { get; set; }
         public List<OrderDetailBLL> OrderDetails { get; set; }
@@ -517,8 +517,8 @@ namespace DAL.Models
     {
         public int CustomerOrderID { get; set; }
         public string CustomerName { get; set; }
-        public string Email{ get; set; }
-        public string Address{ get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
         public string Description { get; set; }
         public string Mobile { get; set; }
         public string Longitude { get; set; }
@@ -593,6 +593,15 @@ namespace DAL.Models
         public bool? IsVATApplied { get; set; }
         public bool? IsFeatured { get; set; }
         public bool? IsStockOut { get; set; }
+        public List<ModifierBLL> Modifiers { get; set; }
+        public List<VariantsBLL> Variants { get; set; }
+        public List<string> ItemImagesBLL { get; set; }
     }
+    public class ItemImagesBLL
+    {
+        public Nullable<int> WebCustomizedSaleID { get; set; }
+        public string ItemImages { get; set; }
+        public int ItemID { get; set; }
 
+    }
 }

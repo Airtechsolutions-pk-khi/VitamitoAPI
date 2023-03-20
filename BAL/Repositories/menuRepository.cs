@@ -29,7 +29,7 @@ namespace BAL.Repositories
         {
             DBContext = contextDB;
         }
-        public RspMenu GetMenu(int locationID,int UserID)
+        public RspMenu GetMenu(int locationID, int UserID)
         {
             var CategoryLst = new List<CategoryBLL>();
             var ItemLst = new List<ItemBLL>();
@@ -50,7 +50,7 @@ namespace BAL.Repositories
                 var modifierlist = DBContext.sp_GetModifiersForItem_menu(UserID).ToList();
                 var variantlist = DBContext.sp_GetVariantsForItem_menu(UserID).ToList();
 
-                
+
 
 
                 if (catlist != null && catlist.Count() > 0)
@@ -64,7 +64,7 @@ namespace BAL.Repositories
 
 
                         lstFeatured.Add(new FeaturedBLL
-                        {                          
+                        {
                             ID = featured.ID,
                             Name = featured.Name,
                             Description = featured.Description,
@@ -95,24 +95,39 @@ namespace BAL.Repositories
                         DataSet _ds;
                         SqlParameter[] p = new SqlParameter[1];
                         p[0] = new SqlParameter("@LocationID", locationID);
-                        _ds = (new DBHelper().GetDatasetFromSP)("sp_GetSelectedFlashItem", p);
+                        _ds = (new DBHelper().GetDatasetFromSP)("sp_GetSelectedFlashItem_API", p);
 
-                        
+
                         var _dt1 = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[0])).ToObject<List<WebSalesBLL>>().ToList();
                         var _dt2 = _ds.Tables[1] == null ? new List<WebSalesDetailBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[1])).ToObject<List<WebSalesDetailBLL>>().ToList();
+                        var _dt3 = _ds.Tables[2] == null ? new List<ItemImagesBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[2])).ToObject<List<ItemImagesBLL>>().ToList();
+
+                        
 
                         foreach (var item in _dt1)
                         {
+                            
                             item.WebSaleDetails = _dt2.Where(x => x.WebCustomizedSaleID == item.WebCustomisedSaleID).ToList();
+                            
+
+                            foreach (var item1 in item.WebSaleDetails)
+                            {
+                                item1.Image = item1.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + item1.Image;
+                                var lstimage = _dt3.Where(x => x.ItemID == item1.ItemID).ToList();
+                                foreach (var _i in lstimage)
+                                {
+                                    _i.ItemImages = _i.ItemImages == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + _i.ItemImages;
+                                }
+                                item1.ItemImages = lstimage.Select(x => x.ItemImages).ToArray();
+                            }
                         }
-                        
                         rsp.FlashSale = _dt1.Where(x => x.Type == "flash").FirstOrDefault();
                         rsp.NewArrival = _dt1.Where(x => x.Type == "newarrival").FirstOrDefault();
                         rsp.Clearance = _dt1.Where(x => x.Type == "clearance").FirstOrDefault();
 
 
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     { }
 
 
@@ -171,7 +186,7 @@ namespace BAL.Repositories
                             Price = popular.Price,
                             NewPrice = popular.NewPrice,
                             //DiscountPercent = DiscountPercent,
-                            Cost = popular.Cost,                           
+                            Cost = popular.Cost,
                             ItemImages = lstIM.ToArray(),
                             DisplayOrder = popular.DisplayOrder,
                             IsFeatured = false,
@@ -228,22 +243,22 @@ namespace BAL.Repositories
                                     });
                                 }
 
-                                
 
-                               
+
+
 
                                 lstIM = new List<string>();
-                                lstIM.Add(item.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + item.Image) ;
+                                lstIM.Add(item.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + item.Image);
 
                                 var random = new Random();
-                                var randomIF = new List<string> { "true","false"};
+                                var randomIF = new List<string> { "true", "false" };
 
                                 var dis = (item.NewPrice / item.Price) * 100;
                                 var per = 100 - dis;
                                 var DiscountPercent = per;
                                 ItemLst.Add(new ItemBLL
                                 {
-                                    
+
                                     ID = item.ID,
                                     Name = item.Name,
                                     Description = item.Description,
@@ -259,12 +274,12 @@ namespace BAL.Repositories
                                     DiscountPercent = DiscountPercent,
                                     Cost = item.Cost,
                                     Modifiers = lstModifier,
-                                    Variants = lstVariant,                                   
-                                    ItemImages=lstIM.ToArray(),
-                                    DisplayOrder=item.DisplayOrder,
-                                    IsFeatured= false,
+                                    Variants = lstVariant,
+                                    ItemImages = lstIM.ToArray(),
+                                    DisplayOrder = item.DisplayOrder,
+                                    IsFeatured = false,
                                     CurrentStock = item.CurrentStock,
-                                    IsInventoryItem=item.IsInventoryItem>0?true:false
+                                    IsInventoryItem = item.IsInventoryItem > 0 ? true : false
                                 });
                             }
                             SubCategoryLst.Add(new SubCategoryBLL
@@ -299,7 +314,7 @@ namespace BAL.Repositories
                 rsp.PopularProducts = lstPopular;
                 //rsp.NewArrival = lstNewArrival;
 
-               
+
                 rsp.status = 1;
                 rsp.description = "Success";
 
