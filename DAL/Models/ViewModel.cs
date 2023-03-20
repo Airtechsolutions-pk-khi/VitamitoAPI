@@ -592,10 +592,10 @@ namespace DAL.Models
         public bool? HasVariant { get; set; }
         public bool? IsVATApplied { get; set; }
         public bool? IsFeatured { get; set; }
-        public bool? IsStockOut { get; set; }
-        public List<ModifierBLL> Modifiers { get; set; }
-        public List<VariantsBLL> Variants { get; set; }
+        public bool? IsStockOut { get; set; }       
         public List<string> ItemImagesBLL { get; set; }
+        public string[] Modifiers { get; set; }
+        public string[] Variants { get; set; }
     }
     public class ItemImagesBLL
     {

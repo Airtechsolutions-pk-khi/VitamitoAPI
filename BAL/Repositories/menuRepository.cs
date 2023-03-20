@@ -119,7 +119,12 @@ namespace BAL.Repositories
                                     _i.ItemImages = _i.ItemImages == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + _i.ItemImages;
                                 }
                                 item1.ItemImages = lstimage.Select(x => x.ItemImages).ToArray();
+                                 
+                                item1.Modifiers = new string[] { };
+                                item1.Variants = new string[] { };
                             }
+                            
+                           
                         }
                         rsp.FlashSale = _dt1.Where(x => x.Type == "flash").FirstOrDefault();
                         rsp.NewArrival = _dt1.Where(x => x.Type == "newarrival").FirstOrDefault();
