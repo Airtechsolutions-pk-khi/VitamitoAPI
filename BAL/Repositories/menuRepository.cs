@@ -93,16 +93,18 @@ namespace BAL.Repositories
                     try
                     {
                         DataSet _ds;
-                        SqlParameter[] p = new SqlParameter[1];
+                        SqlParameter[] p = new SqlParameter[2];
                         p[0] = new SqlParameter("@LocationID", locationID);
+                        p[1] = new SqlParameter("@UserID", UserID);
                         _ds = (new DBHelper().GetDatasetFromSP)("sp_GetSelectedFlashItem_API", p);
 
 
                         var _dt1 = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[0])).ToObject<List<WebSalesBLL>>().ToList();
                         var _dt2 = _ds.Tables[1] == null ? new List<WebSalesDetailBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[1])).ToObject<List<WebSalesDetailBLL>>().ToList();
                         var _dt3 = _ds.Tables[2] == null ? new List<ItemImagesBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[2])).ToObject<List<ItemImagesBLL>>().ToList();
+                        var _dt4 = _ds.Tables[3] == null ? new List<ModifierBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[3])).ToObject<List<ModifierBLL>>().ToList();
+                        var _dt5 = _ds.Tables[4] == null ? new List<VariantsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[4])).ToObject<List<VariantsBLL>>().ToList();
 
-                        
 
                         foreach (var item in _dt1)
                         {
@@ -119,9 +121,14 @@ namespace BAL.Repositories
                                     _i.ItemImages = _i.ItemImages == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + _i.ItemImages;
                                 }
                                 item1.ItemImages = lstimage.Select(x => x.ItemImages).ToArray();
-                                 
-                                item1.Modifiers = new string[] { };
-                                item1.Variants = new string[] { };
+
+                                //item1.Modifiers = new string[] { };
+                                //item1.Variants = new string[] { };
+                                lstModifier = _dt4.Where(x => x.ID == item1.ItemID).ToList();
+                                lstVariant = _dt5.Where(x => x.ID == item1.ItemID).ToList();
+
+                                item1.Modifiers = lstModifier;
+                                item1.Variants = lstVariant;
                             }
                             
                            
@@ -134,42 +141,7 @@ namespace BAL.Repositories
                     }
                     catch (Exception ex)
                     { }
-
-
-                    //lstNewArrival = new List<NewArrivalBLL>();
-                    //foreach (var newArrival in itemslist.OrderByDescending(c => c.LastUpdatedDate).Take(7).OrderBy(c => Guid.NewGuid()).ToList())
-                    //{
-                    //    lstIM = new List<string>();
-                    //    lstIM.Add(newArrival.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + newArrival.Image);
-
-
-                    //    lstNewArrival.Add(new NewArrivalBLL
-                    //    {
-                    //        ID = newArrival.ID,
-                    //        Name = newArrival.Name,
-                    //        Description = newArrival.Description,
-                    //        Image = newArrival.Image == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/defaultimg.jpg" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + newArrival.Image,
-                    //        ItemType = newArrival.ItemType,
-                    //        SubCategoryID = newArrival.SubCategoryID,
-                    //        NameOnReceipt = newArrival.NameOnReceipt,
-                    //        StatusID = newArrival.StatusID,
-                    //        Barcode = newArrival.Barcode,
-                    //        SKU = newArrival.SKU,
-                    //        Price = newArrival.Price,
-                    //        NewPrice = newArrival.NewPrice,
-                    //        //DiscountPercent = DiscountPercent,
-                    //        Cost = newArrival.Cost,
-                    //        ItemImages = lstIM.ToArray(),
-                    //        DisplayOrder = newArrival.DisplayOrder,
-                    //        IsFeatured = false,
-                    //        Modifiers = lstModifier,
-                    //        Variants = lstVariant,
-                    //        CurrentStock = newArrival.CurrentStock,
-                    //        IsInventoryItem = newArrival.IsInventoryItem > 0 ? true : false
-                    //    });
-                    //}
-
-
+ 
                     foreach (var popular in itemslist.OrderByDescending(c => c.LastUpdatedDate).Take(7).OrderBy(c => Guid.NewGuid()).ToList())
                     {
                         lstIM = new List<string>();

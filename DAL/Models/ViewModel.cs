@@ -190,7 +190,9 @@ namespace DAL.Models
 
         public int ID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Image { get; set; }
         public Nullable<int> StatusID { get; set; }
         public Nullable<int> LocationID { get; set; }
@@ -203,7 +205,9 @@ namespace DAL.Models
         public Nullable<int> CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Image { get; set; }
         public Nullable<int> StatusID { get; set; }
 
@@ -214,8 +218,10 @@ namespace DAL.Models
         public int ID { get; set; }
         public Nullable<int> SubCategoryID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string NameOnReceipt { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Image { get; set; }
         public string Barcode { get; set; }
         public string SKU { get; set; }
@@ -239,8 +245,10 @@ namespace DAL.Models
         public int ID { get; set; }
         public Nullable<int> SubCategoryID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string NameOnReceipt { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Image { get; set; }
         public string Barcode { get; set; }
         public string SKU { get; set; }
@@ -287,8 +295,10 @@ namespace DAL.Models
         public int ID { get; set; }
         public Nullable<int> SubCategoryID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string NameOnReceipt { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Image { get; set; }
         public string Barcode { get; set; }
         public string SKU { get; set; }
@@ -328,7 +338,7 @@ namespace DAL.Models
     public class ModifierBLL
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; }        
         public string ArabicName { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
@@ -593,9 +603,14 @@ namespace DAL.Models
         public bool? IsVATApplied { get; set; }
         public bool? IsFeatured { get; set; }
         public bool? IsStockOut { get; set; }       
-        public List<string> ItemImagesBLL { get; set; }
-        public string[] Modifiers { get; set; }
-        public string[] Variants { get; set; }
+        public List<string> ItemImagesBLL { get; set; }        
+        public double? CurrentStock { get; set; }
+        public bool? IsInventoryItem { get; set; }
+
+        //public string[] Modifiers { get; set; }
+        //public string[] Variants { get; set; }
+        public List<ModifierBLL> Modifiers { get; set; }
+        public List<VariantsBLL> Variants { get; set; }
     }
     public class ItemImagesBLL
     {
