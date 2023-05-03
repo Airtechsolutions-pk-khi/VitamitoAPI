@@ -16,7 +16,9 @@ namespace DAL.DBEntities
         public int ID { get; set; }
         public Nullable<int> LocationID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Image { get; set; }
         public int DisplayOrder { get; set; }
         public Nullable<bool> SortByAlpha { get; set; }

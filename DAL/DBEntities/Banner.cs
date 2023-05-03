@@ -29,6 +29,7 @@ namespace DAL.DBEntities
         public string Description { get; set; }
         public string ButtonURL { get; set; }
         public Nullable<int> LocationID { get; set; }
+        public string ArabicTitle { get; set; }
     
         public virtual Location Location { get; set; }
     }

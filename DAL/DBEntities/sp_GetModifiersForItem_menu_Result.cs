@@ -29,5 +29,6 @@ namespace DAL.DBEntities
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public Nullable<int> LastUpdatedBy { get; set; }
         public Nullable<int> UserID { get; set; }
+        public string Image { get; set; }
     }
 }

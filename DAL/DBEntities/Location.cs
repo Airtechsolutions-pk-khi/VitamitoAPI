@@ -17,7 +17,6 @@ namespace DAL.DBEntities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Location()
         {
-            this.Categories = new HashSet<Category>();
             this.Companies = new HashSet<Company>();
             this.DealsHeaders = new HashSet<DealsHeader>();
             this.Floors = new HashSet<Floor>();
@@ -32,6 +31,7 @@ namespace DAL.DBEntities
             this.Suppliers = new HashSet<Supplier>();
             this.PushTokens = new HashSet<PushToken>();
             this.Banners = new HashSet<Banner>();
+            this.Categories = new HashSet<Category>();
         }
     
         public int ID { get; set; }
@@ -72,8 +72,6 @@ namespace DAL.DBEntities
         public string FooterNotes { get; set; }
         public string Passcode { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
         public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Company> Companies { get; set; }
@@ -105,5 +103,7 @@ namespace DAL.DBEntities
         public virtual ICollection<PushToken> PushTokens { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Banner> Banners { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

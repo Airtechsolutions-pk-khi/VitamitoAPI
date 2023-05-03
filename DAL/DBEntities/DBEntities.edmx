@@ -11,6 +11,7 @@
           </Key>
           <Property Name="BannerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar(max)" />
+          <Property Name="ArabicTitle" Type="varchar(max)" />
           <Property Name="Image" Type="varchar(max)" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="PlatformType" Type="nvarchar" MaxLength="50" />
@@ -40,7 +41,9 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LocationID" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="ArabicName" Type="nvarchar" MaxLength="30" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="ArabicDescription" Type="nvarchar" MaxLength="100" />
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="DisplayOrder" Type="int" Nullable="false" />
           <Property Name="SortByAlpha" Type="bit" />
@@ -379,8 +382,10 @@
           <Property Name="SubCategoryID" Type="int" />
           <Property Name="UnitID" Type="int" />
           <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="ArabicName" Type="nvarchar(max)" />
           <Property Name="NameOnReceipt" Type="nvarchar(max)" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ArabicDescription" Type="nvarchar(max)" />
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="Barcode" Type="nvarchar" MaxLength="100" />
           <Property Name="SKU" Type="nvarchar" MaxLength="50" />
@@ -708,7 +713,7 @@
           <Property Name="ItemId" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" />
           <Property Name="UnitPrice" Type="float" />
-          <Property Name="RequestedQty" Type="int" />
+          <Property Name="RequestedQty" Type="float" />
           <Property Name="Remarks" Type="varchar(max)" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
           <Property Name="LastUpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
@@ -774,6 +779,7 @@
           <Property Name="TaxName" Type="nvarchar" MaxLength="10" />
           <Property Name="IsCustomerRequired" Type="bit" />
           <Property Name="IsCentralizedCustomer" Type="bit" />
+          <Property Name="IsCashierOrders" Type="bit" />
         </EntityType>
         <EntityType Name="Reveiws">
           <Key>
@@ -865,7 +871,9 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryID" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="ArabicName" Type="nvarchar" MaxLength="500" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="ArabicDescription" Type="nvarchar" MaxLength="500" />
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="DisplayOrder" Type="int" />
           <Property Name="SortByAlpha" Type="bit" />
@@ -1081,6 +1089,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="150" />
           <Property Name="ArabicName" Type="nvarchar" MaxLength="150" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ArabicDescription" Type="nvarchar(max)" />
           <Property Name="Type" Type="nvarchar" MaxLength="150" />
           <Property Name="Barcode" Type="nvarchar" MaxLength="150" />
           <Property Name="SKU" Type="nvarchar" MaxLength="150" />
@@ -3169,9 +3178,6 @@
           </FunctionImport>
           <FunctionImport Name="sp_getallusers" ReturnType="Collection(db_a74425_premiumposModel.sp_getallusers_Result)" />
           <FunctionImport Name="sp_GetBanners" ReturnType="Collection(db_a74425_premiumposModel.sp_GetBanners_Result)" />
-          <FunctionImport Name="sp_GetCategory_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetCategory_menu_Result)">
-          <Parameter Name="LocationID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="sp_GetCompany" ReturnType="Collection(db_a74425_premiumposModel.sp_GetCompany_Result)">
           <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -3222,9 +3228,6 @@
           <FunctionImport Name="sp_GetModifiers_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetModifiers_menu_Result)">
           <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_GetModifiersForItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetModifiersForItem_menu_Result)">
-          <Parameter Name="UserID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="sp_GetReceiptInfo" ReturnType="Collection(db_a74425_premiumposModel.sp_GetReceiptInfo_Result)">
             <Parameter Name="OrderID" Mode="In" Type="Int32" />
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
@@ -3238,9 +3241,6 @@
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
             <Parameter Name="ItemIDs" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_GetSubCategory_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetSubCategory_menu_Result)">
-          <Parameter Name="LocationID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="sp_GetSubCategoryID_admin" ReturnType="Collection(db_a74425_premiumposModel.sp_GetSubCategoryID_admin_Result)">
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
             <Parameter Name="SubCategoryID" Mode="In" Type="Int32" />
@@ -3250,9 +3250,6 @@
             <Parameter Name="FloorID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetVariants_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetVariants_menu_Result)">
-          <Parameter Name="UserID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_GetVariantsForItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetVariantsForItem_menu_Result)">
           <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertItemsMapping" ReturnType="Collection(db_a74425_premiumposModel.sp_InsertItemsMapping_Result)">
@@ -3598,7 +3595,6 @@
             <Parameter Name="Contact" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="CardTypes" EntityType="db_a74425_premiumposModel.CardType" />
-          <EntitySet Name="Categories" EntityType="db_a74425_premiumposModel.Category" />
           <EntitySet Name="Cities" EntityType="db_a74425_premiumposModel.City" />
           <EntitySet Name="Companies" EntityType="db_a74425_premiumposModel.Company" />
           <EntitySet Name="Countries" EntityType="db_a74425_premiumposModel.Country" />
@@ -3622,7 +3618,6 @@
           <EntitySet Name="ItemModiferMappings" EntityType="db_a74425_premiumposModel.ItemModiferMapping" />
           <EntitySet Name="ItemVariants" EntityType="db_a74425_premiumposModel.ItemVariant" />
           <EntitySet Name="Locations" EntityType="db_a74425_premiumposModel.Location" />
-          <EntitySet Name="Modifiers" EntityType="db_a74425_premiumposModel.Modifier" />
           <EntitySet Name="Orders" EntityType="db_a74425_premiumposModel.Order" />
           <EntitySet Name="OrderCheckouts" EntityType="db_a74425_premiumposModel.OrderCheckout" />
           <EntitySet Name="OrderDealDetails" EntityType="db_a74425_premiumposModel.OrderDealDetail" />
@@ -3640,7 +3635,6 @@
           <EntitySet Name="Stocks" EntityType="db_a74425_premiumposModel.Stock" />
           <EntitySet Name="StockStores" EntityType="db_a74425_premiumposModel.StockStore" />
           <EntitySet Name="Stores" EntityType="db_a74425_premiumposModel.Store" />
-          <EntitySet Name="SubCategories" EntityType="db_a74425_premiumposModel.SubCategory" />
           <EntitySet Name="SubUsers" EntityType="db_a74425_premiumposModel.SubUser" />
           <EntitySet Name="Suppliers" EntityType="db_a74425_premiumposModel.Supplier" />
           <EntitySet Name="sysdiagrams" EntityType="db_a74425_premiumposModel.sysdiagram" />
@@ -3651,15 +3645,6 @@
           <EntitySet Name="Units" EntityType="db_a74425_premiumposModel.Unit" />
           <EntitySet Name="Users" EntityType="db_a74425_premiumposModel.User" />
           <EntitySet Name="UserPaymentInfoes" EntityType="db_a74425_premiumposModel.UserPaymentInfo" />
-          <EntitySet Name="Variants" EntityType="db_a74425_premiumposModel.Variant" />
-          <AssociationSet Name="FK_Category_Location" Association="db_a74425_premiumposModel.FK_Category_Location">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="Category" EntitySet="Categories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SubCategory_Category" Association="db_a74425_premiumposModel.FK_SubCategory_Category">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="SubCategory" EntitySet="SubCategories" />
-          </AssociationSet>
           <AssociationSet Name="FK_City_Country" Association="db_a74425_premiumposModel.FK_City_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="City" EntitySet="Cities" />
@@ -3796,18 +3781,6 @@
             <End Role="IssueStock" EntitySet="IssueStocks" />
             <End Role="IssueStockDetail" EntitySet="IssueStockDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_ItemModiferMapping_Modifiers" Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Modifiers">
-            <End Role="Modifier" EntitySet="Modifiers" />
-            <End Role="ItemModiferMapping" EntitySet="ItemModiferMappings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemModiferMapping_Variant" Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Variant">
-            <End Role="Variant" EntitySet="Variants" />
-            <End Role="ItemModiferMapping" EntitySet="ItemModiferMappings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemVariant_Variant" Association="db_a74425_premiumposModel.FK_ItemVariant_Variant">
-            <End Role="Variant" EntitySet="Variants" />
-            <End Role="ItemVariant" EntitySet="ItemVariants" />
-          </AssociationSet>
           <AssociationSet Name="FK_Location_USer" Association="db_a74425_premiumposModel.FK_Location_USer">
             <End Role="User" EntitySet="Users" />
             <End Role="Location" EntitySet="Locations" />
@@ -3844,14 +3817,6 @@
             <End Role="Location" EntitySet="Locations" />
             <End Role="Supplier" EntitySet="Suppliers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Modifiers_User" Association="db_a74425_premiumposModel.FK_Modifiers_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Modifier" EntitySet="Modifiers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderModifierDetail_Modifiers" Association="db_a74425_premiumposModel.FK_OrderModifierDetail_Modifiers">
-            <End Role="Modifier" EntitySet="Modifiers" />
-            <End Role="OrderModifierDetail" EntitySet="OrderModifierDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderCheckout_Order" Association="db_a74425_premiumposModel.FK_OrderCheckout_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderCheckout" EntitySet="OrderCheckouts" />
@@ -3874,10 +3839,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_OrderModifierDetail_OrderDetail" Association="db_a74425_premiumposModel.FK_OrderModifierDetail_OrderDetail">
             <End Role="OrderDetail" EntitySet="OrderDetails" />
-            <End Role="OrderModifierDetail" EntitySet="OrderModifierDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderModifierDetail_Variant" Association="db_a74425_premiumposModel.FK_OrderModifierDetail_Variant">
-            <End Role="Variant" EntitySet="Variants" />
             <End Role="OrderModifierDetail" EntitySet="OrderModifierDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_PurchaseOrder_Store" Association="db_a74425_premiumposModel.FK_PurchaseOrder_Store">
@@ -3924,10 +3885,6 @@
             <End Role="User" EntitySet="Users" />
             <End Role="SubUser" EntitySet="SubUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Variant_User" Association="db_a74425_premiumposModel.FK_Variant_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Variant" EntitySet="Variants" />
-          </AssociationSet>
           <EntitySet Name="PushTokens" EntityType="db_a74425_premiumposModel.PushToken" />
           <AssociationSet Name="FK_PushToken_Location" Association="db_a74425_premiumposModel.FK_PushToken_Location">
             <End Role="Location" EntitySet="Locations" />
@@ -3938,7 +3895,23 @@
             <End Role="Location" EntitySet="Locations" />
             <End Role="Banner" EntitySet="Banners" />
           </AssociationSet>
+          <FunctionImport Name="sp_GetSelectedFlashItem" ReturnType="Collection(db_a74425_premiumposModel.sp_GetSelectedFlashItem_Result)">
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Categories" EntityType="db_a74425_premiumposModel.Category" />
+          <AssociationSet Name="FK_Category_Location" Association="db_a74425_premiumposModel.FK_Category_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetCategory_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetCategory_menu_Result)">
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
           <EntitySet Name="Items" EntityType="db_a74425_premiumposModel.Item" />
+          <EntitySet Name="SubCategories" EntityType="db_a74425_premiumposModel.SubCategory" />
+          <AssociationSet Name="FK_SubCategory_Category" Association="db_a74425_premiumposModel.FK_SubCategory_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="SubCategory" EntitySet="SubCategories" />
+          </AssociationSet>
           <AssociationSet Name="FK_CustomerWishList_Item" Association="db_a74425_premiumposModel.FK_CustomerWishList_Item">
             <End Role="Item" EntitySet="Items" />
             <End Role="CustomerWishList" EntitySet="CustomerWishLists" />
@@ -3994,8 +3967,44 @@
           <FunctionImport Name="sp_GetItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetItem_menu_Result)">
           <Parameter Name="LocationID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_GetSelectedFlashItem" ReturnType="Collection(db_a74425_premiumposModel.sp_GetSelectedFlashItem_Result)">
-            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          <FunctionImport Name="sp_GetSubCategory_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetSubCategory_menu_Result)">
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Modifiers" EntityType="db_a74425_premiumposModel.Modifier" />
+          <AssociationSet Name="FK_ItemModiferMapping_Modifiers" Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Modifiers">
+            <End Role="Modifier" EntitySet="Modifiers" />
+            <End Role="ItemModiferMapping" EntitySet="ItemModiferMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modifiers_User" Association="db_a74425_premiumposModel.FK_Modifiers_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Modifier" EntitySet="Modifiers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderModifierDetail_Modifiers" Association="db_a74425_premiumposModel.FK_OrderModifierDetail_Modifiers">
+            <End Role="Modifier" EntitySet="Modifiers" />
+            <End Role="OrderModifierDetail" EntitySet="OrderModifierDetails" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetModifiersForItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetModifiersForItem_menu_Result)">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Variants" EntityType="db_a74425_premiumposModel.Variant" />
+          <AssociationSet Name="FK_ItemModiferMapping_Variant" Association="db_a74425_premiumposModel.FK_ItemModiferMapping_Variant">
+            <End Role="Variant" EntitySet="Variants" />
+            <End Role="ItemModiferMapping" EntitySet="ItemModiferMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemVariant_Variant" Association="db_a74425_premiumposModel.FK_ItemVariant_Variant">
+            <End Role="Variant" EntitySet="Variants" />
+            <End Role="ItemVariant" EntitySet="ItemVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderModifierDetail_Variant" Association="db_a74425_premiumposModel.FK_OrderModifierDetail_Variant">
+            <End Role="Variant" EntitySet="Variants" />
+            <End Role="OrderModifierDetail" EntitySet="OrderModifierDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Variant_User" Association="db_a74425_premiumposModel.FK_Variant_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Variant" EntitySet="Variants" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetVariantsForItem_menu" ReturnType="Collection(db_a74425_premiumposModel.sp_GetVariantsForItem_menu_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="ABC_Result">
@@ -4169,20 +4178,6 @@
           <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
           <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="StatusID" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_GetCategory_menu_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="LocationID" Nullable="true" />
-          <Property Type="String" Name="Name" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Image" Nullable="true" />
-          <Property Type="Int32" Name="DisplayOrder" Nullable="false" />
-          <Property Type="Boolean" Name="SortByAlpha" Nullable="true" />
-          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="StatusID" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
-          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="sp_GetCompany_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -4384,24 +4379,6 @@
           <Property Type="Int32" Name="LastUpdatedBy" Nullable="true" />
           <Property Type="Int32" Name="UserID" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="sp_GetModifiersForItem_menu_Result">
-          <Property Type="Int32" Name="ItemID" Nullable="true" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="ArabicName" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Description" Nullable="true" />
-          <Property Type="String" Name="Type" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Barcode" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="SKU" Nullable="true" MaxLength="150" />
-          <Property Type="Decimal" Name="Price" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Int32" Name="StatusID" Nullable="true" />
-          <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
-          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="LastUpdatedBy" Nullable="true" />
-          <Property Type="Int32" Name="UserID" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="sp_GetReceiptInfo_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="Int32" Name="CustomerID" Nullable="true" />
@@ -4515,20 +4492,6 @@
           <Property Type="Int32" Name="PurshaseOrderID" Nullable="true" />
           <Property Type="String" Name="PONum" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="sp_GetSubCategory_menu_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="CategoryID" Nullable="true" />
-          <Property Type="String" Name="Name" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Image" Nullable="true" />
-          <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
-          <Property Type="Boolean" Name="SortByAlpha" Nullable="true" />
-          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="StatusID" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
-          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="sp_GetSubCategoryID_admin_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="Int32" Name="CategoryID" Nullable="true" />
@@ -4558,24 +4521,6 @@
           <Property Type="String" Name="FloorName" Nullable="true" MaxLength="150" />
         </ComplexType>
         <ComplexType Name="sp_GetVariants_menu_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="ArabicName" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Description" Nullable="true" />
-          <Property Type="String" Name="Type" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Barcode" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="SKU" Nullable="true" MaxLength="150" />
-          <Property Type="Decimal" Name="Price" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Int32" Name="StatusID" Nullable="true" />
-          <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
-          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="LastUpdatedBy" Nullable="true" />
-          <Property Type="Int32" Name="UserID" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_GetVariantsForItem_menu_Result">
-          <Property Type="Int32" Name="ItemID" Nullable="true" />
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="ArabicName" Nullable="true" MaxLength="150" />
@@ -5098,25 +5043,6 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LocationID" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
-          <Property Name="SortByAlpha" Type="Boolean" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="StatusID" Type="Int32" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_Category_Location" FromRole="Category" ToRole="Location" />
-          <NavigationProperty Name="SubCategories" Relationship="db_a74425_premiumposModel.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
-        </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="ID" />
@@ -5505,9 +5431,9 @@
           <Property Name="ModifierID" Type="Int32" />
           <Property Name="VariantID" Type="Int32" />
           <Property Name="Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Item" FromRole="ItemModiferMapping" ToRole="Item" />
           <NavigationProperty Name="Modifier" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Modifiers" FromRole="ItemModiferMapping" ToRole="Modifier" />
           <NavigationProperty Name="Variant" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Variant" FromRole="ItemModiferMapping" ToRole="Variant" />
-          <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Item" FromRole="ItemModiferMapping" ToRole="Item" />
         </EntityType>
         <EntityType Name="ItemVariant">
           <Key>
@@ -5530,8 +5456,8 @@
           <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="Int32" />
           <Property Name="LocationID" Type="Int32" />
-          <NavigationProperty Name="Variant" Relationship="db_a74425_premiumposModel.FK_ItemVariant_Variant" FromRole="ItemVariant" ToRole="Variant" />
           <NavigationProperty Name="Item" Relationship="db_a74425_premiumposModel.FK_ItemVariant_Item" FromRole="ItemVariant" ToRole="Item" />
+          <NavigationProperty Name="Variant" Relationship="db_a74425_premiumposModel.FK_ItemVariant_Variant" FromRole="ItemVariant" ToRole="Variant" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -5574,7 +5500,6 @@
           <Property Name="CRN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FooterNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Passcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Categories" Relationship="db_a74425_premiumposModel.FK_Category_Location" FromRole="Location" ToRole="Category" />
           <NavigationProperty Name="City" Relationship="db_a74425_premiumposModel.FK_Location_City" FromRole="Location" ToRole="City" />
           <NavigationProperty Name="Companies" Relationship="db_a74425_premiumposModel.FK_Company_Location" FromRole="Location" ToRole="Company" />
           <NavigationProperty Name="Country" Relationship="db_a74425_premiumposModel.FK_Location_Location" FromRole="Location" ToRole="Country" />
@@ -5592,30 +5517,7 @@
           <NavigationProperty Name="Suppliers" Relationship="db_a74425_premiumposModel.FK_Supplier_Location" FromRole="Location" ToRole="Supplier" />
           <NavigationProperty Name="PushTokens" Relationship="db_a74425_premiumposModel.FK_PushToken_Location" FromRole="Location" ToRole="PushToken" />
           <NavigationProperty Name="Banners" Relationship="db_a74425_premiumposModel.FK__Banner__Location__44952D46" FromRole="Location" ToRole="Banner" />
-        </EntityType>
-        <EntityType Name="Modifier">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ArabicName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Barcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="SKU" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StatusID" Type="Int32" />
-          <Property Name="DisplayOrder" Type="Int32" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="Int32" />
-          <Property Name="UserID" Type="Int32" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ItemModiferMappings" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Modifiers" FromRole="Modifier" ToRole="ItemModiferMapping" />
-          <NavigationProperty Name="User" Relationship="db_a74425_premiumposModel.FK_Modifiers_User" FromRole="Modifier" ToRole="User" />
-          <NavigationProperty Name="OrderModifierDetails" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_Modifiers" FromRole="Modifier" ToRole="OrderModifierDetail" />
+          <NavigationProperty Name="Categories" Relationship="db_a74425_premiumposModel.FK_Category_Location" FromRole="Location" ToRole="Category" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -5761,8 +5663,8 @@
           <Property Name="Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Modifier" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_Modifiers" FromRole="OrderModifierDetail" ToRole="Modifier" />
           <NavigationProperty Name="OrderDetail" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_OrderDetail" FromRole="OrderModifierDetail" ToRole="OrderDetail" />
+          <NavigationProperty Name="Modifier" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_Modifiers" FromRole="OrderModifierDetail" ToRole="Modifier" />
           <NavigationProperty Name="Variant" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_Variant" FromRole="OrderModifierDetail" ToRole="Variant" />
         </EntityType>
         <EntityType Name="OrderType">
@@ -5911,6 +5813,7 @@
           <Property Name="TaxName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IsCustomerRequired" Type="Boolean" />
           <Property Name="IsCentralizedCustomer" Type="Boolean" />
+          <Property Name="IsCashierOrders" Type="Boolean" />
         </EntityType>
         <EntityType Name="Reveiw">
           <Key>
@@ -6009,25 +5912,6 @@
           <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_Store_Location" FromRole="Store" ToRole="Location" />
           <NavigationProperty Name="PurchaseOrders" Relationship="db_a74425_premiumposModel.FK_PurchaseOrder_Store" FromRole="Store" ToRole="PurchaseOrder" />
           <NavigationProperty Name="StockStores" Relationship="db_a74425_premiumposModel.FK_StockStore_Store" FromRole="Store" ToRole="StockStore" />
-        </EntityType>
-        <EntityType Name="SubCategory">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryID" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayOrder" Type="Int32" />
-          <Property Name="SortByAlpha" Type="Boolean" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="StatusID" Type="Int32" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Category" Relationship="db_a74425_premiumposModel.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
-          <NavigationProperty Name="Items" Relationship="db_a74425_premiumposModel.FK_Item_SubCategory" FromRole="SubCategory" ToRole="Item" />
         </EntityType>
         <EntityType Name="SubUser">
           <Key>
@@ -6226,11 +6110,11 @@
           <NavigationProperty Name="Customers" Relationship="db_a74425_premiumposModel.FK_Customer_User" FromRole="User" ToRole="Customer" />
           <NavigationProperty Name="IssueStocks" Relationship="db_a74425_premiumposModel.FK_IssueStock_User" FromRole="User" ToRole="IssueStock" />
           <NavigationProperty Name="Locations" Relationship="db_a74425_premiumposModel.FK_Location_USer" FromRole="User" ToRole="Location" />
-          <NavigationProperty Name="Modifiers" Relationship="db_a74425_premiumposModel.FK_Modifiers_User" FromRole="User" ToRole="Modifier" />
           <NavigationProperty Name="PurchaseOrders" Relationship="db_a74425_premiumposModel.FK_PurchaseOrder_User" FromRole="User" ToRole="PurchaseOrder" />
           <NavigationProperty Name="ReceiptPermissions" Relationship="db_a74425_premiumposModel.FK_ReceiptPermissions_User" FromRole="User" ToRole="ReceiptPermission" />
           <NavigationProperty Name="StockStores" Relationship="db_a74425_premiumposModel.FK_StockStore_User" FromRole="User" ToRole="StockStore" />
           <NavigationProperty Name="SubUsers" Relationship="db_a74425_premiumposModel.FK_SubUser_USer" FromRole="User" ToRole="SubUser" />
+          <NavigationProperty Name="Modifiers" Relationship="db_a74425_premiumposModel.FK_Modifiers_User" FromRole="User" ToRole="Modifier" />
           <NavigationProperty Name="Variants" Relationship="db_a74425_premiumposModel.FK_Variant_User" FromRole="User" ToRole="Variant" />
         </EntityType>
         <EntityType Name="UserPaymentInfo">
@@ -6248,54 +6132,6 @@
           <Property Name="LastUpdatedBy" Type="Int32" />
           <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Variant">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ArabicName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Barcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="SKU" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StatusID" Type="Int32" />
-          <Property Name="DisplayOrder" Type="Int32" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="Int32" />
-          <Property Name="UserID" Type="Int32" />
-          <NavigationProperty Name="ItemModiferMappings" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Variant" FromRole="Variant" ToRole="ItemModiferMapping" />
-          <NavigationProperty Name="ItemVariants" Relationship="db_a74425_premiumposModel.FK_ItemVariant_Variant" FromRole="Variant" ToRole="ItemVariant" />
-          <NavigationProperty Name="OrderModifierDetails" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_Variant" FromRole="Variant" ToRole="OrderModifierDetail" />
-          <NavigationProperty Name="User" Relationship="db_a74425_premiumposModel.FK_Variant_User" FromRole="Variant" ToRole="User" />
-        </EntityType>
-        <Association Name="FK_Category_Location">
-          <End Type="db_a74425_premiumposModel.Location" Role="Location" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.Category" Role="Category" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Category">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SubCategory_Category">
-          <End Type="db_a74425_premiumposModel.Category" Role="Category" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.SubCategory" Role="SubCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SubCategory">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_City_Country">
           <End Type="db_a74425_premiumposModel.Country" Role="Country" Multiplicity="0..1" />
           <End Type="db_a74425_premiumposModel.City" Role="City" Multiplicity="*" />
@@ -6704,42 +6540,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ItemModiferMapping_Modifiers">
-          <End Type="db_a74425_premiumposModel.Modifier" Role="Modifier" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.ItemModiferMapping" Role="ItemModiferMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Modifier">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ItemModiferMapping">
-              <PropertyRef Name="ModifierID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ItemModiferMapping_Variant">
-          <End Type="db_a74425_premiumposModel.Variant" Role="Variant" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.ItemModiferMapping" Role="ItemModiferMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Variant">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ItemModiferMapping">
-              <PropertyRef Name="VariantID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ItemVariant_Variant">
-          <End Type="db_a74425_premiumposModel.Variant" Role="Variant" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.ItemVariant" Role="ItemVariant" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Variant">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ItemVariant">
-              <PropertyRef Name="VariantID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Location_USer">
           <End Type="db_a74425_premiumposModel.User" Role="User" Multiplicity="0..1" />
           <End Type="db_a74425_premiumposModel.Location" Role="Location" Multiplicity="*" />
@@ -6848,30 +6648,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Modifiers_User">
-          <End Type="db_a74425_premiumposModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.Modifier" Role="Modifier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Modifier">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderModifierDetail_Modifiers">
-          <End Type="db_a74425_premiumposModel.Modifier" Role="Modifier" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.OrderModifierDetail" Role="OrderModifierDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Modifier">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="OrderModifierDetail">
-              <PropertyRef Name="ModifierID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderCheckout_Order">
           <End Type="db_a74425_premiumposModel.Order" Role="Order" Multiplicity="0..1" />
           <End Type="db_a74425_premiumposModel.OrderCheckout" Role="OrderCheckout" Multiplicity="*" />
@@ -6941,18 +6717,6 @@
             </Principal>
             <Dependent Role="OrderModifierDetail">
               <PropertyRef Name="OrderDetailID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderModifierDetail_Variant">
-          <End Type="db_a74425_premiumposModel.Variant" Role="Variant" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.OrderModifierDetail" Role="OrderModifierDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Variant">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="OrderModifierDetail">
-              <PropertyRef Name="VariantID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7088,18 +6852,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Variant_User">
-          <End Type="db_a74425_premiumposModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="db_a74425_premiumposModel.Variant" Role="Variant" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Variant">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="PushToken">
           <Key>
             <PropertyRef Name="TokenID" />
@@ -7143,6 +6895,7 @@
           <Property Name="ButtonURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LocationID" Type="Int32" />
           <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK__Banner__Location__44952D46" FromRole="Banner" ToRole="Location" />
+          <Property Name="ArabicTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__Banner__Location__44952D46">
           <End Type="db_a74425_premiumposModel.Location" Role="Location" Multiplicity="0..1" />
@@ -7156,6 +6909,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_GetSelectedFlashItem_Result">
+          <Property Type="Int32" Name="WebCustomisedSaleID" Nullable="false" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
+          <Property Name="SortByAlpha" Type="Boolean" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Location" Relationship="db_a74425_premiumposModel.FK_Category_Location" FromRole="Category" ToRole="Location" />
+          <NavigationProperty Name="SubCategories" Relationship="db_a74425_premiumposModel.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+        </EntityType>
+        <Association Name="FK_Category_Location">
+          <End Type="db_a74425_premiumposModel.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.Category" Role="Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetCategory_menu_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ArabicName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ArabicDescription" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Image" Nullable="true" />
+          <Property Type="Int32" Name="DisplayOrder" Nullable="false" />
+          <Property Type="Boolean" Name="SortByAlpha" Nullable="true" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
+        </ComplexType>
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="ID" />
@@ -7164,8 +6977,10 @@
           <Property Name="SubCategoryID" Type="Int32" />
           <Property Name="UnitID" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NameOnReceipt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -7198,6 +7013,39 @@
           <NavigationProperty Name="Reveiws" Relationship="db_a74425_premiumposModel.FK_Reveiws_Item" FromRole="Item" ToRole="Reveiw" />
           <NavigationProperty Name="Stocks" Relationship="db_a74425_premiumposModel.FK_Stock_Item" FromRole="Item" ToRole="Stock" />
         </EntityType>
+        <EntityType Name="SubCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="SortByAlpha" Type="Boolean" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="db_a74425_premiumposModel.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
+          <NavigationProperty Name="Items" Relationship="db_a74425_premiumposModel.FK_Item_SubCategory" FromRole="SubCategory" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK_SubCategory_Category">
+          <End Type="db_a74425_premiumposModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.SubCategory" Role="SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SubCategory">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerWishList_Item">
           <End Type="db_a74425_premiumposModel.Item" Role="Item" Multiplicity="1" />
           <End Type="db_a74425_premiumposModel.CustomerWishList" Role="CustomerWishList" Multiplicity="*" />
@@ -7359,8 +7207,10 @@
           <Property Type="Int32" Name="SubCategoryID" Nullable="true" />
           <Property Type="Int32" Name="UnitID" Nullable="true" />
           <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="ArabicName" Nullable="true" />
           <Property Type="String" Name="NameOnReceipt" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="ArabicDescription" Nullable="true" />
           <Property Type="String" Name="Image" Nullable="true" />
           <Property Type="String" Name="Barcode" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="SKU" Nullable="true" MaxLength="50" />
@@ -7382,16 +7232,192 @@
           <Property Type="Double" Name="CurrentStock" Nullable="false" />
           <Property Type="Int32" Name="IsInventoryItem" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="sp_GetSelectedFlashItem_Result">
-          <Property Type="Int32" Name="WebCustomisedSaleID" Nullable="false" />
-          <Property Type="Int32" Name="LocationID" Nullable="true" />
-          <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+        <ComplexType Name="sp_GetSubCategory_menu_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="CategoryID" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ArabicName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ArabicDescription" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Image" Nullable="true" />
+          <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+          <Property Type="Boolean" Name="SortByAlpha" Nullable="true" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="StatusID" Nullable="true" />
-          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="Modifier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SKU" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ItemModiferMappings" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Modifiers" FromRole="Modifier" ToRole="ItemModiferMapping" />
+          <NavigationProperty Name="User" Relationship="db_a74425_premiumposModel.FK_Modifiers_User" FromRole="Modifier" ToRole="User" />
+          <NavigationProperty Name="OrderModifierDetails" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_Modifiers" FromRole="Modifier" ToRole="OrderModifierDetail" />
+        </EntityType>
+        <Association Name="FK_ItemModiferMapping_Modifiers">
+          <End Type="db_a74425_premiumposModel.Modifier" Role="Modifier" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.ItemModiferMapping" Role="ItemModiferMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modifier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemModiferMapping">
+              <PropertyRef Name="ModifierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modifiers_User">
+          <End Type="db_a74425_premiumposModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.Modifier" Role="Modifier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Modifier">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderModifierDetail_Modifiers">
+          <End Type="db_a74425_premiumposModel.Modifier" Role="Modifier" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.OrderModifierDetail" Role="OrderModifierDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modifier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderModifierDetail">
+              <PropertyRef Name="ModifierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetModifiersForItem_menu_Result">
+          <Property Type="Int32" Name="ItemID" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="ArabicName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Barcode" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="SKU" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+          <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="LastUpdatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Variant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SKU" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="ItemModiferMappings" Relationship="db_a74425_premiumposModel.FK_ItemModiferMapping_Variant" FromRole="Variant" ToRole="ItemModiferMapping" />
+          <NavigationProperty Name="ItemVariants" Relationship="db_a74425_premiumposModel.FK_ItemVariant_Variant" FromRole="Variant" ToRole="ItemVariant" />
+          <NavigationProperty Name="OrderModifierDetails" Relationship="db_a74425_premiumposModel.FK_OrderModifierDetail_Variant" FromRole="Variant" ToRole="OrderModifierDetail" />
+          <NavigationProperty Name="User" Relationship="db_a74425_premiumposModel.FK_Variant_User" FromRole="Variant" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ItemModiferMapping_Variant">
+          <End Type="db_a74425_premiumposModel.Variant" Role="Variant" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.ItemModiferMapping" Role="ItemModiferMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Variant">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemModiferMapping">
+              <PropertyRef Name="VariantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemVariant_Variant">
+          <End Type="db_a74425_premiumposModel.Variant" Role="Variant" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.ItemVariant" Role="ItemVariant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Variant">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemVariant">
+              <PropertyRef Name="VariantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderModifierDetail_Variant">
+          <End Type="db_a74425_premiumposModel.Variant" Role="Variant" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.OrderModifierDetail" Role="OrderModifierDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Variant">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderModifierDetail">
+              <PropertyRef Name="VariantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Variant_User">
+          <End Type="db_a74425_premiumposModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="db_a74425_premiumposModel.Variant" Role="Variant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Variant">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetVariantsForItem_menu_Result">
+          <Property Type="Int32" Name="ItemID" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="ArabicName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="ArabicDescription" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Barcode" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="SKU" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+          <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="LastUpdatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -7588,24 +7614,6 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetCategory_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetCategory_menu">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetCategory_menu_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7862,28 +7870,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetModifiersForItem_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetModifiersForItem_menu">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetModifiersForItem_menu_Result">
-                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-                <ScalarProperty Name="SKU" ColumnName="SKU" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_GetReceiptInfo" FunctionName="db_a74425_premiumposModel.Store.sp_GetReceiptInfo">
             <ResultMapping>
               <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetReceiptInfo_Result">
@@ -8009,24 +7995,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetSubCategory_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetSubCategory_menu">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetSubCategory_menu_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_GetSubCategoryID_admin" FunctionName="db_a74425_premiumposModel.Store.sp_GetSubCategoryID_admin">
             <ResultMapping>
               <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetSubCategoryID_admin_Result">
@@ -8066,28 +8034,6 @@
           <FunctionImportMapping FunctionImportName="sp_GetVariants_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetVariants_menu">
             <ResultMapping>
               <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetVariants_menu_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-                <ScalarProperty Name="SKU" ColumnName="SKU" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetVariantsForItem_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetVariantsForItem_menu">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetVariantsForItem_menu_Result">
-                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
@@ -8744,24 +8690,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="db_a74425_premiumposModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.City">
               <MappingFragment StoreEntitySet="City">
@@ -9189,28 +9117,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Modifiers">
-            <EntityTypeMapping TypeName="db_a74425_premiumposModel.Modifier">
-              <MappingFragment StoreEntitySet="Modifiers">
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="SKU" ColumnName="SKU" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.Order">
               <MappingFragment StoreEntitySet="Order">
@@ -9455,6 +9361,7 @@
           <EntitySetMapping Name="ReceiptPermissions">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.ReceiptPermission">
               <MappingFragment StoreEntitySet="ReceiptPermissions">
+                <ScalarProperty Name="IsCashierOrders" ColumnName="IsCashierOrders" />
                 <ScalarProperty Name="IsCentralizedCustomer" ColumnName="IsCentralizedCustomer" />
                 <ScalarProperty Name="IsCustomerRequired" ColumnName="IsCustomerRequired" />
                 <ScalarProperty Name="TaxName" ColumnName="TaxName" />
@@ -9568,24 +9475,6 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SubCategories">
-            <EntityTypeMapping TypeName="db_a74425_premiumposModel.SubCategory">
-              <MappingFragment StoreEntitySet="SubCategory">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -9798,27 +9687,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Variants">
-            <EntityTypeMapping TypeName="db_a74425_premiumposModel.Variant">
-              <MappingFragment StoreEntitySet="Variant">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="SKU" ColumnName="SKU" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PushTokens">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.PushToken">
               <MappingFragment StoreEntitySet="PushToken">
@@ -9833,6 +9701,7 @@
           <EntitySetMapping Name="Banners">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.Banner">
               <MappingFragment StoreEntitySet="Banner">
+                <ScalarProperty Name="ArabicTitle" ColumnName="ArabicTitle" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="ButtonURL" ColumnName="ButtonURL" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -9851,6 +9720,61 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetSelectedFlashItem" FunctionName="db_a74425_premiumposModel.Store.sp_GetSelectedFlashItem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetSelectedFlashItem_Result">
+                <ScalarProperty Name="WebCustomisedSaleID" ColumnName="WebCustomisedSaleID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="db_a74425_premiumposModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetCategory_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetCategory_menu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetCategory_menu_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="db_a74425_premiumposModel.Item">
               <MappingFragment StoreEntitySet="Item">
@@ -9872,11 +9796,33 @@
                 <ScalarProperty Name="SKU" ColumnName="SKU" />
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="NameOnReceipt" ColumnName="NameOnReceipt" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UnitID" ColumnName="UnitID" />
                 <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategories">
+            <EntityTypeMapping TypeName="db_a74425_premiumposModel.SubCategory">
+              <MappingFragment StoreEntitySet="SubCategory">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -9888,8 +9834,10 @@
                 <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
                 <ScalarProperty Name="UnitID" ColumnName="UnitID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
                 <ScalarProperty Name="NameOnReceipt" ColumnName="NameOnReceipt" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="SKU" ColumnName="SKU" />
@@ -9913,18 +9861,113 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetSelectedFlashItem" FunctionName="db_a74425_premiumposModel.Store.sp_GetSelectedFlashItem">
+          <FunctionImportMapping FunctionImportName="sp_GetSubCategory_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetSubCategory_menu">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetSelectedFlashItem_Result">
-                <ScalarProperty Name="WebCustomisedSaleID" ColumnName="WebCustomisedSaleID" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
+              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetSubCategory_menu_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Modifiers">
+            <EntityTypeMapping TypeName="db_a74425_premiumposModel.Modifier">
+              <MappingFragment StoreEntitySet="Modifiers">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetModifiersForItem_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetModifiersForItem_menu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetModifiersForItem_menu_Result">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Variants">
+            <EntityTypeMapping TypeName="db_a74425_premiumposModel.Variant">
+              <MappingFragment StoreEntitySet="Variant">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetVariantsForItem_menu" FunctionName="db_a74425_premiumposModel.Store.sp_GetVariantsForItem_menu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_a74425_premiumposModel.sp_GetVariantsForItem_menu_Result">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

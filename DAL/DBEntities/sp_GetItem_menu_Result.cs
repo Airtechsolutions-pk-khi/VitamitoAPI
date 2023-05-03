@@ -17,8 +17,10 @@ namespace DAL.DBEntities
         public Nullable<int> SubCategoryID { get; set; }
         public Nullable<int> UnitID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string NameOnReceipt { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Image { get; set; }
         public string Barcode { get; set; }
         public string SKU { get; set; }

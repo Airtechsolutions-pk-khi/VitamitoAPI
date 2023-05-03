@@ -6,6 +6,7 @@
     </Key>
     <Property Name="BannerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="varchar(max)" />
+    <Property Name="ArabicTitle" Type="varchar(max)" />
     <Property Name="Image" Type="varchar(max)" />
     <Property Name="Type" Type="nvarchar" MaxLength="50" />
     <Property Name="PlatformType" Type="nvarchar" MaxLength="50" />
@@ -35,7 +36,9 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="LocationID" Type="int" />
     <Property Name="Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="ArabicName" Type="nvarchar" MaxLength="30" />
     <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="ArabicDescription" Type="nvarchar" MaxLength="100" />
     <Property Name="Image" Type="nvarchar(max)" />
     <Property Name="DisplayOrder" Type="int" Nullable="false" />
     <Property Name="SortByAlpha" Type="bit" />
@@ -374,8 +377,10 @@
     <Property Name="SubCategoryID" Type="int" />
     <Property Name="UnitID" Type="int" />
     <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="ArabicName" Type="nvarchar(max)" />
     <Property Name="NameOnReceipt" Type="nvarchar(max)" />
     <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="ArabicDescription" Type="nvarchar(max)" />
     <Property Name="Image" Type="nvarchar(max)" />
     <Property Name="Barcode" Type="nvarchar" MaxLength="100" />
     <Property Name="SKU" Type="nvarchar" MaxLength="50" />
@@ -703,7 +708,7 @@
     <Property Name="ItemId" Type="int" />
     <Property Name="Name" Type="nvarchar" MaxLength="500" />
     <Property Name="UnitPrice" Type="float" />
-    <Property Name="RequestedQty" Type="int" />
+    <Property Name="RequestedQty" Type="float" />
     <Property Name="Remarks" Type="varchar(max)" />
     <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
     <Property Name="LastUpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
@@ -769,6 +774,7 @@
     <Property Name="TaxName" Type="nvarchar" MaxLength="10" />
     <Property Name="IsCustomerRequired" Type="bit" />
     <Property Name="IsCentralizedCustomer" Type="bit" />
+    <Property Name="IsCashierOrders" Type="bit" />
   </EntityType>
   <EntityType Name="Reveiws">
     <Key>
@@ -860,7 +866,9 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CategoryID" Type="int" />
     <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="ArabicName" Type="nvarchar" MaxLength="500" />
     <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="ArabicDescription" Type="nvarchar" MaxLength="500" />
     <Property Name="Image" Type="nvarchar(max)" />
     <Property Name="DisplayOrder" Type="int" />
     <Property Name="SortByAlpha" Type="bit" />
@@ -1076,6 +1084,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="150" />
     <Property Name="ArabicName" Type="nvarchar" MaxLength="150" />
     <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="ArabicDescription" Type="nvarchar(max)" />
     <Property Name="Type" Type="nvarchar" MaxLength="150" />
     <Property Name="Barcode" Type="nvarchar" MaxLength="150" />
     <Property Name="SKU" Type="nvarchar" MaxLength="150" />

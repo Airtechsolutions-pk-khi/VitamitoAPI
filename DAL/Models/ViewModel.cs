@@ -322,6 +322,7 @@ namespace DAL.Models
         public string Name { get; set; }
         public string ArabicName { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Type { get; set; }
         public string Barcode { get; set; }
         public string SKU { get; set; }
@@ -584,6 +585,9 @@ namespace DAL.Models
         public int SubCategoryID { get; set; }
         public int? UnitID { get; set; }
         public string NameOnReceipt { get; set; }
+
+        public string ArabicName { get; set; }
+        public string ArabicDescription { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
         public string[] ItemImages { get; set; }

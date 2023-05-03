@@ -24,8 +24,8 @@ namespace DAL.DBEntities
         public Nullable<int> StatusID { get; set; }
         public string Name { get; set; }
     
-        public virtual Modifier Modifier { get; set; }
         public virtual OrderDetail OrderDetail { get; set; }
+        public virtual Modifier Modifier { get; set; }
         public virtual Variant Variant { get; set; }
     }
 }

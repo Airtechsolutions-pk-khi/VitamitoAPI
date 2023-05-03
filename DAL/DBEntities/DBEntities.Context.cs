@@ -28,7 +28,6 @@ namespace DAL.DBEntities
         }
     
         public virtual DbSet<CardType> CardTypes { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
@@ -52,7 +51,6 @@ namespace DAL.DBEntities
         public virtual DbSet<ItemModiferMapping> ItemModiferMappings { get; set; }
         public virtual DbSet<ItemVariant> ItemVariants { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
-        public virtual DbSet<Modifier> Modifiers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderCheckout> OrderCheckouts { get; set; }
         public virtual DbSet<OrderDealDetail> OrderDealDetails { get; set; }
@@ -70,7 +68,6 @@ namespace DAL.DBEntities
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<StockStore> StockStores { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
-        public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<SubUser> SubUsers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -81,10 +78,13 @@ namespace DAL.DBEntities
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserPaymentInfo> UserPaymentInfoes { get; set; }
-        public virtual DbSet<Variant> Variants { get; set; }
         public virtual DbSet<PushToken> PushTokens { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<SubCategory> SubCategories { get; set; }
+        public virtual DbSet<Modifier> Modifiers { get; set; }
+        public virtual DbSet<Variant> Variants { get; set; }
     
         [DbFunction("db_a74425_premiumposEntities", "SplitString")]
         public virtual IQueryable<SplitString_Result> SplitString(string input, string character)
@@ -463,15 +463,6 @@ namespace DAL.DBEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetBanners_Result>("sp_GetBanners");
         }
     
-        public virtual ObjectResult<sp_GetCategory_menu_Result> sp_GetCategory_menu(Nullable<int> locationID)
-        {
-            var locationIDParameter = locationID.HasValue ?
-                new ObjectParameter("LocationID", locationID) :
-                new ObjectParameter("LocationID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCategory_menu_Result>("sp_GetCategory_menu", locationIDParameter);
-        }
-    
         public virtual ObjectResult<sp_GetCompany_Result> sp_GetCompany(Nullable<int> userId)
         {
             var userIdParameter = userId.HasValue ?
@@ -634,15 +625,6 @@ namespace DAL.DBEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetModifiers_menu_Result>("sp_GetModifiers_menu", userIDParameter);
         }
     
-        public virtual ObjectResult<sp_GetModifiersForItem_menu_Result> sp_GetModifiersForItem_menu(Nullable<int> userID)
-        {
-            var userIDParameter = userID.HasValue ?
-                new ObjectParameter("UserID", userID) :
-                new ObjectParameter("UserID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetModifiersForItem_menu_Result>("sp_GetModifiersForItem_menu", userIDParameter);
-        }
-    
         public virtual ObjectResult<sp_GetReceiptInfo_Result> sp_GetReceiptInfo(Nullable<int> orderID, Nullable<int> locationID, Nullable<int> userID)
         {
             var orderIDParameter = orderID.HasValue ?
@@ -686,15 +668,6 @@ namespace DAL.DBEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetStockOfMultipleItems_Result>("sp_GetStockOfMultipleItems", locationIDParameter, itemIDsParameter);
         }
     
-        public virtual ObjectResult<sp_GetSubCategory_menu_Result> sp_GetSubCategory_menu(Nullable<int> locationID)
-        {
-            var locationIDParameter = locationID.HasValue ?
-                new ObjectParameter("LocationID", locationID) :
-                new ObjectParameter("LocationID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSubCategory_menu_Result>("sp_GetSubCategory_menu", locationIDParameter);
-        }
-    
         public virtual ObjectResult<sp_GetSubCategoryID_admin_Result> sp_GetSubCategoryID_admin(Nullable<int> locationID, Nullable<int> subCategoryID)
         {
             var locationIDParameter = locationID.HasValue ?
@@ -728,15 +701,6 @@ namespace DAL.DBEntities
                 new ObjectParameter("UserID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetVariants_menu_Result>("sp_GetVariants_menu", userIDParameter);
-        }
-    
-        public virtual ObjectResult<sp_GetVariantsForItem_menu_Result> sp_GetVariantsForItem_menu(Nullable<int> userID)
-        {
-            var userIDParameter = userID.HasValue ?
-                new ObjectParameter("UserID", userID) :
-                new ObjectParameter("UserID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetVariantsForItem_menu_Result>("sp_GetVariantsForItem_menu", userIDParameter);
         }
     
         public virtual ObjectResult<sp_InsertItemsMapping_Result> sp_InsertItemsMapping(Nullable<int> itemID, string iDs, string type)
@@ -1984,6 +1948,24 @@ namespace DAL.DBEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ValidateUser", emailParameter, contactParameter);
         }
     
+        public virtual ObjectResult<sp_GetSelectedFlashItem_Result> sp_GetSelectedFlashItem(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSelectedFlashItem_Result>("sp_GetSelectedFlashItem", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCategory_menu_Result> sp_GetCategory_menu(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCategory_menu_Result>("sp_GetCategory_menu", locationIDParameter);
+        }
+    
         public virtual ObjectResult<sp_GetItem_menu_Result> sp_GetItem_menu(Nullable<int> locationID)
         {
             var locationIDParameter = locationID.HasValue ?
@@ -1993,13 +1975,31 @@ namespace DAL.DBEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetItem_menu_Result>("sp_GetItem_menu", locationIDParameter);
         }
     
-        public virtual ObjectResult<sp_GetSelectedFlashItem_Result> sp_GetSelectedFlashItem(Nullable<int> locationID)
+        public virtual ObjectResult<sp_GetSubCategory_menu_Result> sp_GetSubCategory_menu(Nullable<int> locationID)
         {
             var locationIDParameter = locationID.HasValue ?
                 new ObjectParameter("LocationID", locationID) :
                 new ObjectParameter("LocationID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSelectedFlashItem_Result>("sp_GetSelectedFlashItem", locationIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSubCategory_menu_Result>("sp_GetSubCategory_menu", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetModifiersForItem_menu_Result> sp_GetModifiersForItem_menu(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetModifiersForItem_menu_Result>("sp_GetModifiersForItem_menu", userIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetVariantsForItem_menu_Result> sp_GetVariantsForItem_menu(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetVariantsForItem_menu_Result>("sp_GetVariantsForItem_menu", userIDParameter);
         }
     }
 }

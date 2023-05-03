@@ -40,6 +40,7 @@ namespace DAL.DBEntities
         public string TaxName { get; set; }
         public Nullable<bool> IsCustomerRequired { get; set; }
         public Nullable<bool> IsCentralizedCustomer { get; set; }
+        public Nullable<bool> IsCashierOrders { get; set; }
     
         public virtual User User { get; set; }
     }
