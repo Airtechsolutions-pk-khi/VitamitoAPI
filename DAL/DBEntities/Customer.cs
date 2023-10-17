@@ -21,6 +21,7 @@ namespace DAL.DBEntities
             this.CustomerDetails = new HashSet<CustomerDetail>();
             this.CustomerOrders = new HashSet<CustomerOrder>();
             this.CustomerWishLists = new HashSet<CustomerWishList>();
+            this.LoyalityLogs = new HashSet<LoyalityLog>();
             this.Orders = new HashSet<Order>();
             this.OrderCheckouts = new HashSet<OrderCheckout>();
         }
@@ -60,6 +61,8 @@ namespace DAL.DBEntities
         public virtual ICollection<CustomerOrder> CustomerOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerWishList> CustomerWishLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoyalityLog> LoyalityLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

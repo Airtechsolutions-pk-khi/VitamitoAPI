@@ -555,5 +555,15 @@
             <param name="UserID"></param>
             <returns></returns>
         </member>
+        <member name="T:VitamitoAPI.Controllers.notificationController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:VitamitoAPI.Controllers.notificationController.PushNotification">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>

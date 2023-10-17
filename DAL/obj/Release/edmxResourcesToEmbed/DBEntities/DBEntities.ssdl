@@ -1,5 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="db_a74425_premiumposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__EFMigrationsHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdminName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdminEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdminPassword" Type="nvarchar" MaxLength="50" />
+    <Property Name="StatusId" Type="int" />
+  </EntityType>
+  <EntityType Name="AppSettings">
+    <Key>
+      <PropertyRef Name="AppSettingID" />
+    </Key>
+    <Property Name="AppSettingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="Discount" Type="float" />
+    <Property Name="TaxPercent" Type="int" />
+    <Property Name="Currency" Type="nvarchar" MaxLength="50" />
+    <Property Name="DeliveryCharges" Type="float" />
+    <Property Name="TopHeadDescription" Type="nvarchar" MaxLength="300" />
+    <Property Name="MinOrderAmount" Type="float" />
+    <Property Name="StatusID" Type="int" />
+  </EntityType>
   <EntityType Name="Banner">
     <Key>
       <PropertyRef Name="BannerID" />
@@ -20,6 +52,42 @@
     <Property Name="Description" Type="nvarchar" MaxLength="300" />
     <Property Name="ButtonURL" Type="nvarchar(max)" />
     <Property Name="LocationID" Type="int" />
+  </EntityType>
+  <EntityType Name="Blog">
+    <Key>
+      <PropertyRef Name="BlogID" />
+    </Key>
+    <Property Name="BlogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BlogCategoryID" Type="int" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="Label" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="ArabicTitle" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="ArabicDescription" Type="nvarchar(max)" />
+    <Property Name="IsPublish" Type="bit" />
+    <Property Name="PostedOn" Type="datetime" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="ImageSmall" Type="nvarchar(max)" />
+    <Property Name="ImageLarge" Type="nvarchar(max)" />
+    <Property Name="StatusID" Type="int" />
+    <Property Name="DisplayOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="BlogCategory">
+    <Key>
+      <PropertyRef Name="BlogCategoryID" />
+    </Key>
+    <Property Name="BlogCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="ArabicName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="ArabicDescription" Type="nvarchar(max)" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="DisplayOrder" Type="int" />
+    <Property Name="StatusID" Type="int" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="UpdatedOn" Type="datetime" />
   </EntityType>
   <EntityType Name="CardTypes">
     <Key>
@@ -83,6 +151,51 @@
     <Property Name="logo" Type="nvarchar" MaxLength="200" />
     <Property Name="Currency" Type="varchar" MaxLength="50" />
     <Property Name="SNTN" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="CompanyQuotation">
+    <Key>
+      <PropertyRef Name="CompanyQuotationID" />
+    </Key>
+    <Property Name="CompanyQuotationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuotationNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuotationDate" Type="datetime" />
+    <Property Name="SupplyDate" Type="datetime" />
+    <Property Name="TaxNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="SellerName" Type="nvarchar" MaxLength="150" />
+    <Property Name="SellerAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="SellerVAT" Type="nvarchar" MaxLength="150" />
+    <Property Name="SellerContact" Type="nvarchar" MaxLength="50" />
+    <Property Name="BuyerName" Type="nvarchar" MaxLength="150" />
+    <Property Name="BuyerAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="BuyerContact" Type="nvarchar" MaxLength="50" />
+    <Property Name="BuyerVAT" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalDiscount" Type="float" />
+    <Property Name="TotalAmount" Type="float" />
+    <Property Name="TotalVAT" Type="float" />
+    <Property Name="GrandTotal" Type="float" />
+    <Property Name="StatusID" Type="int" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="LastUpdatedDate" Type="datetime" />
+    <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="CompanyQuotationDetail">
+    <Key>
+      <PropertyRef Name="CQuotationDetailID" />
+    </Key>
+    <Property Name="CQuotationDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyQuotationID" Type="int" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="200" />
+    <Property Name="ItemNameArabic" Type="nvarchar" MaxLength="200" />
+    <Property Name="UnitPrice" Type="float" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Discount" Type="float" />
+    <Property Name="TaxRate" Type="float" />
+    <Property Name="TaxAmount" Type="float" />
+    <Property Name="Total" Type="float" />
+    <Property Name="StatusID" Type="int" />
   </EntityType>
   <EntityType Name="Country">
     <Key>
@@ -218,6 +331,32 @@
     <Property Name="AddressType" Type="nvarchar" MaxLength="50" />
     <Property Name="AddressNickName" Type="nvarchar" MaxLength="500" />
   </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryID" Type="int" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="FullName" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="DOB" Type="datetime2" Precision="7" />
+    <Property Name="Gender" Type="nvarchar(max)" />
+    <Property Name="Mobile" Type="nvarchar(max)" />
+    <Property Name="IsEmail" Type="bit" />
+    <Property Name="IsSms" Type="bit" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="RedeemPoints" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CurrentPoint" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="CreatedOn" Type="datetime2" Precision="7" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="LastUpdatedDate" Type="datetime2" Precision="7" />
+    <Property Name="LastUpdatedBy" Type="nvarchar(max)" />
+    <Property Name="StatusID" Type="int" />
+  </EntityType>
   <EntityType Name="CustomerWishList">
     <Key>
       <PropertyRef Name="ID" />
@@ -272,6 +411,66 @@
     <Property Name="Description" Type="varchar(max)" />
     <Property Name="Image" Type="varchar(max)" />
   </EntityType>
+  <EntityType Name="Expense">
+    <Key>
+      <PropertyRef Name="ExpenseID" />
+    </Key>
+    <Property Name="ExpenseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExpenseTypeID" Type="int" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="500" />
+    <Property Name="StatusID" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastUpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ExpenseType">
+    <Key>
+      <PropertyRef Name="ExpenseTypeID" />
+    </Key>
+    <Property Name="ExpenseTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="StatusID" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="LastUpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="FavouriteItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="LocationID" Type="int" />
+  </EntityType>
+  <EntityType Name="FlashSale">
+    <Key>
+      <PropertyRef Name="FlashSaleID" />
+    </Key>
+    <Property Name="FlashSaleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="150" />
+    <Property Name="FromDate" Type="datetime" />
+    <Property Name="ToDate" Type="datetime" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="StatusID" Type="int" />
+  </EntityType>
+  <EntityType Name="FlashSaleDetail">
+    <Key>
+      <PropertyRef Name="FlashSaleDetailID" />
+    </Key>
+    <Property Name="FlashSaleDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FlashSaleID" Type="int" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DiscountPer" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DiscountPrice" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
   <EntityType Name="Floors">
     <Key>
       <PropertyRef Name="ID" />
@@ -305,6 +504,19 @@
     <Property Name="CreatedOn" Type="datetime" />
     <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
     <Property Name="StatusId" Type="int" />
+  </EntityType>
+  <EntityType Name="InventoryAdjust">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DamageStock" Type="float" />
+    <Property Name="NewStock" Type="float" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="ReconcilationNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Reason" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="InventoryRecieve">
     <Key>
@@ -399,6 +611,8 @@
     <Property Name="IsVATApplied" Type="bit" />
     <Property Name="IsFeatured" Type="bit" />
     <Property Name="IsStockOut" Type="bit" />
+    <Property Name="MinPrice" Type="float" />
+    <Property Name="IsOpenPrice" Type="bit" />
   </EntityType>
   <EntityType Name="ItemImages">
     <Key>
@@ -483,6 +697,30 @@
     <Property Name="FooterNotes" Type="nvarchar" MaxLength="500" />
     <Property Name="Passcode" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="LoyalityLogs">
+    <Key>
+      <PropertyRef Name="LoyalityID" />
+    </Key>
+    <Property Name="LoyalityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Points" Type="float" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="LastUpdatedDate" Type="int" />
+    <Property Name="LastUpdatedBy" Type="int" />
+    <Property Name="StatusID" Type="int" />
+  </EntityType>
+  <EntityType Name="LoyalitySetting">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Points" Type="float" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="StatusID" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="Modifiers">
     <Key>
       <PropertyRef Name="ID" />
@@ -494,7 +732,7 @@
     <Property Name="Type" Type="nvarchar" MaxLength="150" />
     <Property Name="Barcode" Type="nvarchar" MaxLength="150" />
     <Property Name="SKU" Type="nvarchar" MaxLength="150" />
-    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Price" Type="float" />
     <Property Name="StatusID" Type="int" />
     <Property Name="DisplayOrder" Type="int" />
     <Property Name="CreatedOn" Type="datetime" />
@@ -553,6 +791,7 @@
     <Property Name="DiscountPercent" Type="float" />
     <Property Name="DiscountType" Type="int" />
     <Property Name="AmountDiscount" Type="float" />
+    <Property Name="ItemDiscountAmount" Type="float" />
     <Property Name="AmountTotal" Type="float" />
     <Property Name="GrandTotal" Type="float" />
     <Property Name="Tax" Type="float" />
@@ -739,6 +978,7 @@
       <PropertyRef Name="TokenID" />
     </Key>
     <Property Name="TokenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="int" />
     <Property Name="Token" Type="nvarchar(max)" />
     <Property Name="LocationID" Type="int" />
     <Property Name="StatusID" Type="int" />
@@ -914,6 +1154,14 @@
     <Property Name="FbrPOSID" Type="nvarchar" MaxLength="50" />
     <Property Name="FbrUserCode" Type="nvarchar" MaxLength="50" />
     <Property Name="Token" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SubuserLocations">
+    <Key>
+      <PropertyRef Name="SubUserLocationID" />
+    </Key>
+    <Property Name="SubUserLocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="SubUserID" Type="int" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -1097,6 +1345,30 @@
     <Property Name="LastUpdatedBy" Type="int" />
     <Property Name="UserID" Type="int" />
   </EntityType>
+  <EntityType Name="WebCustomizedSale">
+    <Key>
+      <PropertyRef Name="WebCustomisedSaleID" />
+    </Key>
+    <Property Name="WebCustomisedSaleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" />
+    <Property Name="StatusID" Type="int" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="WebCustomizedSaleDetail">
+    <Key>
+      <PropertyRef Name="WebCustomizedSaleDetailID" />
+    </Key>
+    <Property Name="WebCustomizedSaleDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WebCustomizedSaleID" Type="int" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <Association Name="FK__Banner__Location__44952D46">
     <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
     <End Role="Banner" Type="Self.Banner" Multiplicity="*" />
@@ -1105,6 +1377,42 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Banner">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Blog__BlogCatego__02B25B50">
+    <End Role="BlogCategory" Type="Self.BlogCategory" Multiplicity="0..1" />
+    <End Role="Blog" Type="Self.Blog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BlogCategory">
+        <PropertyRef Name="BlogCategoryID" />
+      </Principal>
+      <Dependent Role="Blog">
+        <PropertyRef Name="BlogCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Blog_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="Blog" Type="Self.Blog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Blog">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BlogCategory_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="BlogCategory" Type="Self.BlogCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BlogCategory">
         <PropertyRef Name="LocationID" />
       </Dependent>
     </ReferentialConstraint>
@@ -1154,6 +1462,30 @@
       </Principal>
       <Dependent Role="Company">
         <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyQuotation_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="CompanyQuotation" Type="Self.CompanyQuotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompanyQuotation">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyQuotationDetail_CompanyQuotation">
+    <End Role="CompanyQuotation" Type="Self.CompanyQuotation" Multiplicity="0..1" />
+    <End Role="CompanyQuotationDetail" Type="Self.CompanyQuotationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyQuotation">
+        <PropertyRef Name="CompanyQuotationID" />
+      </Principal>
+      <Dependent Role="CompanyQuotationDetail">
+        <PropertyRef Name="CompanyQuotationID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1349,6 +1681,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Expense_ExpenseType">
+    <End Role="ExpenseType" Type="Self.ExpenseType" Multiplicity="0..1" />
+    <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseType">
+        <PropertyRef Name="ExpenseTypeID" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="ExpenseTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expense_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FavouriteItem_Item">
+    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+    <End Role="FavouriteItem" Type="Self.FavouriteItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FavouriteItem">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FavouriteItem_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="FavouriteItem" Type="Self.FavouriteItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FavouriteItem">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlashSaleDetail_FlashSale">
+    <End Role="FlashSale" Type="Self.FlashSale" Multiplicity="0..1" />
+    <End Role="FlashSaleDetail" Type="Self.FlashSaleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FlashSale">
+        <PropertyRef Name="FlashSaleID" />
+      </Principal>
+      <Dependent Role="FlashSaleDetail">
+        <PropertyRef Name="FlashSaleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Floors_Location">
     <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
     <End Role="Floors" Type="Self.Floors" Multiplicity="*" />
@@ -1406,6 +1798,18 @@
       </Principal>
       <Dependent Role="Inventory">
         <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryAdjust_Item">
+    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+    <End Role="InventoryAdjust" Type="Self.InventoryAdjust" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InventoryAdjust">
+        <PropertyRef Name="ItemID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1610,6 +2014,18 @@
       </Principal>
       <Dependent Role="Location">
         <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoyalityLogs_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="LoyalityLogs" Type="Self.LoyalityLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LoyalityLogs">
+        <PropertyRef Name="CustomerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2057,6 +2473,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SubuserLocations_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="SubuserLocations" Type="Self.SubuserLocations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubuserLocations">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubuserLocations_SubUser">
+    <End Role="SubUser" Type="Self.SubUser" Multiplicity="0..1" />
+    <End Role="SubuserLocations" Type="Self.SubuserLocations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubuserLocations">
+        <PropertyRef Name="SubUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Supplier_Location">
     <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
     <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
@@ -2105,17 +2545,96 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_WebCustomizedSaleDetail_ItemID">
+    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+    <End Role="WebCustomizedSaleDetail" Type="Self.WebCustomizedSaleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WebCustomizedSaleDetail">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WebCustomizedSaleDetail_LocationID">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="WebCustomizedSaleDetail" Type="Self.WebCustomizedSaleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WebCustomizedSaleDetail">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WebCustomizedSaleID">
+    <End Role="WebCustomizedSale" Type="Self.WebCustomizedSale" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="WebCustomizedSaleDetail" Type="Self.WebCustomizedSaleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebCustomizedSale">
+        <PropertyRef Name="WebCustomisedSaleID" />
+      </Principal>
+      <Dependent Role="WebCustomizedSaleDetail">
+        <PropertyRef Name="WebCustomizedSaleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="ABC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CurrDate" Type="datetime" Mode="In" />
     <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="Get_EmailConfigByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ConfigName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Insert_WebCustomizedSale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Title" Type="nvarchar" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_BlogDetailVitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_CategoryfilterBlogProduct_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogCategory" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Searchtxt" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MinPrice" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MaxPrice" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SortID" Type="int" Mode="In" />
+    <Parameter Name="SubCategory" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_CategoryfilterProduct_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Category" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Searchtxt" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MinPrice" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MaxPrice" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SortID" Type="int" Mode="In" />
+    <Parameter Name="SubCategory" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="sp_CheckCategorySubcategoryForItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
     <Parameter Name="CurrentLocationID" Type="int" Mode="In" />
     <Parameter Name="SubCategoryID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
   </Function>
   <Function Name="sp_CreateLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Name" Type="nvarchar" Mode="In" />
@@ -2151,6 +2670,11 @@
     <Parameter Name="Features" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="ImageURL" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="sp_CustomerOrders_Rpt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderStartDate" Type="varchar" Mode="In" />
+    <Parameter Name="OrderLastDate" Type="varchar" Mode="In" />
+    <Parameter Name="CustomerIDs" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="sp_DatewiseSalesSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OrderStartDate" Type="varchar" Mode="In" />
     <Parameter Name="OrderLastDate" Type="varchar" Mode="In" />
@@ -2175,6 +2699,18 @@
   <Function Name="sp_Delete_InventoryandStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="sp_Delete InventoryandStock">
     <Parameter Name="ItemId" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_Delete_Inventory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ItemId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Delete_InventoryandStock1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="sp_Delete_InventoryandStock">
+    <Parameter Name="ItemId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteFlashSaleVitamitoWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteInventoryandStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ItemId" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_DeleteLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
@@ -2182,27 +2718,113 @@
     <Parameter Name="UserID" Type="int" Mode="In" />
     <Parameter Name="LastUpdatedDate" Type="datetime" Mode="In" />
   </Function>
+  <Function Name="sp_DetailReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DetailReport_V2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="nvarchar" Mode="In" />
+    <Parameter Name="EndDate" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_filterBlogProduct_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogCategory" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Searchtxt" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MinPrice" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MaxPrice" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SortID" Type="int" Mode="In" />
+    <Parameter Name="SubCategory" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_FilterExpense" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderStartDate" Type="datetime" Mode="In" />
+    <Parameter Name="OrderLastDate" Type="datetime" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_FilterExpenseByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="sp_FilterOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OrderStartDate" Type="datetime" Mode="In" />
     <Parameter Name="OrderLastDate" Type="datetime" Mode="In" />
     <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_FilterOrderV2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderStartDate" Type="datetime" Mode="In" />
+    <Parameter Name="OrderLastDate" Type="datetime" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_filterProduct_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Category" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Searchtxt" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MinPrice" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MaxPrice" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SortID" Type="int" Mode="In" />
+    <Parameter Name="SubCategory" Type="nvarchar(max)" Mode="In" />
+  </Function>
   <Function Name="sp_FinishItemsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetAdjustInventory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ItemID" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetAdjustItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ItemID" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetAdjustmentList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetAdminOrders_api" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="Search" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetAdminOrders_POSAPP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="Search" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_GetAllBanners" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_getallusers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_getallusers_SUP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_GetBanners" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetBanners_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetBlogCategory_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetBlogList_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetBlogs_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_GetCategory_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetCity_SUP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_GetCompany" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_GetCountries_SUP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetcouponDiscount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="coupon" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="sp_GetCustomerOrders_api" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CustomerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetCustomers_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_GetDashboardData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
@@ -2227,6 +2849,17 @@
     <Parameter Name="LastDate" Type="varchar" Mode="In" />
     <Parameter Name="StartDate" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="sp_GetExpenses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetExpenseType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExpenseTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetFeaturedBanners_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetHeaderBanner_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetInventory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_GetInventoryItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ItemID" Type="int" Mode="In" />
     <Parameter Name="LocationID" Type="int" Mode="In" />
@@ -2234,7 +2867,16 @@
   <Function Name="sp_GetItem_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_GetItem_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetItemImagesForWebSale_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_GetItemModifierMapping_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetItems_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_GetItemsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
     <Parameter Name="ItemID" Type="int" Mode="In" />
@@ -2245,14 +2887,63 @@
   <Function Name="sp_GetLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_GetLoyalityLogs_Planera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetLoyalitySettings_Planera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_GetModifierAndVariant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_GetModifiers_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_GetModifiers_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="itemid" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_GetModifiersForItem_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetMyOrderDetails_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetMyOrderDetails_Vitamito_V2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetMyOrders_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetMyOrdersById_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetOrderByCustomer_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetOrderByLocation_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="nvarchar" Mode="In" />
+    <Parameter Name="ToDate" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetOrderDetailsByLocation_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="varchar" Mode="In" />
+    <Parameter Name="ToDate" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetOrderDetailsByOrderId_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetOrderModifiers_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="nvarchar" Mode="In" />
+    <Parameter Name="ToDate" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetOrderNo_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetPackages_SUP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetProducts_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_GetReceiptInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OrderID" Type="int" Mode="In" />
@@ -2263,7 +2954,31 @@
     <Parameter Name="UserID" Type="int" Mode="In" />
     <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_GetRelatedBlog_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetRelatedProducts_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_GetSelectedFlashItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetSelectedFlashItem_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetSettings_Planera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetSettings_POSAPP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetSettings_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetSingleOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
     <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_GetStockOfMultipleItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2277,9 +2992,25 @@
     <Parameter Name="LocationID" Type="int" Mode="In" />
     <Parameter Name="SubCategoryID" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_GetSubUser_V2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetSubUserInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SubUserID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_GetTables" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationID" Type="int" Mode="In" />
     <Parameter Name="FloorID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetTables_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="FloorID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetUserByID_SUP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_GetVariants_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
@@ -2287,8 +3018,194 @@
   <Function Name="sp_GetVariantsForItem_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_GetWaiters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetWaiters_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertCustomer_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ParamTable1" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_insertFlashSaleVitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="Items" Type="nvarchar" Mode="In" />
+    <Parameter Name="WebCustomizedSaleID" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="sp_InsertItemsMapping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ItemID" Type="int" Mode="In" />
+    <Parameter Name="IDs" Type="nvarchar" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertOrder__P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderNo" Type="int" Mode="In" />
+    <Parameter Name="TransNo" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="AmountTotal" Type="decimal" Mode="In" />
+    <Parameter Name="GrandTotal" Type="decimal" Mode="In" />
+    <Parameter Name="Tax" Type="decimal" Mode="In" />
+    <Parameter Name="AmountDiscount" Type="decimal" Mode="In" />
+    <Parameter Name="LastUpdatedDate" Type="datetime" Mode="In" />
+    <Parameter Name="LastUpdateBy" Type="int" Mode="In" />
+    <Parameter Name="ServiceCharges" Type="decimal" Mode="In" />
+    <Parameter Name="OrderDate" Type="datetime" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="NearestPlace" Type="nvarchar" Mode="In" />
+    <Parameter Name="Country" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="DeliveryTime" Type="nvarchar" Mode="In" />
+    <Parameter Name="Latitude" Type="nvarchar" Mode="In" />
+    <Parameter Name="Longitude" Type="nvarchar" Mode="In" />
+    <Parameter Name="PlaceType" Type="nvarchar" Mode="In" />
+    <Parameter Name="CardNotes" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LastUpdatedBy" Type="int" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="GuestCount" Type="int" Mode="In" />
+    <Parameter Name="OrderTakerID" Type="int" Mode="In" />
+    <Parameter Name="IsCheckout" Type="bit" Mode="In" />
+    <Parameter Name="OrderType" Type="nvarchar" Mode="In" />
+    <Parameter Name="TableNo" Type="int" Mode="In" />
+    <Parameter Name="WaiterNo" Type="int" Mode="In" />
+    <Parameter Name="DeliveryStatus" Type="int" Mode="In" />
+    <Parameter Name="PaymentMode" Type="int" Mode="In" />
+    <Parameter Name="AmountPaid" Type="decimal" Mode="In" />
+    <Parameter Name="DiscountPercent" Type="decimal" Mode="In" />
+    <Parameter Name="DiscountType" Type="int" Mode="In" />
+    <Parameter Name="ItemDiscountAmount" Type="decimal" Mode="In" />
+    <Parameter Name="CardNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="CardHolderName" Type="nvarchar" Mode="In" />
+    <Parameter Name="CardType" Type="nvarchar" Mode="In" />
+    <Parameter Name="IsPartial" Type="bit" Mode="In" />
+    <Parameter Name="PartialAmount" Type="decimal" Mode="In" />
+    <Parameter Name="FbrAmount" Type="decimal" Mode="In" />
+    <Parameter Name="FbrInvoiceResponse" Type="nvarchar" Mode="In" />
+    <Parameter Name="FbrInvoiceNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="DiscountReason" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertOrder_P_API_V2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ParamTable1" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertOrder_Peshawari_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderNo" Type="int" Mode="In" />
+    <Parameter Name="TransNo" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="AmountTotal" Type="decimal" Mode="In" />
+    <Parameter Name="GrandTotal" Type="decimal" Mode="In" />
+    <Parameter Name="Tax" Type="decimal" Mode="In" />
+    <Parameter Name="AmountDiscount" Type="decimal" Mode="In" />
+    <Parameter Name="LastUpdatedDate" Type="datetime" Mode="In" />
+    <Parameter Name="LastUpdateBy" Type="varchar" Mode="In" />
+    <Parameter Name="ServiceCharges" Type="decimal" Mode="In" />
+    <Parameter Name="OrderDate" Type="datetime" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="NearestPlace" Type="nvarchar" Mode="In" />
+    <Parameter Name="Country" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="DeliveryTime" Type="nvarchar" Mode="In" />
+    <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Latitude" Type="nvarchar" Mode="In" />
+    <Parameter Name="Longitude" Type="nvarchar" Mode="In" />
+    <Parameter Name="PlaceType" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="CardNotes" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LastUpdatedBy" Type="varchar" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertOrder_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderNo" Type="int" Mode="In" />
+    <Parameter Name="TransNo" Type="int" Mode="In" />
+    <Parameter Name="LoocationID" Type="int" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="AmountTotal" Type="decimal" Mode="In" />
+    <Parameter Name="GrandTotal" Type="decimal" Mode="In" />
+    <Parameter Name="Tax" Type="decimal" Mode="In" />
+    <Parameter Name="AmountDiscount" Type="decimal" Mode="In" />
+    <Parameter Name="LastUpdatedDate" Type="datetime" Mode="In" />
+    <Parameter Name="LastUpdateBy" Type="int" Mode="In" />
+    <Parameter Name="ServiceCharges" Type="decimal" Mode="In" />
+    <Parameter Name="OrderDate" Type="datetime" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="NearestPlace" Type="nvarchar" Mode="In" />
+    <Parameter Name="Country" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="DeliveryTime" Type="nvarchar" Mode="In" />
+    <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Latitude" Type="nvarchar" Mode="In" />
+    <Parameter Name="Longitude" Type="nvarchar" Mode="In" />
+    <Parameter Name="PlaceType" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="CardNotes" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LastUpdatedBy" Type="int" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertOrderDetail__P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderId" Type="int" Mode="In" />
+    <Parameter Name="ItemId" Type="int" Mode="In" />
+    <Parameter Name="TransactionNo" Type="int" Mode="In" />
+    <Parameter Name="OrderNo" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="DiscountPrice" Type="decimal" Mode="In" />
+    <Parameter Name="LastUpdatedBy" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertOrderDetails_Peshawari_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+    <Parameter Name="ItemId" Type="int" Mode="In" />
+    <Parameter Name="TransactionNo" Type="int" Mode="In" />
+    <Parameter Name="OrderNo" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Quantity" Type="decimal" Mode="In" />
+    <Parameter Name="Price" Type="decimal" Mode="In" />
+    <Parameter Name="Cost" Type="decimal" Mode="In" />
+    <Parameter Name="OrderMode" Type="nvarchar" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="LastUpdateBy" Type="varchar" Mode="In" />
+    <Parameter Name="LastUpdateDT" Type="datetime" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertPayment_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+    <Parameter Name="CashPayment" Type="float" Mode="In" />
+    <Parameter Name="CardPayment" Type="float" Mode="In" />
+    <Parameter Name="CreditPayment" Type="float" Mode="In" />
+    <Parameter Name="PaymentType" Type="nvarchar" Mode="In" />
+    <Parameter Name="Total" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertPayment_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+    <Parameter Name="CashPayment" Type="float" Mode="In" />
+    <Parameter Name="CardPayment" Type="float" Mode="In" />
+    <Parameter Name="CreditPayment" Type="float" Mode="In" />
+    <Parameter Name="PaymentType" Type="nvarchar" Mode="In" />
+    <Parameter Name="Total" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertReview" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+    <Parameter Name="Contact" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Stars" Type="int" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="ItemID" Type="int" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_insertSaleVitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="Items" Type="nvarchar" Mode="In" />
+    <Parameter Name="WebCustomizedSaleID" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertSubserMapping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SubuserID" Type="int" Mode="In" />
     <Parameter Name="IDs" Type="nvarchar" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
   </Function>
@@ -2328,6 +3245,26 @@
     <Parameter Name="CompanyURL" Type="nvarchar" Mode="In" />
     <Parameter Name="CompanyDescription" Type="nvarchar(max)" Mode="In" />
   </Function>
+  <Function Name="sp_InsertUser_SUP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Company" Type="nvarchar" Mode="In" />
+    <Parameter Name="BusinessType" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar" Mode="In" />
+    <Parameter Name="CityID" Type="int" Mode="In" />
+    <Parameter Name="CountryID" Type="int" Mode="In" />
+    <Parameter Name="Website" Type="nvarchar" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="IsActivate" Type="int" Mode="In" />
+    <Parameter Name="Package" Type="int" Mode="In" />
+    <Parameter Name="Product" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+    <Parameter Name="BusinessKey" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="sp_InsertUserPaymentInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PackageType" Type="nvarchar" Mode="In" />
     <Parameter Name="CountryCode" Type="nvarchar" Mode="In" />
@@ -2357,6 +3294,10 @@
     <Parameter Name="Quantity" Type="float" Mode="In" />
     <Parameter Name="LastUpdatedDate" Type="datetime" Mode="In" />
   </Function>
+  <Function Name="sp_itemListselected_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_Last7DaysSales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CurrDate" Type="datetime" Mode="In" />
     <Parameter Name="LocationID" Type="int" Mode="In" />
@@ -2368,6 +3309,37 @@
   <Function Name="sp_Login_SubUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="varchar" Mode="In" />
     <Parameter Name="pass" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_login_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_LoginSubUser_P_API" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BusinessKey" Type="varchar" Mode="In" />
+    <Parameter Name="Passcode" Type="varchar" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Navigation_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_OrderDetails_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+    <Parameter Name="ItemID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="Price" Type="decimal" Mode="In" />
+    <Parameter Name="LastUpdateDT" Type="datetime" Mode="In" />
+    <Parameter Name="LastUpdateBy" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_OrderDetails_Vitamito_V2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+    <Parameter Name="ItemID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="Price" Type="decimal" Mode="In" />
+    <Parameter Name="DiscountPrice" Type="decimal" Mode="In" />
+    <Parameter Name="LastUpdateDT" Type="datetime" Mode="In" />
+    <Parameter Name="LastUpdateBy" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_OrderReject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+    <Parameter Name="DeliveryStatus" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_OrderReportDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OrderID" Type="int" Mode="In" />
@@ -2382,287 +3354,35 @@
     <Parameter Name="OrderLastDate" Type="varchar" Mode="In" />
     <Parameter Name="LocationId" Type="nvarchar" Mode="In" />
   </Function>
-  <Function Name="sp_PRoductSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="sp_PostLoyality_Planera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Points" Type="float" Mode="In" />
     <Parameter Name="LocationID" Type="int" Mode="In" />
-    <Parameter Name="OrderLastDate" Type="varchar" Mode="In" />
-    <Parameter Name="OrderStartDate" Type="varchar" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
   </Function>
-  <Function Name="sp_PRoductSummaryMultiLoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="nvarchar" Mode="In" />
-    <Parameter Name="OrderLastDate" Type="varchar" Mode="In" />
-    <Parameter Name="OrderStartDate" Type="varchar" Mode="In" />
+  <Function Name="sp_PricefilterProduct_Vitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Category" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Searchtxt" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MinPrice" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MaxPrice" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SortID" Type="int" Mode="In" />
+    <Parameter Name="SubCategory" Type="nvarchar(max)" Mode="In" />
   </Function>
-  <Function Name="sp_PurchaseOrderDetailList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="POID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_RemoveItemVariant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_RptCreditSales_MultiLoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="OrderStartDate" Type="varchar" Mode="In" />
-    <Parameter Name="OrderLastDate" Type="varchar" Mode="In" />
-    <Parameter Name="LocationId" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_SalesSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-    <Parameter Name="OrderLastDate" Type="varchar" Mode="In" />
-    <Parameter Name="OrderStartDate" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_SalesSummaryMultiLoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="nvarchar" Mode="In" />
-    <Parameter Name="OrderLastDate" Type="varchar" Mode="In" />
-    <Parameter Name="OrderStartDate" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_ShiftData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="date" Type="datetime" Mode="In" />
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_SignupUserWebApi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="FirstName" Type="varchar" Mode="In" />
-    <Parameter Name="LastName" Type="varchar" Mode="In" />
-    <Parameter Name="UserName" Type="varchar" Mode="In" />
-    <Parameter Name="Email" Type="varchar" Mode="In" />
-    <Parameter Name="Password" Type="varchar" Mode="In" />
-    <Parameter Name="Image" Type="varchar" Mode="In" />
-    <Parameter Name="RoleID" Type="int" Mode="In" />
-    <Parameter Name="UserType" Type="nvarchar" Mode="In" />
-    <Parameter Name="LastUpdatedBy" Type="nvarchar" Mode="In" />
-    <Parameter Name="LastUpdatedDate" Type="datetime" Mode="In" />
-    <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
-    <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
-    <Parameter Name="StatusID" Type="int" Mode="In" />
-    <Parameter Name="BusinessKey" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_SignupWizard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="UserID" Type="int" Mode="In" />
-    <Parameter Name="Email" Type="varchar" Mode="In" />
-    <Parameter Name="Password" Type="varchar" Mode="In" />
-    <Parameter Name="SubPassword" Type="varchar" Mode="In" />
-    <Parameter Name="Passcode" Type="varchar" Mode="In" />
-    <Parameter Name="UserName" Type="varchar" Mode="In" />
-    <Parameter Name="SubEmail" Type="varchar" Mode="In" />
-    <Parameter Name="UserType" Type="varchar" Mode="In" />
-    <Parameter Name="LocEmail" Type="varchar" Mode="In" />
-    <Parameter Name="Company" Type="varchar" Mode="In" />
-    <Parameter Name="CompanyCode" Type="varchar" Mode="In" />
-    <Parameter Name="LocationName" Type="nvarchar" Mode="In" />
-    <Parameter Name="LocationDescription" Type="nvarchar" Mode="In" />
-    <Parameter Name="LicenseID" Type="int" Mode="In" />
-    <Parameter Name="LastUpdatedBy" Type="nvarchar" Mode="In" />
-    <Parameter Name="LastUpdatedDate" Type="datetime" Mode="In" />
-    <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
-    <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
-    <Parameter Name="StatusID" Type="int" Mode="In" />
-    <Parameter Name="compcontact" Type="nvarchar" Mode="In" />
-    <Parameter Name="comptax" Type="decimal" Mode="In" />
-    <Parameter Name="compntn" Type="nvarchar" Mode="In" />
-    <Parameter Name="FirstName" Type="varchar" Mode="In" />
-    <Parameter Name="LastName" Type="nvarchar" Mode="In" />
-    <Parameter Name="Contactno" Type="nvarchar" Mode="In" />
-    <Parameter Name="Address" Type="nvarchar" Mode="In" />
-    <Parameter Name="locContactno" Type="nvarchar" Mode="In" />
-    <Parameter Name="locAddress" Type="nvarchar" Mode="In" />
-    <Parameter Name="StoreName" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_SignUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="FirstName" Type="varchar" Mode="In" />
-    <Parameter Name="LastName" Type="varchar" Mode="In" />
-    <Parameter Name="UserName" Type="varchar" Mode="In" />
-    <Parameter Name="Email" Type="varchar" Mode="In" />
-    <Parameter Name="Password" Type="varchar" Mode="In" />
-    <Parameter Name="Company" Type="varchar" Mode="In" />
-    <Parameter Name="CompanyCode" Type="varchar" Mode="In" />
-    <Parameter Name="RoleID" Type="int" Mode="In" />
-    <Parameter Name="UserType" Type="nvarchar" Mode="In" />
-    <Parameter Name="LocationName" Type="nvarchar" Mode="In" />
-    <Parameter Name="LocationDescription" Type="nvarchar" Mode="In" />
-    <Parameter Name="LicenseID" Type="int" Mode="In" />
-    <Parameter Name="LastUpdatedBy" Type="nvarchar" Mode="In" />
-    <Parameter Name="LastUpdatedDate" Type="datetime" Mode="In" />
-    <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
-    <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
-    <Parameter Name="StatusID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_StockInNotifcation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_StockNotification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_StockReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-    <Parameter Name="StartDate" Type="varchar" Mode="In" />
-    <Parameter Name="EndDate" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_StockReportDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-    <Parameter Name="ItemID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_StockReportMultiLoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="nvarchar" Mode="In" />
-    <Parameter Name="StartDate" Type="varchar" Mode="In" />
-    <Parameter Name="EndDate" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_StockStoreReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-    <Parameter Name="StartDate" Type="varchar" Mode="In" />
-    <Parameter Name="EndDate" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_StockStoreSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_StockStoreSummaryMultiLoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Locations" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_UpdateInventory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-    <Parameter Name="Qty" Type="int" Mode="In" />
+  <Function Name="sp_ProductDetailsVitamito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
-    <Parameter Name="ItemID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_UpdateLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-    <Parameter Name="Name" Type="nvarchar" Mode="In" />
-    <Parameter Name="Descripiton" Type="nvarchar" Mode="In" />
-    <Parameter Name="Address" Type="nvarchar" Mode="In" />
-    <Parameter Name="ContactNo" Type="nvarchar" Mode="In" />
-    <Parameter Name="Email" Type="nvarchar" Mode="In" />
-    <Parameter Name="TimeZoneID" Type="int" Mode="In" />
-    <Parameter Name="DateFrom" Type="datetime" Mode="In" />
-    <Parameter Name="DateTo" Type="datetime" Mode="In" />
-    <Parameter Name="CountryID" Type="varchar" Mode="In" />
-    <Parameter Name="CityID" Type="int" Mode="In" />
-    <Parameter Name="Open_Time" Type="time" Mode="In" />
-    <Parameter Name="Close_Time" Type="time" Mode="In" />
-    <Parameter Name="UserID" Type="int" Mode="In" />
-    <Parameter Name="LicenseID" Type="int" Mode="In" />
-    <Parameter Name="IndustryType" Type="varchar" Mode="In" />
-    <Parameter Name="DeliveryServices" Type="bit" Mode="In" />
-    <Parameter Name="DeliveryCharges" Type="float" Mode="In" />
-    <Parameter Name="DeliveryTime" Type="varchar" Mode="In" />
-    <Parameter Name="MinOrderAmount" Type="float" Mode="In" />
-    <Parameter Name="Longitude" Type="varchar" Mode="In" />
-    <Parameter Name="Latitude" Type="varchar" Mode="In" />
-    <Parameter Name="LastUpdatedBy" Type="nvarchar" Mode="In" />
-    <Parameter Name="LastUpdatedDate" Type="datetime" Mode="In" />
-    <Parameter Name="StatusID" Type="int" Mode="In" />
-    <Parameter Name="CompanyCode" Type="varchar" Mode="In" />
-    <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
-    <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
-    <Parameter Name="IsDelivery" Type="bit" Mode="In" />
-    <Parameter Name="RestaurantTypes" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="Cuisine" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="Features" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="ImageURL" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_UpdateStockRefund" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ItemID" Type="int" Mode="In" />
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-    <Parameter Name="Quantity" Type="float" Mode="In" />
-  </Function>
-  <Function Name="sp_UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="UserID" Type="int" Mode="In" />
-    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-    <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
-    <Parameter Name="LastName" Type="nvarchar" Mode="In" />
-    <Parameter Name="ImagePath" Type="nvarchar" Mode="In" />
-    <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="Company" Type="nvarchar" Mode="In" />
-    <Parameter Name="BusinessType" Type="nvarchar" Mode="In" />
-    <Parameter Name="Email" Type="nvarchar" Mode="In" />
-    <Parameter Name="ContactNo" Type="nvarchar" Mode="In" />
-    <Parameter Name="Address" Type="nvarchar" Mode="In" />
-    <Parameter Name="CityID" Type="int" Mode="In" />
-    <Parameter Name="CountryID" Type="varchar" Mode="In" />
-    <Parameter Name="Website" Type="nvarchar" Mode="In" />
-    <Parameter Name="Subscribe" Type="bit" Mode="In" />
-    <Parameter Name="RoleID" Type="int" Mode="In" />
-    <Parameter Name="TimeZoneID" Type="int" Mode="In" />
-    <Parameter Name="Emp_Code" Type="nvarchar" Mode="In" />
-    <Parameter Name="NIC" Type="varchar" Mode="In" />
-    <Parameter Name="Designation" Type="nvarchar" Mode="In" />
-    <Parameter Name="BasicSalary" Type="float" Mode="In" />
-    <Parameter Name="WorkingStatus" Type="bit" Mode="In" />
-    <Parameter Name="DateFrom" Type="datetime" Mode="In" />
-    <Parameter Name="DateTo" Type="datetime" Mode="In" />
-    <Parameter Name="UserType" Type="varchar" Mode="In" />
-    <Parameter Name="LastUpdatedBy" Type="nvarchar" Mode="In" />
-    <Parameter Name="LastUpdatedDate" Type="datetime" Mode="In" />
-    <Parameter Name="StatusID" Type="int" Mode="In" />
-    <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
-    <Parameter Name="States" Type="nvarchar" Mode="In" />
-    <Parameter Name="Zipcode" Type="nvarchar" Mode="In" />
-    <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
-    <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
-    <Parameter Name="CompanyURL" Type="nvarchar" Mode="In" />
-    <Parameter Name="CompanyDescription" Type="nvarchar(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_UserActivateApi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="UserID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_UserPaymentAccountActivate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="UserPaymentInfoID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_UserPaymentDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="UserID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_UserSalesMultiLoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="LocationID" Type="nvarchar" Mode="In" />
-    <Parameter Name="OrderStartDate" Type="varchar" Mode="In" />
-    <Parameter Name="OrderLastDate" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_ValidateEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Email" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_ZXReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="SubUserID" Type="int" Mode="In" />
-    <Parameter Name="LocationID" Type="int" Mode="In" />
-    <Parameter Name="OrderLastDate" Type="varchar" Mode="In" />
-    <Parameter Name="OrderStartDate" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="SplitString" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Input" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="Character" Type="char" Mode="In" />
-    <ReturnType>
-      <CollectionType>
-        <RowType>
-          <Property Name="Item" Type="nvarchar" MaxLength="1000" />
-        </RowType>
-      </CollectionType>
-    </ReturnType>
-  </Function>
-  <Function Name="SplitStringGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="GroupIDS" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="PriortyIDS" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="MinutesIDS" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="AttemptIDS" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="Offsetval" Type="float" Mode="In" />
-    <ReturnType>
-      <CollectionType>
-        <RowType>
-          <Property Name="GroupID" Type="bigint" />
-          <Property Name="PriortyID" Type="bigint" />
-          <Property Name="MinuteID" Type="bigint" />
-          <Property Name="Elapsed" Type="datetime" />
-        </RowType>
-      </CollectionType>
-    </ReturnType>
-  </Function>
-  <Function Name="ValidateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="accounttypeid" Type="int" Mode="In" />
-  </Function>
-  <Function Name="ValidateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="Contact" Type="nvarchar(max)" Mode="In" />
   </Function>
   <EntityContainer Name="db_a74425_premiumposModelStoreContainer">
+    <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppSettings" EntityType="Self.AppSettings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BlogCategory" EntityType="Self.BlogCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CardTypes" EntityType="Self.CardTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyQuotation" EntityType="Self.CompanyQuotation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyQuotationDetail" EntityType="Self.CompanyQuotationDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Coupons" EntityType="Self.Coupons" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -2670,12 +3390,19 @@
     <EntitySet Name="CustomerDetail" EntityType="Self.CustomerDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerOrder" EntityType="Self.CustomerOrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerOrders" EntityType="Self.CustomerOrders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerWishList" EntityType="Self.CustomerWishList" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DealsCategory" EntityType="Self.DealsCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DealsDetail" EntityType="Self.DealsDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DealsHeader" EntityType="Self.DealsHeader" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Expense" EntityType="Self.Expense" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpenseType" EntityType="Self.ExpenseType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FavouriteItem" EntityType="Self.FavouriteItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FlashSale" EntityType="Self.FlashSale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FlashSaleDetail" EntityType="Self.FlashSaleDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Floors" EntityType="Self.Floors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InventoryAdjust" EntityType="Self.InventoryAdjust" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventoryRecieve" EntityType="Self.InventoryRecieve" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventoryRequest" EntityType="Self.InventoryRequest" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IssueStock" EntityType="Self.IssueStock" Schema="dbo" store:Type="Tables" />
@@ -2685,6 +3412,8 @@
     <EntitySet Name="ItemModiferMapping" EntityType="Self.ItemModiferMapping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ItemVariant" EntityType="Self.ItemVariant" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoyalityLogs" EntityType="Self.LoyalityLogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoyalitySetting" EntityType="Self.LoyalitySetting" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Modifiers" EntityType="Self.Modifiers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderCheckout" EntityType="Self.OrderCheckout" Schema="dbo" store:Type="Tables" />
@@ -2706,6 +3435,7 @@
     <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubUser" EntityType="Self.SubUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubuserLocations" EntityType="Self.SubuserLocations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Table_orderCheckoutDetail" EntityType="Self.Table_orderCheckoutDetail" Schema="dbo" store:Type="Tables" />
@@ -2716,9 +3446,23 @@
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserPaymentInfo" EntityType="Self.UserPaymentInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Variant" EntityType="Self.Variant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebCustomizedSale" EntityType="Self.WebCustomizedSale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebCustomizedSaleDetail" EntityType="Self.WebCustomizedSaleDetail" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Banner__Location__44952D46" Association="Self.FK__Banner__Location__44952D46">
       <End Role="Location" EntitySet="Location" />
       <End Role="Banner" EntitySet="Banner" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Blog__BlogCatego__02B25B50" Association="Self.FK__Blog__BlogCatego__02B25B50">
+      <End Role="BlogCategory" EntitySet="BlogCategory" />
+      <End Role="Blog" EntitySet="Blog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Blog_Location" Association="Self.FK_Blog_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="Blog" EntitySet="Blog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BlogCategory_Location" Association="Self.FK_BlogCategory_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="BlogCategory" EntitySet="BlogCategory" />
     </AssociationSet>
     <AssociationSet Name="FK_Category_Location" Association="Self.FK_Category_Location">
       <End Role="Location" EntitySet="Location" />
@@ -2735,6 +3479,14 @@
     <AssociationSet Name="FK_Company_User" Association="Self.FK_Company_User">
       <End Role="User" EntitySet="User" />
       <End Role="Company" EntitySet="Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyQuotation_User" Association="Self.FK_CompanyQuotation_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="CompanyQuotation" EntitySet="CompanyQuotation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyQuotationDetail_CompanyQuotation" Association="Self.FK_CompanyQuotationDetail_CompanyQuotation">
+      <End Role="CompanyQuotation" EntitySet="CompanyQuotation" />
+      <End Role="CompanyQuotationDetail" EntitySet="CompanyQuotationDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_Coupons_User" Association="Self.FK_Coupons_User">
       <End Role="User" EntitySet="User" />
@@ -2800,6 +3552,26 @@
       <End Role="Location" EntitySet="Location" />
       <End Role="DealsHeader" EntitySet="DealsHeader" />
     </AssociationSet>
+    <AssociationSet Name="FK_Expense_ExpenseType" Association="Self.FK_Expense_ExpenseType">
+      <End Role="ExpenseType" EntitySet="ExpenseType" />
+      <End Role="Expense" EntitySet="Expense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expense_Location" Association="Self.FK_Expense_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="Expense" EntitySet="Expense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FavouriteItem_Item" Association="Self.FK_FavouriteItem_Item">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="FavouriteItem" EntitySet="FavouriteItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FavouriteItem_Location" Association="Self.FK_FavouriteItem_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="FavouriteItem" EntitySet="FavouriteItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlashSaleDetail_FlashSale" Association="Self.FK_FlashSaleDetail_FlashSale">
+      <End Role="FlashSale" EntitySet="FlashSale" />
+      <End Role="FlashSaleDetail" EntitySet="FlashSaleDetail" />
+    </AssociationSet>
     <AssociationSet Name="FK_Floors_Location" Association="Self.FK_Floors_Location">
       <End Role="Location" EntitySet="Location" />
       <End Role="Floors" EntitySet="Floors" />
@@ -2819,6 +3591,10 @@
     <AssociationSet Name="FK_Inventory_Supplier" Association="Self.FK_Inventory_Supplier">
       <End Role="Supplier" EntitySet="Supplier" />
       <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryAdjust_Item" Association="Self.FK_InventoryAdjust_Item">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="InventoryAdjust" EntitySet="InventoryAdjust" />
     </AssociationSet>
     <AssociationSet Name="FK_InventoryRecieve_Store" Association="Self.FK_InventoryRecieve_Store">
       <End Role="Store" EntitySet="Store" />
@@ -2887,6 +3663,10 @@
     <AssociationSet Name="FK_Location_USer" Association="Self.FK_Location_USer">
       <End Role="User" EntitySet="User" />
       <End Role="Location" EntitySet="Location" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoyalityLogs_Customer" Association="Self.FK_LoyalityLogs_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="LoyalityLogs" EntitySet="LoyalityLogs" />
     </AssociationSet>
     <AssociationSet Name="FK_Modifiers_User" Association="Self.FK_Modifiers_User">
       <End Role="User" EntitySet="User" />
@@ -3036,6 +3816,14 @@
       <End Role="User" EntitySet="User" />
       <End Role="SubUser" EntitySet="SubUser" />
     </AssociationSet>
+    <AssociationSet Name="FK_SubuserLocations_Location" Association="Self.FK_SubuserLocations_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="SubuserLocations" EntitySet="SubuserLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubuserLocations_SubUser" Association="Self.FK_SubuserLocations_SubUser">
+      <End Role="SubUser" EntitySet="SubUser" />
+      <End Role="SubuserLocations" EntitySet="SubuserLocations" />
+    </AssociationSet>
     <AssociationSet Name="FK_Supplier_Location" Association="Self.FK_Supplier_Location">
       <End Role="Location" EntitySet="Location" />
       <End Role="Supplier" EntitySet="Supplier" />
@@ -3051,6 +3839,18 @@
     <AssociationSet Name="FK_Variant_User" Association="Self.FK_Variant_User">
       <End Role="User" EntitySet="User" />
       <End Role="Variant" EntitySet="Variant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WebCustomizedSaleDetail_ItemID" Association="Self.FK_WebCustomizedSaleDetail_ItemID">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="WebCustomizedSaleDetail" EntitySet="WebCustomizedSaleDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WebCustomizedSaleDetail_LocationID" Association="Self.FK_WebCustomizedSaleDetail_LocationID">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="WebCustomizedSaleDetail" EntitySet="WebCustomizedSaleDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WebCustomizedSaleID" Association="Self.FK_WebCustomizedSaleID">
+      <End Role="WebCustomizedSale" EntitySet="WebCustomizedSale" />
+      <End Role="WebCustomizedSaleDetail" EntitySet="WebCustomizedSaleDetail" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

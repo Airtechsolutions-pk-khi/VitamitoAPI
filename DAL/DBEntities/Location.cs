@@ -17,21 +17,27 @@ namespace DAL.DBEntities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Location()
         {
+            this.Banners = new HashSet<Banner>();
+            this.Blogs = new HashSet<Blog>();
+            this.BlogCategories = new HashSet<BlogCategory>();
+            this.Categories = new HashSet<Category>();
             this.Companies = new HashSet<Company>();
             this.DealsHeaders = new HashSet<DealsHeader>();
+            this.Expenses = new HashSet<Expense>();
+            this.FavouriteItems = new HashSet<FavouriteItem>();
             this.Floors = new HashSet<Floor>();
             this.Inventories = new HashSet<Inventory>();
             this.Orders = new HashSet<Order>();
             this.OrderCheckouts = new HashSet<OrderCheckout>();
             this.OrderTypes = new HashSet<OrderType>();
             this.PurchaseOrders = new HashSet<PurchaseOrder>();
+            this.PushTokens = new HashSet<PushToken>();
             this.Stocks = new HashSet<Stock>();
             this.Stores = new HashSet<Store>();
             this.SubUsers = new HashSet<SubUser>();
+            this.SubuserLocations = new HashSet<SubuserLocation>();
             this.Suppliers = new HashSet<Supplier>();
-            this.PushTokens = new HashSet<PushToken>();
-            this.Banners = new HashSet<Banner>();
-            this.Categories = new HashSet<Category>();
+            this.WebCustomizedSaleDetails = new HashSet<WebCustomizedSaleDetail>();
         }
     
         public int ID { get; set; }
@@ -72,12 +78,24 @@ namespace DAL.DBEntities
         public string FooterNotes { get; set; }
         public string Passcode { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Banner> Banners { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Blog> Blogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BlogCategory> BlogCategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Category> Categories { get; set; }
         public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Company> Companies { get; set; }
         public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DealsHeader> DealsHeaders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Expense> Expenses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FavouriteItem> FavouriteItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Floor> Floors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -92,18 +110,18 @@ namespace DAL.DBEntities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PushToken> PushTokens { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Store> Stores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubUser> SubUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubuserLocation> SubuserLocations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supplier> Suppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PushToken> PushTokens { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Banner> Banners { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<WebCustomizedSaleDetail> WebCustomizedSaleDetails { get; set; }
     }
 }

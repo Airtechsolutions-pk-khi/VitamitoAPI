@@ -26,95 +26,25 @@ namespace BAL.Repositories
         {
             DBContext = contextDB;
         }
-        //public RspBrandList GetBrandInfo()
-        //{
-        //    var bll = new List<BrandsBLL>();
-        //    var lstLoc = new List<LocationsBLL>();
-        //    var rsp = new RspBrandList();
-        //    try
-        //    {
-        //        var list = DBContext.sp_getBrands_api().ToList();
-        //        var listLocations = DBContext.sp_getLocations_api().ToList();
-        //        foreach (var i in list)
-        //        {
-        //            lstLoc = new List<LocationsBLL>();
-        //            foreach (var j in listLocations.Where(x => x.StatusID == 1 && x.BrandID == i.BrandID))
-        //            {
-        //                lstLoc.Add(new LocationsBLL
-        //                {
-        //                    ContactNo = j.ContactNo,
-        //                    BrandID = j.BrandID,
-        //                    Name = j.Name,
-        //                    ImageURL = j.ImageURL,
-        //                    Email = j.Email,
-        //                    Address = j.Address,
-        //                    StatusID = j.StatusID,
-        //                    DeliveryCharges = j.DeliveryCharges,
-        //                    DeliveryTime = j.DeliveryTime,
-        //                    MinOrderAmount = j.MinOrderAmount,
-        //                    DeliveryServices = j.DeliveryServices,
-        //                    LocationID = j.LocationID,
-        //                    Latitude = j.Latitude,
-        //                    Longitude = j.Longitude
-        //                });
-        //            }
-        //            bll.Add(new BrandsBLL
-        //            {
-
-        //                BrandID = i.BrandID,
-        //                Username = i.Username,
-        //                Name = i.Name,
-        //                Image = i.Image == null ? "" : ConfigurationManager.AppSettings["AdminURL"].ToString() + i.Image,
-        //                Email = i.Email,
-        //                Password = i.Password,
-        //                Address = i.Address,
-        //                Currency = i.Currency,
-        //                BusinessKey = i.BusinessKey,
-        //                StatusID = i.StatusID,
-        //                Locations = lstLoc,
-        //                CompanyURl = i.CompanyURl == null ? "" : ConfigurationManager.AppSettings["AdminURL"].ToString() + i.CompanyURl,
-        //                Tax = 15
-        //            });
-        //        }
-        //        rsp.brands = bll;
-        //        rsp.status = 1;
-        //        rsp.description = "Success";
-
-        //        return rsp;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        rsp.brands = bll;
-        //        rsp.status = 0;
-        //        rsp.description = "Failed";
-        //        return rsp;
-        //    }
-        //}
         public static DataTable _dt;
         public static DataSet _ds;
         public AppSettings GetSetting(int UserID)
         {           
             try
-            {
-                
+            {  
                 var lst = new AppSettings();
                 var coupon = new List<CouponVM>();
                 SqlParameter[] p = new SqlParameter[1];
                 p[0] = new SqlParameter("@UserID", UserID);
-                _ds = (new DBHelper().GetDatasetFromSP)("sp_GetSettings_Vitamito", p);
-                 
+                _ds = (new DBHelper().GetDatasetFromSP)("sp_GetSettings_Vitamito", p);         
                 if (_ds != null)
                 {
                     if (_ds.Tables[0] != null)
                     {
-                        lst = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[0])).ToObject<List<AppSettings>>().FirstOrDefault();
-                        //lst = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[0])).ToObject<AppSettings>().FirstOrDefault();                        
-                        //lst = _dt.DataTableToList<AppSettings>();
-                    }
+                        lst = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[0])).ToObject<List<AppSettings>>().FirstOrDefault();                    }
                     if (_ds.Tables[1] != null)
                     {
                         coupon = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(_ds.Tables[1])).ToObject<List<CouponVM>>();
-                        //lst = _dt.DataTableToList<AppSettings>();
                     }
                     lst.Coupons = coupon;
                 }
@@ -124,7 +54,6 @@ namespace BAL.Repositories
             {
                 return null;
             }
- 
         }
         public RspBanner GetBanners(int UserID,int LocationID)
         {
@@ -149,7 +78,6 @@ namespace BAL.Repositories
                     });
                 }
 
-                
                 rsp.Banners = banners;
                 rsp.status = 1;
                 rsp.description = "Success";

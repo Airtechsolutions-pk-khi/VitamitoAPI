@@ -22,6 +22,7 @@ namespace DAL.DBEntities
         public string Contact { get; set; }
         public Nullable<int> LocationID { get; set; }
         public Nullable<decimal> TAX { get; set; }
+        public Nullable<decimal> TAXWebApp { get; set; }
         public string NTN { get; set; }
         public Nullable<int> StatusID { get; set; }
         public string LastUpdateBy { get; set; }
@@ -31,7 +32,6 @@ namespace DAL.DBEntities
         public string logo { get; set; }
         public string Currency { get; set; }
         public string SNTN { get; set; }
-        public Nullable<decimal> TAXWebApp { get; set; }
     
         public virtual Location Location { get; set; }
         public virtual User User { get; set; }

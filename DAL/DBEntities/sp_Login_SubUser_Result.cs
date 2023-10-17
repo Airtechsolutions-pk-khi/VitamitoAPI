@@ -39,6 +39,7 @@ namespace DAL.DBEntities
         public Nullable<System.DateTime> DateFrom { get; set; }
         public Nullable<System.DateTime> DateTo { get; set; }
         public string UserType { get; set; }
+        public string Country { get; set; }
         public string LastUpdatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public Nullable<int> StatusID { get; set; }

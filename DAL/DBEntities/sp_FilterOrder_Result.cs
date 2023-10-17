@@ -38,6 +38,11 @@ namespace DAL.DBEntities
         public string CreatedBy { get; set; }
         public Nullable<bool> IsAvailiable { get; set; }
         public string CounterType { get; set; }
+        public Nullable<int> DeliveryStatus { get; set; }
+        public string FbrInvoiceNumber { get; set; }
+        public Nullable<bool> IsOrderFbr { get; set; }
+        public string FbrStatus { get; set; }
+        public string OrderNoPrefix { get; set; }
         public string TableName { get; set; }
         public string ordertakername { get; set; }
         public string waitername { get; set; }

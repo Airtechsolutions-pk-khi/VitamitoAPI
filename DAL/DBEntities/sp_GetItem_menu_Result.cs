@@ -39,6 +39,8 @@ namespace DAL.DBEntities
         public Nullable<bool> IsVATApplied { get; set; }
         public Nullable<bool> IsFeatured { get; set; }
         public Nullable<bool> IsStockOut { get; set; }
+        public Nullable<double> MinPrice { get; set; }
+        public Nullable<bool> IsOpenPrice { get; set; }
         public double CurrentStock { get; set; }
         public int IsInventoryItem { get; set; }
     }

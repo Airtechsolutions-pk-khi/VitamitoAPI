@@ -284,3 +284,14 @@ E:\Project\VitamitoAPI\BAL\obj\Debug\BAL.csproj.CoreCompileInputs.cache
 E:\Project\VitamitoAPI\BAL\obj\Debug\BAL.csproj.CopyComplete
 E:\Project\VitamitoAPI\BAL\obj\Debug\BAL.dll
 E:\Project\VitamitoAPI\BAL\obj\Debug\BAL.pdb
+F:\Projects\Vitamito_API\BAL\bin\Debug\BAL.dll.config
+F:\Projects\Vitamito_API\BAL\bin\Debug\BAL.dll
+F:\Projects\Vitamito_API\BAL\bin\Debug\BAL.pdb
+F:\Projects\Vitamito_API\BAL\bin\Debug\DAL.dll
+F:\Projects\Vitamito_API\BAL\bin\Debug\DAL.pdb
+F:\Projects\Vitamito_API\BAL\bin\Debug\DAL.dll.config
+F:\Projects\Vitamito_API\BAL\obj\Debug\BAL.csproj.AssemblyReference.cache
+F:\Projects\Vitamito_API\BAL\obj\Debug\BAL.csproj.CoreCompileInputs.cache
+F:\Projects\Vitamito_API\BAL\obj\Debug\BAL.csproj.CopyComplete
+F:\Projects\Vitamito_API\BAL\obj\Debug\BAL.dll
+F:\Projects\Vitamito_API\BAL\obj\Debug\BAL.pdb

@@ -20,7 +20,7 @@ namespace DAL.DBEntities
         public string Type { get; set; }
         public string Barcode { get; set; }
         public string SKU { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public Nullable<double> Price { get; set; }
         public Nullable<int> StatusID { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
@@ -28,5 +28,6 @@ namespace DAL.DBEntities
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public Nullable<int> LastUpdatedBy { get; set; }
         public Nullable<int> UserID { get; set; }
+        public string Image { get; set; }
     }
 }

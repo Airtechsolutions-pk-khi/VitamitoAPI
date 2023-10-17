@@ -19,7 +19,9 @@ namespace DAL.DBEntities
         {
             this.CustomerWishLists = new HashSet<CustomerWishList>();
             this.DealsDetails = new HashSet<DealsDetail>();
+            this.FavouriteItems = new HashSet<FavouriteItem>();
             this.Inventories = new HashSet<Inventory>();
+            this.InventoryAdjusts = new HashSet<InventoryAdjust>();
             this.IssueStockDetails = new HashSet<IssueStockDetail>();
             this.ItemModiferMappings = new HashSet<ItemModiferMapping>();
             this.ItemVariants = new HashSet<ItemVariant>();
@@ -28,6 +30,7 @@ namespace DAL.DBEntities
             this.PurchaseOrderDetails = new HashSet<PurchaseOrderDetail>();
             this.Reveiws = new HashSet<Reveiw>();
             this.Stocks = new HashSet<Stock>();
+            this.WebCustomizedSaleDetails = new HashSet<WebCustomizedSaleDetail>();
         }
     
         public int ID { get; set; }
@@ -56,13 +59,19 @@ namespace DAL.DBEntities
         public Nullable<bool> IsVATApplied { get; set; }
         public Nullable<bool> IsFeatured { get; set; }
         public Nullable<bool> IsStockOut { get; set; }
+        public Nullable<double> MinPrice { get; set; }
+        public Nullable<bool> IsOpenPrice { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerWishList> CustomerWishLists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DealsDetail> DealsDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FavouriteItem> FavouriteItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory> Inventories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InventoryAdjust> InventoryAdjusts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IssueStockDetail> IssueStockDetails { get; set; }
         public virtual SubCategory SubCategory { get; set; }
@@ -81,5 +90,7 @@ namespace DAL.DBEntities
         public virtual ICollection<Reveiw> Reveiws { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WebCustomizedSaleDetail> WebCustomizedSaleDetails { get; set; }
     }
 }

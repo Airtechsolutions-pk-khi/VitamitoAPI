@@ -16,6 +16,7 @@ namespace DAL.DBEntities
     {
         public int BannerID { get; set; }
         public string Title { get; set; }
+        public string ArabicTitle { get; set; }
         public string Image { get; set; }
         public string Type { get; set; }
         public string PlatformType { get; set; }
@@ -29,7 +30,6 @@ namespace DAL.DBEntities
         public string Description { get; set; }
         public string ButtonURL { get; set; }
         public Nullable<int> LocationID { get; set; }
-        public string ArabicTitle { get; set; }
     
         public virtual Location Location { get; set; }
     }

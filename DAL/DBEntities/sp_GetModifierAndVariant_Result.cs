@@ -16,7 +16,7 @@ namespace DAL.DBEntities
         public Nullable<int> ItemID { get; set; }
         public Nullable<int> ModifierID { get; set; }
         public string ModifierName { get; set; }
-        public Nullable<decimal> ModifierPrice { get; set; }
+        public Nullable<double> ModifierPrice { get; set; }
         public string ModifierType { get; set; }
         public string ModifierBarcode { get; set; }
         public Nullable<int> VariantID { get; set; }

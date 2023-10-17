@@ -79,7 +79,19 @@
     <Compile Include="DBEntities\ABC_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\Admin.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\AppSetting.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\Banner.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Blog.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\BlogCategory.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\CardType.cs">
@@ -94,6 +106,12 @@
     <Compile Include="DBEntities\Company.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\CompanyQuotation.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CompanyQuotationDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\Country.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -101,6 +119,9 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Customer.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Customer1.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\CustomerAddress.cs">
@@ -116,6 +137,9 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\CustomerWishList.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\C__EFMigrationsHistory.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\DBContext.cs" />
@@ -143,10 +167,28 @@
     <Compile Include="DBEntities\DealsHeader.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\Expense.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\ExpenseType.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\FavouriteItem.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\FlashSale.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\FlashSaleDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\Floor.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Inventory.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\InventoryAdjust.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\InventoryRecieve.cs">
@@ -174,6 +216,12 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Location.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\LoyalityLog.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\LoyalitySetting.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Modifier.cs">
@@ -227,19 +275,64 @@
     <Compile Include="DBEntities\SplitString_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sp_BlogDetailVitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_CategoryfilterBlogProduct_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_CategoryfilterProduct_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_CustomerOrders_Rpt_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\sp_DatewiseSalesSummaryMulitLoc_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_DatewiseSalesSummary_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities\sp_FilterOrderTest_Result.cs">
+    <Compile Include="DBEntities\sp_DetailReport_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_DetailReport_V2_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_filterBlogProduct_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_FilterExpenseByDate_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_FilterExpense_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_FilterOrderV2_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_FilterOrder_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sp_filterProduct_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\sp_FinishItemsList_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetAdjustInventory_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetAdjustItems_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetAdjustmentList_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetAdminOrders_api_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetAdminOrders_POSAPP_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_GetAllBanners_Result.cs">
@@ -248,16 +341,43 @@
     <Compile Include="DBEntities\sp_getallusers_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sp_getallusers_SUP_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\sp_GetBanners_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetBanners_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetBlogCategory_menu_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetBlogList_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetBlogs_Vitamito_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_GetCategory_menu_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sp_GetCity_SUP_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\sp_GetCompany_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sp_GetCountries_SUP_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetcouponDiscount_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\sp_GetCustomerOrders_api_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetCustomers_P_API_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_GetDashboardDataMultiLoc_Result.cs">
@@ -275,7 +395,25 @@
     <Compile Include="DBEntities\sp_GetDashboardTopSellingItems_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sp_GetExpenses_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetExpenseType_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetFeaturedBanners_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetHeaderBanner_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\sp_GetInventoryItems_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetInventory_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetItemImagesForWebSale_API_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_GetItemModifierMapping_menu_Result.cs">
@@ -287,7 +425,19 @@
     <Compile Include="DBEntities\sp_GetItemsNotInInventory_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sp_GetItems_P_API_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\sp_GetItem_menu_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetItem_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetLocation_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetLoyalitySettings_Planera_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_GetModifierAndVariant_Result.cs">
@@ -299,13 +449,70 @@
     <Compile Include="DBEntities\sp_GetModifiers_menu_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sp_GetModifiers_P_API_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetMyOrderDetails_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetMyOrderDetails_Vitamito_V2_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetMyOrdersById_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetMyOrders_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetOrderByCustomer_P_API_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetOrderByLocation_P_API_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetOrderDetailsByLocation_P_API_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetOrderDetailsByOrderId_P_API_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetOrderModifiers_P_API_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetPackages_SUP_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetProducts_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\sp_GetReceiptInfo_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_GetReceiptPermissions_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sp_GetRelatedBlog_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetRelatedProducts_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetSelectedFlashItem_API_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\sp_GetSelectedFlashItem_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetSettings_Planera_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetSettings_POSAPP_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetSettings_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetSingleOrder_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_GetStockOfMultipleItems_Result.cs">
@@ -317,7 +524,19 @@
     <Compile Include="DBEntities\sp_GetSubCategory_menu_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sp_GetSubUserInfo_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetSubUser_V2_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetTables_P_API_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\sp_GetTables_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetUserByID_SUP_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_GetVariantsForItem_menu_Result.cs">
@@ -326,16 +545,37 @@
     <Compile Include="DBEntities\sp_GetVariants_menu_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities\sp_InsertItemsMapping_Result.cs">
+    <Compile Include="DBEntities\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_helpdiagrams_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_InsertOrder_P_API_V2_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_InsertOrder__P_API_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_itemListselected_Vitamito_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_Last7DaysSales_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_LoginSubUser_P_API_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_Login_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_Login_SubUser_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_login_Vitamito_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_Navigation_Vitamito_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\sp_OrderReportDetail_Result.cs">
@@ -347,73 +587,10 @@
     <Compile Include="DBEntities\sp_OrderReportHeader_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities\sp_PRoductSummaryMultiLoc_Result.cs">
+    <Compile Include="DBEntities\sp_PricefilterProduct_Vitamito_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities\sp_PRoductSummary_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_PurchaseOrderDetailList_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_RptCreditSales_MultiLoc_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_SalesSummaryMultiLoc_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_SalesSummary_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_ShiftData_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_SignupUserWebApi_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_SignupWizard_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_SignUser_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_StockInNotifcation_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_StockNotification_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_StockReportDetail_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_StockReportMultiLoc_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_StockReport_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_StockStoreReport_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_StockStoreSummaryMultiLoc_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_StockStoreSummary_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_UserActivateApi_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_UserPaymentDetails_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_UserSalesMultiLoc_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_ValidateEmail_Result.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sp_ZXReport_Result.cs">
+    <Compile Include="DBEntities\sp_ProductDetailsVitamito_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Status.cs">
@@ -432,6 +609,9 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\SubUser.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\SubuserLocation.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Supplier.cs">
@@ -462,6 +642,12 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Variant.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\WebCustomizedSale.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\WebCustomizedSaleDetail.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DataTableEntensions.cs" />

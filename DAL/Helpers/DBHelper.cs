@@ -10,10 +10,8 @@ namespace WebAPICode.Helpers
 {
     public class DBHelper
     {
-
-
-        private static readonly string connectionString = "data source=sql5053.site4now.net;initial catalog=db_a74425_premiumpos;persist security info=True;user id=db_a74425_premiumpos_admin;password=PPpp1212#;";
-        //private static readonly string connectionString = "data source=192.185.7.123;initial catalog=theluant_DbLive;persist security info=True;user id=airtech_foodcarrieradmin;password=Tech@963;";
+        //private static readonly string connectionString = "data source=sql5053.site4now.net;initial catalog=db_a74425_premiumpos;persist security info=True;user id=db_a74425_premiumpos_admin;password=PPpp1212#;";
+        private static readonly string connectionString = "data source=sql5109.site4now.net;initial catalog=db_a74425_premiumposuat;persist security info=True;user id=db_a74425_premiumposuat_admin;password=Test@123;";
 
         public DataTable GetTableFromSP(string sp, Dictionary<string, object> parametersCollection)
         {

@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Mail;
 using DAL.Models;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace BAL.Repositories
 {
@@ -65,19 +66,6 @@ namespace BAL.Repositories
         {
             try
             {
-
-
-                //ErrorLog1 Log = new ErrorLog1();
-                //Log.Errorin = FnName + " : " + e.InnerException;
-                //Log.ErrorMessage = e.Message;
-                //Log.CreatedDate = DateTime.UtcNow;
-                ////Log.UserID = 2;
-                ////Log.CreatedBy= 2;
-                //DBContext.ErrorLogs1.Attach(Log);
-                //DBContext.ErrorLogs1.Add(Log);
-                //DBContext.SaveChanges();
-                ////function
-                //LogWrite(Log.ErrorMessage, FileName);
             }
             catch
             {
@@ -85,49 +73,9 @@ namespace BAL.Repositories
         }
         public void LogWrite(string msg, string fileName)
         {
-            //var logPath = ConfigurationManager.AppSettings["LogPath"];
-            //_sw = new StreamWriter(@logPath + fileName + DateTime.UtcNow.ToString("yyyyMMdd") + ".txt", true);
-
             _sw.WriteLine(DateTime.UtcNow.ToLongTimeString() + " " + msg);
             _sw.Close();
         }
-
-        //public string CurrentDate(SessionInfo session)
-        //{
-        //    #region timmings
-
-        //    DateTime t1 = DateTime.UtcNow.AddMinutes(session.UTC);
-        //    DateTime t2 = Convert.ToDateTime(session.OpenTime.ToString());
-        //    DateTime t3 = Convert.ToDateTime(session.CloseTime.ToString());
-
-        //    string startday;
-
-        //    TimeSpan diff = t3 - t2;
-
-        //    DateTime NewDate = t2.AddHours(diff.Hours <= 0 ? (24 - (-diff.Hours)) : diff.Hours);
-
-        //    if (t3.Date != NewDate.Date)
-        //    {
-        //        int b = DateTime.Compare(t1, t3);
-
-        //        if (b == 1)
-        //        {
-        //            startday = DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss");
-        //        }
-        //        else
-        //        {
-        //            startday = DateTime.Today.AddDays(-1).ToString();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        startday = DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss");
-        //    }
-        //    return startday;
-        //    #endregion timmings 
-        //}
-
-
         public string DateFormat(string Date)
         {
             if (Date != "")
@@ -175,9 +123,59 @@ namespace BAL.Repositories
 
             }
         }
+		public Rsp InsertToken(TokenBLL obj)
+		{
+			Rsp rsp;
+			try
+			{
+				PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
+				token.StatusID = 1;
+				var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token).Count();
+				if (chk == 0)
+				{
+					PushToken data = DBContext.PushTokens.Add(token);
+					DBContext.SaveChanges();
+				}
 
 
-        public void PushNotificationAndroid(PushNoticationBLL obj)
+				rsp = new Rsp();
+				rsp.status = (int)eStatus.Success;
+				rsp.description = "Token Added";
+			}
+			catch (Exception ex)
+			{
+				rsp = new Rsp();
+				rsp.status = (int)eStatus.Exception;
+				rsp.description = "Failed to add token";
+			}
+			return rsp;
+		}
+		public Rsp InsertCustomerToken(TokenBLL obj)
+		{
+			Rsp rsp;
+			try
+			{
+				PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
+				token.StatusID = 1;
+				var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.CustomerID == obj.CustomerID).Count();
+				if (chk == 0)
+				{
+					PushToken data = DBContext.PushTokens.Add(token);
+					DBContext.SaveChanges();
+				}
+				rsp = new Rsp();
+				rsp.status = (int)eStatus.Success;
+				rsp.description = "Token Added";
+			}
+			catch (Exception ex)
+			{
+				rsp = new Rsp();
+				rsp.status = (int)eStatus.Exception;
+				rsp.description = "Failed to add token";
+			}
+			return rsp;
+		}
+		public void PushNotificationAndroid(PushNoticationBLL obj)
         {
             try
             {              
@@ -225,5 +223,54 @@ namespace BAL.Repositories
                 string str = ex.Message;
             }
         }
-    }
+		public void PushNotificationAndroidCustomer(PushNoticationBLL obj)
+		{
+			try
+			{
+				var applicationID = "AAAA3z5BiLk:APA91bESrcEdyzX52s4sOMivbjNz5YKRDZvPK9nIJGAXtZ1l3LBwLhBd4QKTsJIUSiJ9V0wiAxM4-4pX0yIajRnSPPTHT5ExEezXAK4VblnwL3UiSFKnDoH_q5DFdY0x-a8W0hAlNBtV";
+				var senderId = "958822189241";
+				string deviceId = obj.DeviceID;
+				WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
+				tRequest.Method = "post";
+				tRequest.ContentType = "application/json";
+				var data = new
+				{
+					to = deviceId,
+					notification = new
+					{
+						body = obj.Message,
+						title = obj.Title,
+						icon = "myicon"
+
+					}
+				};
+				var serializer = new JavaScriptSerializer();
+				var json = serializer.Serialize(data);
+				Byte[] byteArray = Encoding.UTF8.GetBytes(json);
+				tRequest.Headers.Add(string.Format("Authorization: key={0}", applicationID));
+				tRequest.Headers.Add(string.Format("Sender: id={0}", senderId));
+				tRequest.ContentLength = byteArray.Length;
+				using (Stream dataStream = tRequest.GetRequestStream())
+				{
+					dataStream.Write(byteArray, 0, byteArray.Length);
+					using (WebResponse tResponse = tRequest.GetResponse())
+					{
+						using (Stream dataStreamResponse = tResponse.GetResponseStream())
+						{
+							using (StreamReader tReader = new StreamReader(dataStreamResponse))
+							{
+								String sResponseFromServer = tReader.ReadToEnd();
+								string str = sResponseFromServer;
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				string str = ex.Message;
+			}
+		}
+
+	}
 }

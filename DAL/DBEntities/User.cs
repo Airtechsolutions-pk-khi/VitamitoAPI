@@ -18,15 +18,16 @@ namespace DAL.DBEntities
         public User()
         {
             this.Companies = new HashSet<Company>();
+            this.CompanyQuotations = new HashSet<CompanyQuotation>();
             this.Coupons = new HashSet<Coupon>();
             this.Customers = new HashSet<Customer>();
             this.IssueStocks = new HashSet<IssueStock>();
             this.Locations = new HashSet<Location>();
+            this.Modifiers = new HashSet<Modifier>();
             this.PurchaseOrders = new HashSet<PurchaseOrder>();
             this.ReceiptPermissions = new HashSet<ReceiptPermission>();
             this.StockStores = new HashSet<StockStore>();
             this.SubUsers = new HashSet<SubUser>();
-            this.Modifiers = new HashSet<Modifier>();
             this.Variants = new HashSet<Variant>();
         }
     
@@ -71,6 +72,8 @@ namespace DAL.DBEntities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Company> Companies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompanyQuotation> CompanyQuotations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Coupon> Coupons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
@@ -79,6 +82,8 @@ namespace DAL.DBEntities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Location> Locations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Modifier> Modifiers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReceiptPermission> ReceiptPermissions { get; set; }
@@ -86,8 +91,6 @@ namespace DAL.DBEntities
         public virtual ICollection<StockStore> StockStores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubUser> SubUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Modifier> Modifiers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Variant> Variants { get; set; }
     }

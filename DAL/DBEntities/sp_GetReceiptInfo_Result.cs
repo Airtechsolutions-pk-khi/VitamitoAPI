@@ -38,6 +38,10 @@ namespace DAL.DBEntities
         public string CreatedBy { get; set; }
         public Nullable<bool> IsAvailiable { get; set; }
         public string CounterType { get; set; }
+        public Nullable<int> DeliveryStatus { get; set; }
+        public string FbrInvoiceNumber { get; set; }
+        public Nullable<bool> IsOrderFbr { get; set; }
+        public string FbrStatus { get; set; }
         public Nullable<int> ID1 { get; set; }
         public Nullable<int> OrderID { get; set; }
         public Nullable<int> LocationID1 { get; set; }
@@ -49,6 +53,7 @@ namespace DAL.DBEntities
         public Nullable<double> DiscountPercent { get; set; }
         public Nullable<int> DiscountType { get; set; }
         public Nullable<double> AmountDiscount { get; set; }
+        public Nullable<double> ItemDiscountAmount { get; set; }
         public Nullable<double> AmountTotal { get; set; }
         public Nullable<double> GrandTotal { get; set; }
         public Nullable<double> Tax { get; set; }
@@ -65,6 +70,10 @@ namespace DAL.DBEntities
         public Nullable<double> ServiceCharges { get; set; }
         public Nullable<bool> IsPartial { get; set; }
         public Nullable<double> PartialAmount { get; set; }
+        public string DiscountReason { get; set; }
+        public Nullable<double> FbrAmount { get; set; }
+        public string FbrInvoiceNumber1 { get; set; }
+        public string FbrInvoiceResponse { get; set; }
         public Nullable<int> ID2 { get; set; }
         public Nullable<int> CountryID { get; set; }
         public Nullable<int> CityID { get; set; }
@@ -85,5 +94,8 @@ namespace DAL.DBEntities
         public Nullable<int> StatusID1 { get; set; }
         public Nullable<System.DateTime> CreatedOn2 { get; set; }
         public string CreatedBy2 { get; set; }
+        public Nullable<double> RedeemPoints { get; set; }
+        public Nullable<double> CurrentPoint { get; set; }
+        public Nullable<int> LocationID2 { get; set; }
     }
 }

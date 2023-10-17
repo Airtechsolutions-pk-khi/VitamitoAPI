@@ -19,7 +19,7 @@ namespace DAL.DBEntities
         public Nullable<int> ItemId { get; set; }
         public string Name { get; set; }
         public Nullable<double> UnitPrice { get; set; }
-        public Nullable<int> RequestedQty { get; set; }
+        public Nullable<double> RequestedQty { get; set; }
         public string Remarks { get; set; }
         public Nullable<decimal> Total { get; set; }
         public string LastUpdatedBy { get; set; }
@@ -28,7 +28,7 @@ namespace DAL.DBEntities
         public string CreatedBy { get; set; }
         public Nullable<int> StatusId { get; set; }
     
-        public virtual PurchaseOrder PurchaseOrder { get; set; }
         public virtual Item Item { get; set; }
+        public virtual PurchaseOrder PurchaseOrder { get; set; }
     }
 }

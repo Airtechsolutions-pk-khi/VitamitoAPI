@@ -31,8 +31,8 @@ namespace DAL.DBEntities
         public Nullable<int> PurshaseOrderID { get; set; }
         public string PONum { get; set; }
     
+        public virtual Item Item { get; set; }
         public virtual Location Location { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }
-        public virtual Item Item { get; set; }
     }
 }

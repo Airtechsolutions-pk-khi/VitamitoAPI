@@ -31,6 +31,7 @@ namespace DAL.DBEntities
         public Nullable<double> DiscountPercent { get; set; }
         public Nullable<int> DiscountType { get; set; }
         public Nullable<double> AmountDiscount { get; set; }
+        public Nullable<double> ItemDiscountAmount { get; set; }
         public Nullable<double> AmountTotal { get; set; }
         public Nullable<double> GrandTotal { get; set; }
         public Nullable<double> Tax { get; set; }

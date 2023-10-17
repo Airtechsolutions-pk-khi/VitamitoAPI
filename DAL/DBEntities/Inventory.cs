@@ -32,8 +32,8 @@ namespace DAL.DBEntities
     
         public virtual Inventory Inventory1 { get; set; }
         public virtual Inventory Inventory2 { get; set; }
+        public virtual Item Item { get; set; }
         public virtual Location Location { get; set; }
         public virtual Supplier Supplier { get; set; }
-        public virtual Item Item { get; set; }
     }
 }

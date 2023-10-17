@@ -38,7 +38,12 @@ namespace DAL.DBEntities
         public string CreatedBy { get; set; }
         public Nullable<bool> IsAvailiable { get; set; }
         public string CounterType { get; set; }
+        public Nullable<int> DeliveryStatus { get; set; }
+        public string FbrInvoiceNumber { get; set; }
+        public Nullable<bool> IsOrderFbr { get; set; }
+        public string FbrStatus { get; set; }
         public Nullable<double> AmountDiscount { get; set; }
+        public Nullable<double> ItemDiscountAmount { get; set; }
         public Nullable<double> AmountPaid { get; set; }
         public Nullable<double> AmountTotal { get; set; }
         public Nullable<double> ServiceCharges { get; set; }

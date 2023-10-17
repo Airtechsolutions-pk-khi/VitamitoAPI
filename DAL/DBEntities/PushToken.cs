@@ -15,6 +15,7 @@ namespace DAL.DBEntities
     public partial class PushToken
     {
         public int TokenID { get; set; }
+        public Nullable<int> CustomerID { get; set; }
         public string Token { get; set; }
         public Nullable<int> LocationID { get; set; }
         public Nullable<int> StatusID { get; set; }

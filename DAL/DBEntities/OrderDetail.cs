@@ -49,11 +49,11 @@ namespace DAL.DBEntities
         public string ItemCode { get; set; }
         public string Description { get; set; }
     
+        public virtual Item Item { get; set; }
         public virtual Order Order { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDealDetail> OrderDealDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderModifierDetail> OrderModifierDetails { get; set; }
-        public virtual Item Item { get; set; }
     }
 }

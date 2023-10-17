@@ -51,5 +51,19 @@ namespace VitamitoAPI.Controllers
             };
 
         }
-    }
+		[HttpPost]
+		[Route("login/insert/customertoken")]
+		public HttpResponseMessage InsertToken(TokenBLL obj)
+		{
+			Rsp rsp = loginRepo.InsertCustomerToken(obj);
+
+			string json = Newtonsoft.Json.JsonConvert.SerializeObject(rsp);
+			json = Newtonsoft.Json.Linq.JObject.Parse(json).ToString();
+			return new HttpResponseMessage
+			{
+				Content = new StringContent(json, Encoding.UTF8, "text/json")    //  RETURNING json
+			};
+
+		}
+	}
 }
